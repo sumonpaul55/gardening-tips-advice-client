@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
-
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link } from "@nextui-org/react";
+import Image from 'next/image'
 
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -20,15 +20,16 @@ export default function MenuBar() {
     ];
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen}>
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    LOgo
-                    <p className="font-bold text-inherit">ACME</p>
+                    <Link href="/">
+                        <Image src="/logo.png" alt="nextLeaf" height={200} width={200} />
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 
@@ -51,14 +52,15 @@ export default function MenuBar() {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem className="hidden lg:flex">
-                    <Link href="#">Login</Link>
+                    <Link href="/login">Login</Link>
                 </NavbarItem>
-                <NavbarItem>
-                    <Button as={Link} color="primary" href="#" variant="flat">
-                        Sign Up
-                    </Button>
+                <NavbarItem className="hidden lg:flex">
+                    <Link href="/registration">Registration</Link>
                 </NavbarItem>
             </NavbarContent>
+
+
+            {/* mobile menu */}
             <NavbarMenu>
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
