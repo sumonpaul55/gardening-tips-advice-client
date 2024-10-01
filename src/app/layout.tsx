@@ -9,6 +9,8 @@ import { Roboto_Slab } from 'next/font/google'
 import "./globals.css";
 import MenuBar from "@/components/shared/navigationMenu/NaviBar";
 import Provider from "@/providers/Provider";
+import GoTop from "@/components/shared/GoTop";
+import ScrollToTop from "@/components/shared/ScrollToTop";
 
 const inter = Inter({
   weight: '400',
@@ -44,8 +46,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className={`${poppins.className} ${roboto_slab.variable} ${roboto.variable} ${inter.variable} antialiased`}>
       <body >
         <Provider>
+          <ScrollToTop />
           <MenuBar />
           {children}
+          <GoTop />
         </Provider>
       </body>
     </html >

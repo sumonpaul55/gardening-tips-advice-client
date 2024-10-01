@@ -28,7 +28,7 @@ const Registration = () => {
         setFile(file[0])
     }
     return (
-        <Container>
+        <Container className="h-[2500px]">
             <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
                 <div className="space-y-1">
                     <h4 className="text-lg md:text-xl font-semibold">Registration</h4>
