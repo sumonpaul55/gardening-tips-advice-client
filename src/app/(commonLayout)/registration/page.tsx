@@ -9,20 +9,23 @@ import { FiExternalLink } from "react-icons/fi";
 
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginValidationSchema } from "@/validationSchema/validationSchema"
+import { registerValidationSchema } from "@/validationSchema/validationSchema"
 import { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 const Registration = () => {
     const [showPassword, setShowPassword] = useState<boolean>(true)
+
     const [file, setFile] = useState<any>()
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data)
+        const formData = {
+            ...data, image: file
+        }
+        console.log(formData)
     }
 
     const onChangeFile = (file: any) => {
-        console.log(file)
-        setFile("")
+        setFile(file[0])
     }
     return (
         <Container>
@@ -31,26 +34,24 @@ const Registration = () => {
                     <h4 className="text-lg md:text-xl font-semibold">Registration</h4>
                     <p className="text-sm">Hi, Welcome👏</p>
                 </div>
-                <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
+                <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(registerValidationSchema)}>
                     <GInput type="text" label="Name" name="name" />
                     <GInput type="email" label="Email" name="email" clasName="" />
                     <div className="relative">
                         <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
                         {
                             showPassword ?
-                                <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(true)} /> :
-                                <FaEye className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} />
+                                <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} /> :
+
+                                <FaEye className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(true)} />
                         }
                     </div>
                     {/* file upload */}
                     <input onChange={(e) => onChangeFile(e.target.files)} type="file" className="w-full bg-gray-100 p-2 rounded-lg" />
-
-                    {/* <button className="text-sm text-secondary font-semibold text-end mt-2 w-full">Forgot password?</button> */}
                     {
-                        file &&
-                        <Button className="w-full bg-secondary text-white" type="submit">Login</Button>
+                        <Button className="w-full bg-secondary text-white disabled:bg-gray-500" type="submit" disabled={!file}>Login</Button>
                     }
-                    <Button className="w-full bg-secondary text-white" type="submit">Registration</Button>
+
                 </GFrom>
                 <div className="flex items-center mt-4 flex-wrap">
                     <p>Do you have account?</p>

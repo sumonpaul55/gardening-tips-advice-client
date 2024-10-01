@@ -17,6 +17,7 @@ const LoginPage = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         console.log(data)
     }
+    console.log(showPassword)
     return (
         <Container>
             <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
@@ -30,11 +31,13 @@ const LoginPage = () => {
                         <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
                         {
                             showPassword ?
-                                <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%]" onClick={() => setShowPassword(true)} /> :
-                                <FaEye className="absolute right-3 top-1/2 -translate-y-[50%]" onClick={() => setShowPassword(false)} />
+                                <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} /> :
+                                <FaEye className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(true)} />
                         }
                     </div>
-                    <button className="text-sm text-secondary font-semibold text-end mt-2 w-full">Forgot password?</button>
+                    <div className="text-end">
+                        <p className="text-sm text-secondary font-semibold inline text-end mt-2 cursor-pointer select-none">Forgot password?</p>
+                    </div>
                     <Button className="w-full bg-secondary text-white" type="submit">Login</Button>
                 </GFrom>
                 <div className="flex items-center mt-4 flex-wrap">

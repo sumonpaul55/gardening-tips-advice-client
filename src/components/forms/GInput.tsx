@@ -13,8 +13,6 @@ const GInput = ({ size = "md", type = "text", variant = "flat", isRequired = tru
 
     const { register, formState: { errors } } = useFormContext()
 
-    console.log(errors)
-
 
     return (
         <Input {...register(name)} size={size} type={type} label={label} variant={variant} isRequired={isRequired} className={clasName && clasName} errorMessage={errors[name] ? (errors[name].message as string) : ""} isInvalid={!!errors[name]} />
