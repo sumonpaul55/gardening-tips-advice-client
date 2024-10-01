@@ -10,9 +10,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["var(--inter)"],
+        roboto: ["var(--roboto)"],
+        roboto_slab: ["var(--roboto_slab)"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        secondary: "#007525",
       },
     },
   },

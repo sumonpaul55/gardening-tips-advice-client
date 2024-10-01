@@ -1,16 +1,31 @@
 
 import type { Metadata } from "next";
 import { Roboto } from 'next/font/google'
+import { Poppins } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import { Roboto_Slab } from 'next/font/google'
 
 
 import "./globals.css";
 import MenuBar from "@/components/shared/navigationMenu/NaviBar";
 import Provider from "@/providers/Provider";
 
-
+const inter = Inter({
+  weight: '400',
+  subsets: ['latin'], variable: "--inter"
+})
+const roboto_slab = Roboto_Slab({
+  weight: '400',
+  subsets: ['latin'], variable: "--roboto_slab"
+})
 const roboto = Roboto({
   weight: '400',
+  subsets: ['latin'], variable: "--roboto"
+})
+const poppins = Poppins({
+  weight: '400',
   subsets: ['latin'],
+  variable: "--poppins"
 })
 
 
@@ -26,8 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${roboto.className} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.className} ${roboto_slab.variable} ${roboto.variable} ${inter.variable} antialiased`}>
+      <body >
         <Provider>
           <MenuBar />
           {children}
