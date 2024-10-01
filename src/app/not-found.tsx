@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 const NotFound = () => {
     const router = useRouter()
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-center p-6">
+        <div className="h-[calc(100vh-65px)] flex flex-col items-center justify-center bg-gray-200 text-center p-6">
             <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}

@@ -49,7 +49,7 @@ const Registration = () => {
                     {/* file upload */}
                     <input onChange={(e) => onChangeFile(e.target.files)} type="file" className="w-full bg-gray-100 p-2 rounded-lg" />
                     {
-                        <Button className="w-full bg-secondary text-white disabled:bg-gray-500" type="submit" disabled={!file}>Login</Button>
+                        <Button className="w-full bg-secondary text-white disabled:bg-disable" type="submit" disabled={!file}>Login</Button>
                     }
 
                 </GFrom>
