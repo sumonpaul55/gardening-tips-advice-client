@@ -14,21 +14,33 @@ import { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useLogInMutation } from "@/redux/features/auth/auth.api"
 import { toast } from "sonner"
+import { verifiyToken } from "@/utils/verifyToken"
+import { useAppDispatch } from "@/redux/hooks"
+import { setUser } from "@/redux/features/auth/authSlice"
 
 const LoginPage = () => {
     const [login] = useLogInMutation()
     const [showPassword, setShowPassword] = useState<boolean>(true)
-
+    const dispatch = useAppDispatch()
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Logging...")
         try {
-            const res = await login(data)
+            const res = await login(data) as any;
             console.log(res)
+            if (res?.data?.success) {
+                const user = verifiyToken(res?.data?.data?.accessToken)
+                dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
+
+                toast.success(res?.data?.message, { id: toastId })
+            }
+            else {
+                toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId })
+            }
         } catch (error: any) {
             toast.error(error)
         }
     }
-    console.log(showPassword)
     return (
         <Container>
             <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">

@@ -47,7 +47,6 @@ export default function RootLayout({
           <MenuBar />
           {children}
           footer
-
           <ScrollToTop />
           <GoTop />
         </GProvider>
