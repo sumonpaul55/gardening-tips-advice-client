@@ -37,6 +37,7 @@ const Registration = () => {
                 <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(registerValidationSchema)}>
                     <GInput type="text" label="Name" name="name" />
                     <GInput type="email" label="Email" name="email" clasName="" />
+                    <GInput type="number" label="Phone" name="phoneNumber" clasName="" />
                     <div className="relative">
                         <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
                         {

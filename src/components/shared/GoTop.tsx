@@ -12,7 +12,6 @@ const GoTop = () => {
     }, [])
 
 
-    console.log(document.documentElement.scrollTop)
 
     const handleGotop = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" })

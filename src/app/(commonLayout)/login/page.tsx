@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import GFrom from "@/components/forms/GFrom"
 import GInput from "@/components/forms/GInput"
@@ -11,11 +12,21 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { loginValidationSchema } from "@/validationSchema/validationSchema"
 import { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useLogInMutation } from "@/redux/features/auth/auth.api"
+import { toast } from "sonner"
 
 const LoginPage = () => {
+    const [login] = useLogInMutation()
     const [showPassword, setShowPassword] = useState<boolean>(true)
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        console.log(data)
+
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        try {
+            const res = await login(data)
+            console.log(res)
+        } catch (error: any) {
+            toast.error(error)
+        }
     }
     console.log(showPassword)
     return (
