@@ -10,7 +10,6 @@ interface inputprops extends IInputs { type?: string }
 
 const GInput = ({ size = "md", type = "text", variant = "flat", isRequired = true, clasName, name, label }: inputprops) => {
 
-
     const { register, formState: { errors } } = useFormContext()
 
 

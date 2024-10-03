@@ -10,8 +10,7 @@ import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const user = useAppSelector(state => state.auth.user)
-    const { data: loggedInuser, isSuccess } = useGetUserByEmailQuery(`${user?.email}`)
-
+    const { data: loggedInuser, isSuccess, } = useGetUserByEmailQuery(`${user?.email}`)
     const dispatch = useAppDispatch()
     const [isClient, setIsClient] = useState(false)
 

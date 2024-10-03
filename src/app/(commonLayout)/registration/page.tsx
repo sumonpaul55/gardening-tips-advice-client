@@ -12,20 +12,45 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { registerValidationSchema } from "@/validationSchema/validationSchema"
 import { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useRegisterMutation } from "@/redux/features/auth/auth.api"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import { verifiyToken } from "@/utils/verifyToken"
+import { setUser } from "@/redux/features/auth/authSlice"
+import { useAppDispatch } from "@/redux/hooks"
 
 const Registration = () => {
-    const [showPassword, setShowPassword] = useState<boolean>(true)
 
-    const [file, setFile] = useState<any>()
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const formData = {
-            ...data, image: file
+    const dispatch = useAppDispatch()
+    const router = useRouter()
+    const [showPassword, setShowPassword] = useState<boolean>(true)
+    const [register] = useRegisterMutation()
+    const [imageFile, setImageFile] = useState<any>()
+
+
+
+
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        const toastId = toast.loading("Register processing...")
+        const formData = new FormData()
+        const registerData = {
+            ...data
         }
-        console.log(formData)
+        formData.append("data", JSON.stringify(registerData))
+        formData.append("file", imageFile)
+        const res = await register(formData) as any
+        if (res?.data?.success) {
+            const user = verifiyToken(res?.data?.data?.accessToken)
+            dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
+            toast.success(res?.data?.message, { id: toastId })
+            router.push("/")
+        } else {
+            toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId })
+        }
     }
 
     const onChangeFile = (file: any) => {
-        setFile(file[0])
+        setImageFile(file[0])
     }
     return (
         <Container className="h-[2500px]">
@@ -50,7 +75,7 @@ const Registration = () => {
                     {/* file upload */}
                     <input onChange={(e) => onChangeFile(e.target.files)} type="file" className="w-full bg-gray-100 p-2 rounded-lg" />
                     {
-                        <Button className="w-full bg-secondary text-white disabled:bg-disable" type="submit" disabled={!file}>Login</Button>
+                        <Button className="w-full bg-secondary text-white disabled:bg-disable" type="submit" disabled={!imageFile}>Sign Up</Button>
                     }
 
                 </GFrom>
