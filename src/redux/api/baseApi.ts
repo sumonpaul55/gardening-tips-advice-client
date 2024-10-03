@@ -14,11 +14,10 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
-
 // get accesstoken with refresh token
 const BaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
-
+  console.log(result);
   if (result?.error?.status === 401) {
     //     // sending refresh token
     const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
@@ -27,14 +26,16 @@ const BaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
     });
 
     const data = await res.json();
+    console.log(data, "ami");
     // refresh token valid
-    if (data?.data?.accessToken) {
+    if (data?.success) {
       // set the accesstoken in exsiting user using api dispatch {signa, getState, dispatch} = api
       const user = (api.getState() as RootState).auth.user;
+      console.log(user, "old");
       api.dispatch(
         setUser({
           user,
-          token: data?.data?.accessToken,
+          token: data?.data,
         })
       );
       result = await baseQuery(args, api, extraOptions);
