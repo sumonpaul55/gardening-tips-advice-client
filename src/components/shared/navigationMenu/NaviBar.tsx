@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import { logOut } from "@/redux/features/auth/authSlice";
-
+import Cookies from "js-cookie";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const user = useAppSelector(state => state.auth.user)
@@ -29,6 +29,7 @@ export default function MenuBar() {
     // handle logout
     const handleLogout = () => {
         const toastId = toast.loading("proccessing...");
+        Cookies.remove("token")
         dispatch(logOut())
         toast.success("Logout successfull", { id: toastId })
     }
@@ -74,11 +75,8 @@ export default function MenuBar() {
                             <Button className="bg-secondary">
                                 <Link href="/login" className="text-white">Login</Link>
                             </Button>
-
                         </NavbarItem>
                 }
-
-
             </NavbarContent>
 
 

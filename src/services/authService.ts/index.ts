@@ -10,14 +10,14 @@ export const getCurrenUser = async () => {
   let decodedToken = null;
   if (accessToken) {
     decodedToken = await jwtDecode(accessToken as string);
-    console.log(decodedToken);
+    return {
+      _id: decodedToken?._id,
+      name: decodedToken?.name,
+      email: decodedToken?.email,
+      phoneNumber: decodedToken?.phoneNumber,
+      role: decodedToken?.role,
+      profilePhoto: decodedToken?.profilePhoto,
+    };
   }
-  return {
-    _id: decodedToken?._id,
-    name: decodedToken?.name,
-    email: decodedToken?.email,
-    phoneNumber: decodedToken?.phoneNumber,
-    role: decodedToken?.role,
-    profilePhoto: decodedToken?.profilePhoto,
-  };
+  return decodedToken;
 };

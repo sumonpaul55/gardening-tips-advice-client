@@ -17,17 +17,21 @@ import { toast } from "sonner"
 import { verifiyToken } from "@/utils/verifyToken"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
+import { useRouter, useSearchParams } from "next/navigation"
 
 const LoginPage = () => {
-    const [login] = useLogInMutation()
+    const searchParams = useSearchParams();
+    const redirect = searchParams?.get("redirect")
+    const [login, { isLoading, isSuccess }] = useLogInMutation()
     const [showPassword, setShowPassword] = useState<boolean>(true)
+    const router = useRouter()
     const dispatch = useAppDispatch()
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Logging...")
+
         try {
             const res = await login(data) as any;
-            console.log(res)
             if (res?.data?.success) {
                 const user = verifiyToken(res?.data?.data?.accessToken)
                 dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
@@ -38,6 +42,13 @@ const LoginPage = () => {
             }
         } catch (error: any) {
             toast.error(error)
+        }
+    }
+    if (!isLoading && isSuccess) {
+        if (redirect) {
+            router.push(redirect)
+        } else {
+            router.push("/")
         }
     }
     return (

@@ -4,7 +4,7 @@ import { getCurrenUser } from "./services/authService.ts";
 
 type role = keyof typeof roleBaseRoutes;
 
-const Authroutes = ["/login", "/register"];
+const Authroutes = ["/login", "/registration"];
 
 const roleBaseRoutes = {
   // using regex for all profile related path can be accessable for user
@@ -36,5 +36,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/admin", "/user"],
+  matcher: ["/admin", "/admin/:page*", "/user", "/login", "/registration", "/user/:page*"],
 };
