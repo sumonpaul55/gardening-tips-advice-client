@@ -18,11 +18,13 @@ import { verifiyToken } from "@/utils/verifyToken"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
 import { useRouter, useSearchParams } from "next/navigation"
+import LoadingBlur from "@/components/shared/LoadingBlur"
+import React from "react"
 
 const LoginPage = () => {
+    const [login, { isLoading, isSuccess }] = useLogInMutation()
     const searchParams = useSearchParams();
     const redirect = searchParams?.get("redirect")
-    const [login, { isLoading, isSuccess }] = useLogInMutation()
     const [showPassword, setShowPassword] = useState<boolean>(true)
     const router = useRouter()
     const dispatch = useAppDispatch()
@@ -55,34 +57,39 @@ const LoginPage = () => {
         }
     }
     return (
-        <Container>
-            <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
-                <div className="space-y-1">
-                    <h4 className="text-lg md:text-xl font-semibold">Login page</h4>
-                    <p className="text-sm">Hi, Welcome Back👏</p>
-                </div>
-                <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
-                    <GInput type="email" label="Email" name="email" clasName="" />
-                    <div className="relative">
-                        <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
-                        {
-                            showPassword ?
-                                <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} /> :
-                                <FaEye className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(true)} />
-                        }
-                    </div>
-                    <div className="text-end">
-                        <p className="text-sm text-secondary font-semibold inline text-end mt-2 cursor-pointer select-none">Forgot password?</p>
-                    </div>
-                    <Button className="w-full bg-secondary text-white" type="submit">Login</Button>
-                </GFrom>
-                <div className="flex items-center mt-4 flex-wrap">
-                    <p>Not Registered yet?</p>
-                    <Link className="ml-3 font-semibold text-primary flex items-center gap-2" href="/registration">Create Account <FiExternalLink />
-                    </Link>
-                </div>
-            </div>
-        </Container>
+        <>
+            {
+                isLoading ? <LoadingBlur /> :
+                    <Container>
+                        <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
+                            <div className="space-y-1">
+                                <h4 className="text-lg md:text-xl font-semibold">Login page</h4>
+                                <p className="text-sm">Hi, Welcome Back👏</p>
+                            </div>
+                            <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
+                                <GInput type="email" label="Email" name="email" clasName="" />
+                                <div className="relative">
+                                    <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
+                                    {
+                                        showPassword ?
+                                            <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} /> :
+                                            <FaEye className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(true)} />
+                                    }
+                                </div>
+                                <div className="text-end">
+                                    <p className="text-sm text-secondary font-semibold inline text-end mt-2 cursor-pointer select-none">Forgot password?</p>
+                                </div>
+                                <Button className="w-full bg-secondary text-white" type="submit">Login</Button>
+                            </GFrom>
+                            <div className="flex items-center mt-4 flex-wrap">
+                                <p>Not Registered yet?</p>
+                                <Link className="ml-3 font-semibold text-primary flex items-center gap-2" href="/registration">Create Account <FiExternalLink />
+                                </Link>
+                            </div>
+                        </div>
+                    </Container >
+            }
+        </>
     )
 }
 

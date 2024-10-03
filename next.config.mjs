@@ -7,7 +7,13 @@ const nextConfig = {
                 hostname: "**"
             }
         ]
-    }
+    },
+    // this is suspense related error will ignore
+
+    // it is not recommanded // or wrap the mail layout children with <Suspense fallback={<>loading..</>}>
+    // experimental: {
+    //     missingSuspenseWithCSRBailout: false,
+    // },
 };
 
 export default nextConfig;

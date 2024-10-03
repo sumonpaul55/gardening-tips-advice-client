@@ -11,6 +11,9 @@ import MenuBar from "@/components/shared/navigationMenu/NaviBar";
 import GProvider from "@/providers/Provider";
 import GoTop from "@/components/shared/GoTop";
 import ScrollToTop from "@/components/shared/ScrollToTop";
+import Footer from "@/components/shared/Footer";
+import { Suspense } from "react";
+import LoadingBlur from "@/components/shared/LoadingBlur";
 
 const inter = Inter({
   weight: '400',
@@ -45,8 +48,10 @@ export default function RootLayout({
       <body >
         <GProvider>
           <MenuBar />
-          {children}
-          footer
+          <Suspense fallback={<LoadingBlur />}>
+            {children}
+          </Suspense>
+          <Footer />
           <ScrollToTop />
           <GoTop />
         </GProvider>
