@@ -67,7 +67,7 @@ export default function MenuBar() {
             </NavbarContent>
             <NavbarContent justify="end">
                 {
-                    user?.email ?
+                    user ?
                         <Dropdown>
                             <DropdownTrigger>
                                 <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
@@ -75,13 +75,7 @@ export default function MenuBar() {
                             <DropdownMenu className="m-2">
                                 <DropdownItem>
                                     <div className="space-y-2 mb-2 flex flex-col">
-                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
-                                            Dashborad
-                                        </Link>
-                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
-                                            Dashborad
-                                        </Link>
-                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
+                                        <Link href="/user" className="bg-secondary w-full rounded-lg text-white text-md p-2">
                                             Dashborad
                                         </Link>
                                     </div>

@@ -12,8 +12,8 @@ const SideBar = () => {
                 </svg>
             </button>
             <div className={`min-h-screen flex gap-3 pt-10 duration-200 w-[300px] flex-col sm:gap-4 fixed h-full md:static bg-slate-600 text-white p-2 ${sideBarOpen ? "-left-[300px] " : "z-40"}`}>
-                <Link onClick={() => setSidebarOpen(!sideBarOpen)} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href="/product-manage/products">All Product</Link>
-                <Link onClick={() => setSidebarOpen(!sideBarOpen)} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href="/product-manage/add-product">Add Product</Link>
+                <Link onClick={() => setSidebarOpen(!sideBarOpen)} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href="/user/profile">Profile</Link>
+                <Link onClick={() => setSidebarOpen(!sideBarOpen)} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href="/user/create-post">Create Post</Link>
             </div>
         </>
     )

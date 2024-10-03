@@ -18,6 +18,7 @@ export async function middleware(request: NextRequest) {
   //   get user from decoded token
   const user = await getCurrenUser();
   //   if user not exist go login otherwise not
+
   if (!user) {
     if (Authroutes.includes(pathname)) {
       return NextResponse.next();

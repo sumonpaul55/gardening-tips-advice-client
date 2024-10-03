@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 export const getCurrenUser = async () => {
   //   const accessToken = localStorage.getItem("accessToken");
-  const accessToken = cookies().get("token")?.value;
+  const accessToken = cookies().get("accessToken")?.value;
 
   let decodedToken = null;
   if (accessToken) {
