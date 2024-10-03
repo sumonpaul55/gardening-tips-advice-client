@@ -6,7 +6,7 @@ import Container from "@/components/shared/Container/Container"
 import { Button } from "@nextui-org/react"
 import Link from "next/link"
 import { FiExternalLink } from "react-icons/fi";
-
+import Cookies from "js-cookie"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerValidationSchema } from "@/validationSchema/validationSchema"
@@ -33,14 +33,17 @@ const Registration = () => {
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Register processing...")
         const formData = new FormData()
+        const name = data?.name.trim()
         const registerData = {
-            ...data
+            ...data, name
         }
         formData.append("data", JSON.stringify(registerData))
         formData.append("file", imageFile)
         const res = await register(formData) as any
         if (res?.data?.success) {
             const user = verifiyToken(res?.data?.data?.accessToken)
+            // set cookies refresh token
+            Cookies.set("refreshToken", res?.data?.data?.refreshToken)
             dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
             toast.success(res?.data?.message, { id: toastId })
             router.push("/")

@@ -6,7 +6,7 @@ import Container from "@/components/shared/Container/Container"
 import { Button } from "@nextui-org/react"
 import Link from "next/link"
 import { FiExternalLink } from "react-icons/fi";
-
+import Cookies from "js-cookie"
 import { FieldValues, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginValidationSchema } from "@/validationSchema/validationSchema"
@@ -33,6 +33,9 @@ const LoginPage = () => {
         try {
             const res = await login(data) as any;
             if (res?.data?.success) {
+
+                // set cookies refresh token
+                Cookies.set("refreshToken", res?.data?.data?.refreshToken)
                 const user = verifiyToken(res?.data?.data?.accessToken)
                 dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
                 toast.success(res?.data?.message, { id: toastId })

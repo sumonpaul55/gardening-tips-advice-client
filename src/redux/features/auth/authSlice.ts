@@ -28,12 +28,11 @@ const authSlice = createSlice({
       const { user, token } = action.payload;
       state.user = user;
       state.token = token;
-      Cookies.set("token", token);
+      Cookies.set("accessToken", token);
     },
     logOut: (state) => {
       state.user = null;
       state.token = null;
-      // Cookies.remove("token");
     },
   },
 });

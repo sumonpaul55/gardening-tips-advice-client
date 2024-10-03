@@ -31,7 +31,7 @@ export default function MenuBar() {
     // handle logout
     const handleLogout = () => {
         const toastId = toast.loading("proccessing...");
-        Cookies.remove("token")
+        Cookies.remove("accessToken");
         dispatch(logOut())
         toast.success("Logout successfull", { id: toastId })
     }
