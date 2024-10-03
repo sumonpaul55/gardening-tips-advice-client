@@ -1,14 +1,17 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button, Dropdown, DropdownMenu, DropdownItem, DropdownTrigger } from "@nextui-org/react";
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import { logOut } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
+import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const user = useAppSelector(state => state.auth.user)
+    const { data: loggedInuser, isSuccess } = useGetUserByEmailQuery(`${user?.email}`)
+
     const dispatch = useAppDispatch()
     const [isClient, setIsClient] = useState(false)
 
@@ -34,10 +37,10 @@ export default function MenuBar() {
         toast.success("Logout successfull", { id: toastId })
     }
 
-
-    if (!isClient) {
+    if (!isClient && !isSuccess) {
         return null
     }
+
     return (
         <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg">
             <NavbarContent>
@@ -66,11 +69,31 @@ export default function MenuBar() {
             <NavbarContent justify="end">
                 {
                     user?.email ?
-                        <NavbarItem >
-                            <Button className="bg-secondary text-white" onClick={handleLogout}>
-                                Log Out
-                            </Button>
-                        </NavbarItem> :
+                        <Dropdown>
+                            <DropdownTrigger>
+                                <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
+                            </DropdownTrigger>
+                            <DropdownMenu className="m-2">
+                                <DropdownItem>
+                                    <div className="space-y-2 mb-2 flex flex-col">
+                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
+                                            Dashborad
+                                        </Link>
+                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
+                                            Dashborad
+                                        </Link>
+                                        <Link href="/admin" className="bg-secondary w-full rounded-lg text-white text-md p-2">
+                                            Dashborad
+                                        </Link>
+                                    </div>
+                                    <Button className="bg-secondary py-2 w-full h-auto text-white" onClick={handleLogout}>
+                                        Log Out
+                                    </Button>
+
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                        :
                         <NavbarItem>
                             <Button className="bg-secondary">
                                 <Link href="/login" className="text-white">Login</Link>

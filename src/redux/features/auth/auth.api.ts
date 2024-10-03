@@ -25,6 +25,14 @@ const authApi = baseApi.injectEndpoints({
       //   return Response;
       // },
     }),
+    getUserByEmail: builder.query({
+      query: (email: string) => {
+        return {
+          url: `/user/${email}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
-export const { useLogInMutation, useRegisterMutation } = authApi;
+export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery } = authApi;
