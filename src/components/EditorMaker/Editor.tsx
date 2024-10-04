@@ -1,50 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import React, { useRef } from 'react';
-import JoditEditor from 'jodit-react';
+import React, { useState, useRef } from 'react';
+import JoditEditor from "jodit-pro-react";
 
-const TextEditor = () => {
-    const editor = useRef(null);
+const Editor = ({ }) => {
 
-    // Configuration for the Jodit Editor
+    const editor = useRef(null)
+    const [content, setContent] = useState('')
+
     const config = {
+        readonly: false, // all options from https://xdsoft.net/jodit/docs/,
         uploader: {
-            insertImageAsBase64URI: false, // Set to false to avoid base64 encoding
-            url: '/api/upload-image', // Your image upload API endpoint
-            method: 'POST', // HTTP method for the upload
-            headers: {
-                'Authorization': 'Bearer your-token', // Optional: If you need to send authentication headers
-            },
-            filesVariableName: 'files', // The name of the form field that contains the image
-            isSuccess: function (resp: { success: any; }) {
-                return resp.success; // Define the success response condition
-            },
-            process: function (resp: { files: any[]; path: any; baseurl: any; error: any; }) {
-                return {
-                    files: resp.files.map((file) => file.url), // Map the uploaded file URLs to the image URL field
-                    path: resp.path,
-                    baseurl: resp.baseurl,
-                    error: resp.error,
-                };
-            },
+            url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
         },
-        buttons: ['bold', 'italic', 'underline', 'image'], // Buttons including image upload
-        height: 400, // Height of the editor
-        uploaderInsertImageAsBase64URI: false, // Disable base64 image uploads
-    };
+        filebrowser: {
+            ajax: {
+                url: 'https://xdsoft.net/jodit/finder/'
+            },
+            height: 580,
+        }
+    }
+
+
 
     return (
-        <div>
-            <JoditEditor
-                ref={editor}
-                config={config}
-                tabIndex={1} // tabIndex of textarea
-                onChange={(newContent) => {
-                    console.log(newContent);
-                }}
-            />
-        </div>
+        <JoditEditor
+            ref={editor}
+            value={content}
+            config={config}// tabIndex of textarea
+            onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+            onChange={newContent => { console.log(newContent) }}
+        />
     );
-};
+}
 
-export default TextEditor;
+export default Editor

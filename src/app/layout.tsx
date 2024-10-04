@@ -49,11 +49,13 @@ export default function RootLayout({
         <GProvider>
           <MenuBar />
           <Suspense fallback={<LoadingBlur />}>
-            {children}
+            <div className="pb-[360px]">
+              {children}
+            </div>
           </Suspense>
-          <Footer />
           <ScrollToTop />
           <GoTop />
+          <Footer />
         </GProvider>
       </body>
     </html >

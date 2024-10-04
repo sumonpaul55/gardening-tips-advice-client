@@ -2,7 +2,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaLeaf } from 'react
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-gray-300 py-12 mt-5">
+        <footer className="bg-gray-900 text-gray-300 py-12 fixed bottom-0 w-full -z-10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-wrap justify-between">
                     {/* Column 1: Logo & Description */}
