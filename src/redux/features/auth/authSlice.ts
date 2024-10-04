@@ -34,6 +34,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
     },
   },
 });

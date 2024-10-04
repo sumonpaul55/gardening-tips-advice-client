@@ -2,7 +2,7 @@
 import { fetchBaseQuery, createApi, BaseQueryFn, FetchArgs, BaseQueryApi, DefinitionType } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { logOut, setUser } from "../features/auth/authSlice";
-
+// import Cookies from "js-cookie";
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
   credentials: "include",
