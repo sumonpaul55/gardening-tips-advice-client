@@ -11,3 +11,7 @@ export const registerValidationSchema = z.object({
   phoneNumber: z.string({ required_error: "Please provide your phone number" }),
   password: z.string({ required_error: "password is required to login" }).min(6, "password should atleast 6 charachters"),
 });
+
+export const postValidation = z.object({
+  title: z.string({ required_error: "Need Post title" }).min(10, "title should be minimum 10 character"),
+});

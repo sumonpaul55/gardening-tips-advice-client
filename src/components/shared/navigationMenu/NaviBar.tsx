@@ -41,7 +41,7 @@ export default function MenuBar() {
     }
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg">
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999]">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
