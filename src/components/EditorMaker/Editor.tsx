@@ -47,7 +47,6 @@ const Editor = () => {
         }
     }
 
-
     return (
         <GFrom onSubmit={handleSubmit} resolver={zodResolver(postValidation)}>
             <div>

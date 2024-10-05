@@ -57,10 +57,10 @@ const LoginPage = () => {
         }
     }
     return (
-        <>
+        <div className="bg-white md:min-h-screen">
             {
                 isLoading ? <LoadingBlur /> :
-                    <Container>
+                    <Container className="md:mt-32">
                         <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
                             <div className="space-y-1">
                                 <h4 className="text-lg md:text-xl font-semibold">Login page</h4>
@@ -89,7 +89,7 @@ const LoginPage = () => {
                         </div>
                     </Container >
             }
-        </>
+        </div>
     )
 }
 
