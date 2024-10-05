@@ -3,9 +3,12 @@ import Container from "@/components/shared/Container/Container"
 import PostSection4 from "@/components/page/posts/postSection4"
 
 const PostPage = async () => {
+
     const res = await fetch("http://localhost:5000/api/post", { credentials: "include", cache: 'no-store' })
 
-    const data = await res.json();
+    const data = await res?.json();
+
+
 
     return (
         <main className="z-50 bg-white md:min-h-screen">

@@ -8,6 +8,7 @@ export const getCurrenUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
 
   let decodedToken = null;
+
   if (accessToken) {
     decodedToken = await jwtDecode(accessToken as string);
     return {

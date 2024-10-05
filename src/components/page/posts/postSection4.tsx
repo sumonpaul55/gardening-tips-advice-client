@@ -35,10 +35,10 @@ const PostSection4: React.FC<PostSection4Props> = ({ post }) => {
                     />
                 )}
                 <h2 className="text-2xl font-bold mb-4">{post?.title}</h2>
-                <div
+                {/* <div
                     className="post-content text-gray-700"
                     dangerouslySetInnerHTML={{ __html: post.post }}
-                />
+                /> */}
             </div>
         </Link>
     );

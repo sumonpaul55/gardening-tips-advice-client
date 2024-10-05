@@ -11,7 +11,7 @@ const CreatePost = () => {
     })
     return (
         <div>
-            <h1 className="text-lg md:text-2xl font-semibold mb-2">Create Post</h1>
+            <h1 className="text-lg md:text-2xl font-semibold mb-2 text-center md:text-left mt-3">Create Post</h1>
             <Editor />
         </div>
     )

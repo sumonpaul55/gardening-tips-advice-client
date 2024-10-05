@@ -21,8 +21,8 @@ const BaseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
 
   if (result?.error?.status === 401) {
     //     // sending refresh token
-    // const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
-    const res = await fetch("https://gardening-tips-server.vercel.app/api/auth/refresh-token", {
+    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+      // const res = await fetch("https://gardening-tips-server.vercel.app/api/auth/refresh-token", {
       method: "POST",
       credentials: "include",
     });
@@ -50,6 +50,6 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   //   baseQuery: baseQuery,
   baseQuery: BaseQueryWithRefreshToken,
-  tagTypes: ["post"],
+  tagTypes: ["post", "category"],
   endpoints: () => ({}),
 });

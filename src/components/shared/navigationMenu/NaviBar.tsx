@@ -7,27 +7,18 @@ import { toast } from "sonner";
 import { logOut } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
 import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
+import { MenuItems } from "@/consts/menuItems";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const user = useAppSelector(state => state.auth.user)
-    const { data: loggedInuser, isSuccess, } = useGetUserByEmailQuery(`${user?.email}`)
     const dispatch = useAppDispatch()
+    const { data: loggedInuser, isSuccess, } = useGetUserByEmailQuery(`${user?.email}`)
     const [isClient, setIsClient] = useState(false)
 
     useEffect(() => {
         setIsClient(true)
     }, [])
-    const menuItems = [
-        {
-            name: "Post",
-            url: "post"
-        },
-        {
-            name: "News Feed",
-            url: "news-feed"
-        }
 
-    ];
     // handle logout
     const handleLogout = () => {
         const toastId = toast.loading("proccessing...");
@@ -56,7 +47,10 @@ export default function MenuBar() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 {
-                    menuItems?.map((item, idx: number) => {
+                    MenuItems?.map((item, idx: number) => {
+                        // if (item?.url === "profile" && !user) {
+                        //     return null
+                        // }
                         return <NavbarItem key={idx}>
                             <Link color="foreground" href={`/${item.url}`}>
                                 {item?.name}
@@ -98,11 +92,11 @@ export default function MenuBar() {
 
             {/* mobile menu */}
             <NavbarMenu>
-                {menuItems.map((item, index) => (
+                {MenuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link
                             color={
-                                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                                index === 2 ? "primary" : index === MenuItems?.length - 1 ? "danger" : "foreground"
                             }
                             className="w-full"
                             href={`/${item.url}`}

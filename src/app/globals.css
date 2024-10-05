@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.jodit-wysiwyg{
+    min-height: 200px !important;
+}

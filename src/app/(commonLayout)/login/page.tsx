@@ -23,10 +23,10 @@ import React from "react"
 
 const LoginPage = () => {
     const [login, { isLoading, isSuccess }] = useLogInMutation()
-    const searchParams = useSearchParams();
-    const redirect = searchParams?.get("redirect")
-    const [showPassword, setShowPassword] = useState<boolean>(true)
+    const redirect = useSearchParams().get("redirect");
     const router = useRouter()
+
+    const [showPassword, setShowPassword] = useState<boolean>(true)
     const dispatch = useAppDispatch()
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
