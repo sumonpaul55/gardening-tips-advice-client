@@ -1,25 +1,45 @@
 "use client"
 import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
 import { useAppSelector } from '@/redux/hooks'
+import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import React from 'react'
-
+import React, { } from 'react'
+import moment from "moment"
 const ProfilePage = () => {
     const user = useAppSelector(state => state.auth.user)
     const { data, isLoading } = useGetUserByEmailQuery(`${user?.email}`)
-
-
+    const userData = data?.data;
+    // const { email, profilePhoto, name, verified, role, phoneNumber, createdAt, follower, following } = userData;
+    console.log(data?.data)
     console.log(user)
     if (!isLoading && !user) {
         return redirect("/")
-    }
-    if (!user) {
+    } else if (!user?.email) {
         return null
     }
     return (
         <>
-            <div className='mt-4'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis dolorem qui architecto dolor aliquam explicabo asperiores, veritatis voluptatum, aspernatur voluptas id quam ea, cum distinctio hic quidem doloribus ipsam culpa eveniet saepe dolores. Adipisci error provident optio, modi repellat officiis doloremque, suscipit accusantium maiores officia saepe pariatur quasi autem debitis quis excepturi magnam libero alias? Voluptates est vel eveniet neque delectus libero, culpa harum excepturi cum nihil quae illum modi. Laborum quas assumenda esse beatae ratione temporibus inventore vel soluta nesciunt a est quasi, vitae cumque repellendus eligendi commodi nam impedit velit nisi iste facere? Nemo maiores possimus laudantium hic?
+            <div className='mt-4 flex flex-col md:flex-row gap-8 min-h-screen font-roboto_slab bg-slate-100'>
+                <div className='md:w-[30%] bg-slate-200 px-2 lg:px-7 pt-4 rounded-md'>
+                    <div className='flex flex-col'>
+                        <div className=''>
+                            <Image src={userData?.profilePhoto} alt={userData?.name} width={400} height={500} className='md:size-[250px] size-[150px] object-bottom rounded-full border-2 p-2 shadow-lg' />
+                        </div>
+                        {/* more info */}
+                        <div className='p-3 md:p-6'>
+                            <div className='flex flex-col gap-2'>
+                                <span className='text-sm md:text-lg font-semibold'>Name: {userData?.name}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Email: {userData?.email}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Role: {userData?.role}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Phone: {userData?.phoneNumber}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Follower: {userData?.follower?.length}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Following: {userData?.following?.length}</span>
+                                <span className='text-sm md:text-lg font-semibold'>Joined: {moment(userData?.createdAt).format("MMM Do YY")}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='flex-1 bg-slate-200 rounded-md'></div>
             </div>
         </>
     )
