@@ -2,19 +2,23 @@
 
 import { IInputs } from "@/types"
 import { Input } from "@nextui-org/react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, } from "react-hook-form";
 
-interface inputprops extends IInputs { type?: string; value?: string; isDisabled?: boolean }
+interface inputprops extends IInputs { type?: string; isDisabled?: boolean; defaultValue?: string }
 
 
 
-const GInput = ({ size = "md", type = "text", variant = "flat", isRequired = true, clasName, name, label, value, isDisabled }: inputprops) => {
+const GInput = ({ size = "md", type = "text", variant = "flat", isRequired = true, clasName, defaultValue, name, label, isDisabled }: inputprops) => {
+
 
     const { register, formState: { errors } } = useFormContext()
 
+    // const preValue = useWatch({ name })
+
+
 
     return (
-        <Input {...register(name)} value={value && value} size={size} type={type} isDisabled={isDisabled} label={label} variant={variant} isRequired={isRequired} className={clasName && clasName} errorMessage={errors[name] ? (errors[name].message as string) : ""} isInvalid={!!errors[name]} />
+        <Input {...register(name)} defaultValue={defaultValue ? defaultValue : ""} size={size} type={type} isDisabled={isDisabled} label={label} variant={variant} isRequired={isRequired} className={clasName && clasName} errorMessage={errors[name] ? (errors[name].message as string) : ""} isInvalid={!!errors[name]} />
     )
 }
 

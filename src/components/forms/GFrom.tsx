@@ -26,7 +26,6 @@ const GFrom = ({ resolver, defaultValue, onSubmit, children, className }: IFormP
     }
     const methods = useForm(formConfig)
     const submitHanlder = methods.handleSubmit;
-
     return (
         <FormProvider {...methods}>
             <form onSubmit={submitHanlder(onSubmit)} className={className && className}>

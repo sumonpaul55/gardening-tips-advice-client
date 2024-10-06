@@ -11,6 +11,7 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["user"],
     }),
     logIn: builder.mutation({
       query: (data) => {
@@ -20,6 +21,7 @@ const authApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+
       // transformErrorResponse: (Response: any) => {
       //   Cookies.set("token", Response?.data?.data?.accessToken);
       //   return Response;
@@ -32,7 +34,28 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["user"],
+    }),
+    getUserByid: builder.query({
+      query: (id: string) => {
+        console.log(id);
+        return {
+          url: `/user/id/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+    }),
+    updateUser: builder.mutation({
+      query: (updateInfo: any) => {
+        return {
+          url: `/auth/update-user/${updateInfo.id}`,
+          method: "PUT",
+          body: updateInfo.formData,
+        };
+      },
+      invalidatesTags: ["user"],
     }),
   }),
 });
-export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery } = authApi;
+export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery, useGetUserByidQuery, useUpdateUserMutation } = authApi;

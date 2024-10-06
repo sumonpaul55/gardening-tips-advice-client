@@ -13,8 +13,7 @@ const ProfilePage = () => {
     const { data, isLoading } = useGetUserByEmailQuery(`${user?.email}`)
     const userData = data?.data;
     // const { email, profilePhoto, name, verified, role, phoneNumber, createdAt, follower, following } = userData;
-    console.log(data?.data)
-    console.log(user)
+
     if (!isLoading && !user) {
         return redirect("/")
     } else if (!user?.email) {
@@ -42,9 +41,9 @@ const ProfilePage = () => {
                                 <div className='flex items-center flex-wrap justify-between'>
                                     <span className='text-sm md:text-lg font-semibold'>Varified: {userData?.verified === true ? "Verified" : "Not verified"}</span>
                                     {
-                                        userData?.up
+                                        userData?.verified !== true && <Button className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400' isDisabled={true}>Verify</Button>
                                     }
-                                    <Button className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400' isDisabled={true}>Verify</Button>
+
                                 </div>
 
                             </div>
