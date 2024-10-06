@@ -1,13 +1,13 @@
 "use client"
 import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
 import { useAppSelector } from '@/redux/hooks'
-import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React, { } from 'react'
 import moment from "moment"
 import EditUser from '@/components/modals/EditProfileModal'
 import ProfileImage from './ProfileImage'
 import { Button } from '@nextui-org/react'
+import UsersPosts from './UsersPosts'
 const ProfilePage = () => {
     const user = useAppSelector(state => state.auth.user)
     const { data, isLoading } = useGetUserByEmailQuery(`${user?.email}`)
@@ -51,7 +51,9 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='flex-1 bg-slate-100 rounded-md md:border-l'></div>
+                <div className='flex-1 bg-slate-100 rounded-md md:border-l p-2 md:p-5'>
+                    <UsersPosts />
+                </div>
             </div>
         </>
     )

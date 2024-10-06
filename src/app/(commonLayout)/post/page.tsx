@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "@/components/shared/Container/Container"
-import PostSection4 from "@/components/page/posts/postSection4"
+import PostCardsSection from "@/components/page/posts/postCardSection";
 
 const PostPage = async () => {
 
@@ -15,7 +15,7 @@ const PostPage = async () => {
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6">
                     {
-                        data?.data?.map((post: { _id: string; title: string; post: any }, idx: number) => <PostSection4 post={post} key={idx} />)
+                        data?.data?.map((post: { _id: string; title: string; post: any; userId: any; category: { category: string } }, idx: number) => <PostCardsSection post={post} key={idx} />)
                     }
                 </div>
             </Container>

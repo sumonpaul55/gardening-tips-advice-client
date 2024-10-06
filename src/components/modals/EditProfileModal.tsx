@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, } from "@nextui-org/react";
-import React, { useState } from "react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input } from "@nextui-org/react";
+import React from "react";
 // import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 // import { toast } from "sonner";
 import GFrom from "../forms/GFrom";
 import GInput from "../forms/GInput";
 import { FaEdit } from "react-icons/fa";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 
 
@@ -14,7 +15,7 @@ export default function EditUser() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     // const [file, setFile] = useState<any>()
 
-    const handleEditUser = async () => {
+    const handleEditUser: SubmitHandler<FieldValues> = async (data) => {
         // const image = await uploadImageToCloudinary(file)
         // const res = await createCategory(datas) as any
         // console.log(res)
@@ -23,7 +24,7 @@ export default function EditUser() {
         // } else if (res?.error) {
         //     toast.error(res?.error?.data?.message || "something went wrong")
         // }
-
+        console.log(data)
     }
     return (
         <div className="flex-1">
@@ -37,8 +38,8 @@ export default function EditUser() {
                                 <GFrom onSubmit={handleEditUser}>
                                     <div className="flex items-center gap-3">
                                         <GInput name="name" label="Your Name" />
-                                        <GInput name="" label="Email" value="email" isDisabled clasName="" />
-                                        <GInput name="" label="Role" value="email" isDisabled clasName="" />
+                                        <Input label="Email" value="email" isDisabled={true} />
+                                        <Input label="Role" value="email" isDisabled={true} />
                                     </div>
                                 </GFrom>
                             </ModalBody>
@@ -46,9 +47,7 @@ export default function EditUser() {
                                 <Button color="danger" variant="light" onPress={onClose}>
                                     Close
                                 </Button>
-
                             </ModalFooter>
-
                         </>
                     )}
                 </ModalContent>

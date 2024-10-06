@@ -10,6 +10,7 @@ export type TUser = {
   iat: number;
   exp: number;
   phoneNumber: string;
+  profilePhoto?: string | undefined;
 };
 export type TInitialState = {
   user: null | TUser;

@@ -49,9 +49,9 @@ export default function MenuBar() {
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 {
                     MenuItems?.map((item, idx: number) => {
-                        // if (item?.url === "profile" && !user) {
-                        //     return null
-                        // }
+                        if (item?.url === "profile" && !user) {
+                            return null
+                        }
                         return <NavbarItem key={idx}>
                             <Link color="foreground" href={`/${item.url}`}>
                                 {item?.name}

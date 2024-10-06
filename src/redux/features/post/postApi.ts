@@ -12,7 +12,15 @@ const postApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["post"],
     }),
+    getVotesSummery: builder.query({
+      query: () => {
+        return {
+          url: "/voterSummer",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useMakePostMutation } = postApi;
+export const { useMakePostMutation, useGetVotesSummeryQuery } = postApi;
