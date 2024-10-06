@@ -8,6 +8,7 @@ import { logOut } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
 import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
 import { MenuItems } from "@/consts/menuItems";
+import { MdVerified } from "react-icons/md";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const user = useAppSelector(state => state.auth.user)
@@ -64,7 +65,16 @@ export default function MenuBar() {
                     user ?
                         <Dropdown>
                             <DropdownTrigger>
-                                <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
+                                <div className="relative">
+                                    <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
+                                    {
+                                        loggedInuser?.data?.verified === true ?
+                                            <span className='absolute -right-2 top-6 size-5 shadow flex items-center justify-center rounded-full bg-gray-300'>
+                                                <MdVerified className='text-primary' size={16} />
+                                            </span> :
+                                            null
+                                    }
+                                </div>
                             </DropdownTrigger>
                             <DropdownMenu className="m-2">
                                 <DropdownItem>

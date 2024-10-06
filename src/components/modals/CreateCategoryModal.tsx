@@ -46,7 +46,7 @@ export default function CreateCategory() {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Add a Categroy</ModalHeader>
                             <ModalBody>
                                 <Input errorMessage={!categroy} label="Category Name" onChange={(e) => setCategory(e.target.value)} />
                                 <label htmlFor="categoryimage" className="mt-3 rounded-lg block border p-3 cursor-pointer">image suggested(400*250) px</label>
