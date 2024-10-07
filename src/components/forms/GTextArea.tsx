@@ -4,7 +4,7 @@ import { IInputs } from "@/types"
 import { Textarea } from "@nextui-org/react";
 import { useFormContext } from "react-hook-form";
 
-interface inputprops extends IInputs { type?: string; value?: string; isDisabled?: boolean, defaultValue?: string; }
+interface inputprops extends IInputs { type?: string; value?: string; isDisabled?: boolean, defaultValue?: string; className: string }
 
 
 

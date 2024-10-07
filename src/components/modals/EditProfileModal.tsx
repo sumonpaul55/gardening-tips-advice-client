@@ -80,7 +80,7 @@ export default function EditUser() {
                                     </div>
 
                                     <div className="mt-3">
-                                        <GTeaxtArea name="address" label="Address" defaultValue={dataUser?.address ? dataUser?.address : ""} />
+                                        <GTeaxtArea className="" name="address" label="Address" defaultValue={dataUser?.address ? dataUser?.address : ""} />
                                     </div>
 
                                     <div className="mt-4">
