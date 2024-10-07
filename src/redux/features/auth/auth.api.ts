@@ -38,7 +38,6 @@ const authApi = baseApi.injectEndpoints({
     }),
     getUserByid: builder.query({
       query: (id: string) => {
-        console.log(id);
         return {
           url: `/user/id/${id}`,
           method: "GET",

@@ -31,6 +31,8 @@ const PostCardsSection: React.FC<PostSection4Props> = ({ post }) => {
     const firstImage = extractFirstImage(post?.post);
     const postOwner = post?.userId;
 
+
+
     // const isFolloew = postOwner?.follower?.find()
 
     return (

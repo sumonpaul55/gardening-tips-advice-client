@@ -43,7 +43,7 @@ const ProfilePage = () => {
                                     {
                                         userData?.verified !== true && <Button className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400' isDisabled={true}>Verify</Button>
                                     }
-
+                                    <span className='text-sm md:text-lg font-semibold mt-3'>Address: {(userData?.address)}</span>
                                 </div>
 
                             </div>

@@ -22,9 +22,9 @@ export default function EditUser() {
     const [file, setFile] = useState<any>()
 
     const handleEditUser: SubmitHandler<FieldValues> = async (data) => {
-        const toastId = toast.loading("Updating...")
+        const toastId = toast.loading("Updating...");
 
-        const formData = new FormData()
+        const formData = new FormData();
         const updateData = {
             links: [
                 { socialName: "Facebook", url: data?.facebook },

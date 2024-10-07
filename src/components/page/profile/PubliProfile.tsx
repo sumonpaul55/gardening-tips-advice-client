@@ -13,6 +13,7 @@ const PubliProfile = ({ userId }: { userId: string }) => {
     const localUser = useAppSelector(state => state.auth.user)
     const userData = data?.data;
     const isFollower = userData?.follower?.some((item: string) => item === localUser?._id)
+    console.log(userData)
     if (!userData) {
         redirect("/")
     }

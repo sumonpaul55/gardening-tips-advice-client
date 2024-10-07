@@ -19,6 +19,7 @@ import { verifiyToken } from "@/utils/verifyToken"
 import { setUser } from "@/redux/features/auth/authSlice"
 import { useAppDispatch } from "@/redux/hooks"
 import LoadingBlur from "@/components/shared/LoadingBlur"
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary"
 
 const Registration = () => {
 
@@ -32,15 +33,17 @@ const Registration = () => {
 
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        let profilePhoto;
+        if (imageFile) {
+            profilePhoto = await uploadImageToCloudinary(imageFile)
+        }
         const toastId = toast.loading("Register processing...")
-        const formData = new FormData()
         const name = data?.name.trim()
         const registerData = {
-            ...data, name
+            ...data, name, profilePhoto
         }
-        formData.append("data", JSON.stringify(registerData))
-        formData.append("file", imageFile)
-        const res = await register(formData) as any
+
+        const res = await register(registerData) as any
         if (res?.data?.success) {
             const user = verifiyToken(res?.data?.data?.accessToken)
             // set cookies refresh token
