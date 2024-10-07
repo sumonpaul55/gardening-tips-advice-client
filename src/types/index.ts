@@ -8,3 +8,16 @@ export interface IInputs {
   placeholder?: string;
   isRequired?: boolean;
 }
+
+export interface IUser {
+  _id: string;
+  name: string;
+  role: string;
+  email: string;
+  status?: string;
+  phoneNumber: string;
+  profilePhoto: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}

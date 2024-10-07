@@ -7,10 +7,6 @@ export const MenuItems = [
     name: "News Feed",
     url: "news-feed",
   },
-  {
-    name: "Profile",
-    url: "profile",
-  },
 ];
 
 export const UserMenuItems = [
@@ -21,9 +17,5 @@ export const UserMenuItems = [
   {
     name: "News Feed",
     url: "news-feed",
-  },
-  {
-    name: "Profile",
-    url: "profile",
   },
 ];

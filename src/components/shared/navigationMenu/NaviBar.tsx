@@ -79,7 +79,10 @@ export default function MenuBar() {
                             <DropdownMenu className="m-2">
                                 <DropdownItem>
                                     <div className="space-y-2 mb-2 flex flex-col">
-                                        <Link href="/user" className="bg-secondary w-full rounded-lg text-white text-md p-2">
+                                        <Link href="/profile" className="bg-primary w-full rounded-lg text-white text-md p-2">
+                                            Profile
+                                        </Link>
+                                        <Link href="/user" className="bg-primary w-full rounded-lg text-white text-md p-2">
                                             Dashborad
                                         </Link>
                                     </div>
