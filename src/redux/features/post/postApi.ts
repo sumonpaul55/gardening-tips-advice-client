@@ -12,10 +12,18 @@ const postApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["post"],
     }),
-    getVotesSummery: builder.query({
-      query: () => {
+    // getVotesSummery: builder.query({
+    //   query: () => {
+    //     return {
+    //       url: "/voterSummer",
+    //       method: "GET",
+    //     };
+    //   },
+    // }),
+    getPostById: builder.query({
+      query: (id: string) => {
         return {
-          url: "/voterSummer",
+          url: `/post/${id}`,
           method: "GET",
         };
       },
@@ -23,4 +31,4 @@ const postApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useMakePostMutation, useGetVotesSummeryQuery } = postApi;
+export const { useMakePostMutation, useGetPostByIdQuery } = postApi;

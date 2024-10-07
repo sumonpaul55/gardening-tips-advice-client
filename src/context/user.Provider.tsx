@@ -7,14 +7,14 @@ const UserContext = createContext<IUserProviderValues | undefined>(undefined)
 
 type IUserProviderValues = {
     user: IUser | null | undefined;
-    isloading: boolean | undefined;
+    isLoading: boolean | undefined;
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     setUser: (user: IUser | null) => void;
 }
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<IUser | null>(null)
-    const [isloading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
 
     const handleUser = async () => {
@@ -25,10 +25,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         handleUser()
-    }, [isloading])
+    }, [isLoading])
 
 
-    return <UserContext.Provider value={{ user, isloading, setUser, setIsLoading }}>
+    return <UserContext.Provider value={{ user, isLoading, setUser, setIsLoading }}>
         {children}
     </UserContext.Provider>
 }

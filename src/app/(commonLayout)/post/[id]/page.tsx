@@ -1,14 +1,14 @@
+import PostDetails from '@/components/page/posts/PostDetails'
 import React from 'react'
 
-const PostDetails = ({ params }: { params: { id: string } }) => {
-
+const PostDPages = ({ params }: { params: { id: string } }) => {
     return (
-        <main>
+        <main className='bg-white py-10 md:min-h-screen'>
             <div className="Container">
-                {params.id}
+                <PostDetails id={params?.id} />
             </div>
         </main>
     )
 }
 
-export default PostDetails
+export default PostDPages

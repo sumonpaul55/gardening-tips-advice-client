@@ -1,6 +1,5 @@
 "use client"
 import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
-import { useAppSelector } from '@/redux/hooks'
 import { redirect } from 'next/navigation'
 import React, { } from 'react'
 import moment from "moment"
@@ -8,8 +7,10 @@ import EditUser from '@/components/modals/EditProfileModal'
 import ProfileImage from './ProfileImage'
 import { Button } from '@nextui-org/react'
 import UsersPosts from './UsersPosts'
+import Link from 'next/link'
+import { useLocalUser } from '@/context/user.Provider'
 const ProfilePage = () => {
-    const user = useAppSelector(state => state.auth.user)
+    const { user } = useLocalUser()
     const { data, isLoading } = useGetUserByEmailQuery(`${user?.email}`)
     const userData = data?.data;
     // const { email, profilePhoto, name, verified, role, phoneNumber, createdAt, follower, following } = userData;
@@ -46,6 +47,16 @@ const ProfilePage = () => {
                                     <span className='text-sm md:text-lg font-semibold mt-3'>Address: {(userData?.address)}</span>
                                 </div>
 
+                            </div>
+                        </div>
+                        <div>
+                            <h4 className='md:text-lg'>Socila links</h4>
+                            <div className='grid grid-cols-2 gap-5 md:grid-cols-3 mt-5'>
+                                {
+                                    userData?.links?.map((item: { url: string; socialName: string }, idx: number) => {
+                                        return <Link key={idx} href={item?.url} target='_blank' className='p-3 bg-secondary text-white rounded-lg'>{item?.socialName}</Link>
+                                    })
+                                }
                             </div>
                         </div>
                     </div>

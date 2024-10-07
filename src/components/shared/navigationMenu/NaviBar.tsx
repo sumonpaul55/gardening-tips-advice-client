@@ -2,16 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button, Dropdown, DropdownMenu, DropdownItem, DropdownTrigger } from "@nextui-org/react";
 import Image from 'next/image'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { toast } from "sonner";
 import { logOut } from "@/redux/features/auth/authSlice";
 import Cookies from "js-cookie";
 import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
 import { MenuItems } from "@/consts/menuItems";
 import { MdVerified } from "react-icons/md";
+import { useLocalUser } from "@/context/user.Provider";
 export default function MenuBar() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const user = useAppSelector(state => state.auth.user)
+    const { user } = useLocalUser()
     const dispatch = useAppDispatch()
     const { data: loggedInuser, isSuccess, } = useGetUserByEmailQuery(`${user?.email}`)
     const [isClient, setIsClient] = useState(false)

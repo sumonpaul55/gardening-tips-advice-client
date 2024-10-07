@@ -1,7 +1,7 @@
 "use client"
 import Container from '@/components/shared/Container/Container'
+import { useLocalUser } from '@/context/user.Provider'
 import { useGetUserByidQuery } from '@/redux/features/auth/auth.api'
-import { useAppSelector } from '@/redux/hooks'
 import { Button } from '@nextui-org/react'
 import moment from 'moment'
 import Image from 'next/image'
@@ -10,9 +10,13 @@ import React from 'react'
 
 const PubliProfile = ({ userId }: { userId: string }) => {
     const { data } = useGetUserByidQuery(userId)
-    const localUser = useAppSelector(state => state.auth.user)
+    const { user: localUser } = useLocalUser()
     const userData = data?.data;
+
+
     const isFollower = userData?.follower?.some((item: string) => item === localUser?._id)
+
+
     console.log(userData)
     if (!userData) {
         redirect("/")
