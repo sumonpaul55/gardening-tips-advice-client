@@ -16,10 +16,8 @@ export default function CreateCategory() {
         if (categroy) {
             if (file) {
                 const image = await uploadImageToCloudinary(file)
-                console.log(image)
                 const datas = { category: categroy, image }
                 const res = await createCategory(datas) as any
-                console.log(res)
                 if (res?.data?.success) {
                     toast.success(res?.data?.message)
                 } else if (res?.error) {
@@ -51,7 +49,7 @@ export default function CreateCategory() {
                                 <Input errorMessage={!categroy} label="Category Name" onChange={(e) => setCategory(e.target.value)} />
                                 <label htmlFor="categoryimage" className="mt-3 rounded-lg block border p-3 cursor-pointer">image suggested(400*250) px</label>
                                 <Input isInvalid={!file} type="file" id="categoryimage" className="hidden" onChange={(e: any) => setFile(e.target.files[0])} />
-                                <Button color="primary" onPress={onClose} onClick={handleCreateCategory} className="mt-5">
+                                <Button color="primary" onPress={onClose} onClick={handleCreateCategory} className="mt-5" isDisabled={!categroy}>
                                     Create
                                 </Button>
                             </ModalBody>

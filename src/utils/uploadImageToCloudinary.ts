@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const uploadImageToCloudinary = async (file: any) => {
-  console.log(process.env.NEXT_PUBLIC_UpLoad_presect);
-
   const formData = new FormData();
   formData.append("file", file);
   formData.append("cloud_name", process.env.NEXT_PUBLIC_Cloud_Name as string);

@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "**"
-            }
-        ]
+        // remotePatterns: [
+        //     {
+        //         protocol: "https",
+        //         hostname: "**"
+        //     }
+        // ]
+        domains: ["res.cloudinary.com", "i.ibb.co.com"]
     },
     // this is suspense related error will ignore
 

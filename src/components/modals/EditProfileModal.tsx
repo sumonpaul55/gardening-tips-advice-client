@@ -12,6 +12,7 @@ import GTeaxtArea from "../forms/GTextArea";
 import { useAppSelector } from "@/redux/hooks";
 import { useUpdateUserMutation } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 
 
 
@@ -23,9 +24,12 @@ export default function EditUser() {
 
     const handleEditUser: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Updating...");
-
-        const formData = new FormData();
+        let profilePhoto
+        if (file) {
+            profilePhoto = await uploadImageToCloudinary(file)
+        }
         const updateData = {
+            profilePhoto,
             links: [
                 { socialName: "Facebook", url: data?.facebook },
                 { socialName: "Youtube", url: data?.youtube },
@@ -36,12 +40,11 @@ export default function EditUser() {
             ],
             ...data
         }
-        formData.append("data", JSON.stringify(updateData))
-        formData.append("file", file)
-        const updateInfo = { id: localUser?._id, formData }
+
+        const updateInfo = { id: localUser?._id, updateData }
         try {
             const res = await update(updateInfo) as any
-            console.log(res)
+
             if (res?.data?.success) {
                 toast.success(res?.data?.message, { id: toastId })
             } else if (res?.error) {

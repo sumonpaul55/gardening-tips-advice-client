@@ -37,6 +37,7 @@ const Registration = () => {
         if (imageFile) {
             profilePhoto = await uploadImageToCloudinary(imageFile)
         }
+        console.log(profilePhoto)
         const toastId = toast.loading("Register processing...")
         const name = data?.name.trim()
         const registerData = {

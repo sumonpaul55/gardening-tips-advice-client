@@ -39,7 +39,9 @@ const PostCardsSection: React.FC<PostSection4Props> = ({ post }) => {
         <div className="border rounded-lg p-3 shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full pb-6">
             {firstImage && (
                 <Link href={`/post/${post?._id}`} className=''>
-                    <img
+                    <Image
+                        width={400}
+                        height={600}
                         src={firstImage}
                         alt="Post Image"
                         className="w-full h-64 object-cover mb-2 rounded-t-lg"
