@@ -22,7 +22,7 @@ const ProfilePage = () => {
     }
     return (
         <>
-            <div className='mt-4 flex flex-col md:flex-row gap-8 min-h-screen font-roboto_slab bg-slate-100'>
+            <div className='mt-4 flex flex-col md:flex-row gap-8 min-h-screen font-roboto_slab bg-slate-100 pb-10'>
                 <div className='md:w-[30%] bg-slate-100 px-2 lg:px-5 pt-4 rounded-md relative'>
                     <div className='flex flex-col'>
                         <div className=''>

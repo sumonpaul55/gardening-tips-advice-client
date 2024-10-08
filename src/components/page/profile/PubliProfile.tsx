@@ -1,25 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import Container from '@/components/shared/Container/Container'
 import { useLocalUser } from '@/context/user.Provider'
-import { useGetUserByidQuery } from '@/redux/features/auth/auth.api'
+import { useFollowUnfolowMutation, useGetUserByidQuery } from '@/redux/features/auth/auth.api'
 import { Button } from '@nextui-org/react'
 import moment from 'moment'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import { toast } from 'sonner'
 
 const PubliProfile = ({ userId }: { userId: string }) => {
-    const { data } = useGetUserByidQuery(userId)
+    const { data, isLoading } = useGetUserByidQuery(userId)
+    const [followUnfollow] = useFollowUnfolowMutation()
     const { user: localUser } = useLocalUser()
     const userData = data?.data;
 
 
     const isFollower = userData?.follower?.some((item: string) => item === localUser?._id)
 
-
-    console.log(userData)
-    if (!userData) {
+    if (!isLoading && !userData) {
         redirect("/")
+    }
+
+    const handleFollowUnfollow = async () => {
+        const info = { email: localUser?.email, userId: userData?._id }
+        const res = await followUnfollow(info) as any
+        if (res?.data?.success) {
+            toast.success(res?.data?.message)
+        } else {
+            toast.error(res?.error?.data?.message)
+        }
     }
     return (
         <Container>
@@ -42,10 +53,11 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                         </div>
                     </div>
                     <div>
-                        {
-                            isFollower ? <Button className='bg-secondary text-white md:px-10'>Unfollow</Button> :
-                                <Button className='bg-secondary text-white md:px-10'>Follow</Button>
-                        }
+                        <Button className={`${isFollower ? "bg-pink-600" : "bg-secondary"}  text-white md:px-10`} onClick={handleFollowUnfollow}> {
+                            isFollower ? "Unfollow" :
+                                "Follow"}
+                        </Button>
+
 
                     </div>
                 </div>

@@ -56,6 +56,18 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["user"],
     }),
+    followUnfolow: builder.mutation({
+      query: (info: any) => {
+        console.log("api", info);
+        return {
+          url: "/user/follow-unfollow",
+          method: "PUT",
+          body: info,
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
   }),
 });
-export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery, useGetUserByidQuery, useUpdateUserMutation } = authApi;
+export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery, useGetUserByidQuery, useUpdateUserMutation, useFollowUnfolowMutation } =
+  authApi;

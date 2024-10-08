@@ -27,6 +27,7 @@ const PostActivitiy = () => {
                     <span>{upvotes}</span>
                 </motion.button>
                 <motion.button
+
                     whileTap={{ scale: 0.9 }}
                     className="flex items-center text-red-500 hover:text-red-600"
                     onClick={handleDownvote}>
