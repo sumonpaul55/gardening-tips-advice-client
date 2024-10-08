@@ -62,7 +62,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
                 <div className='flex-1 bg-slate-100 rounded-md md:border-l p-2 md:p-5'>
-                    <UsersPosts />
+                    <UsersPosts userId={user?._id} />
                 </div>
             </div>
         </>

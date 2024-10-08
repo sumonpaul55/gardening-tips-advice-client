@@ -28,7 +28,16 @@ const postApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getPostByUserId: builder.query({
+      query: (id: string) => {
+        console.log("api id", id);
+        return {
+          url: `/post/postby-user/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useMakePostMutation, useGetPostByIdQuery } = postApi;
+export const { useMakePostMutation, useGetPostByIdQuery, useGetPostByUserIdQuery } = postApi;

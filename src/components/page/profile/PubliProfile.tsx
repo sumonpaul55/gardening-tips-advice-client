@@ -57,8 +57,6 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                             isFollower ? "Unfollow" :
                                 "Follow"}
                         </Button>
-
-
                     </div>
                 </div>
             </div>
