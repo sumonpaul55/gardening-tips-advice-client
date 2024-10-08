@@ -4,13 +4,16 @@ import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import GTeaxtArea from '@/components/forms/GTextArea';
 import GFrom from '@/components/forms/GFrom';
 import { FieldValues, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { commetValidationSchema } from '@/validationSchema/validationSchema';
+import { Tooltip } from '@nextui-org/react';
 
 const PostActivitiy = () => {
-    const [upvotes, setUpvotes] = useState(0);
-    const [downvotes, setDownvotes] = useState(0);
+    const [upvotes, setUpvotes] = useState<boolean>();
+    const [downvotes, setDownvotes] = useState<boolean>();
 
-    const handleUpvote = () => setUpvotes(upvotes + 1);
-    const handleDownvote = () => setDownvotes(downvotes + 1);
+    const handleUpvote = () => setUpvotes(true);
+    const handleDownvote = () => setDownvotes(true);
 
     const handleComment: SubmitHandler<FieldValues> = (data) => {
         console.log(data)
@@ -18,26 +21,29 @@ const PostActivitiy = () => {
     return (
         <div className="flex flex-col space-x-4 mt-10">
             <div className='flex items-center justify-stretch gap-10 mb-10'>
-                <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    className="flex items-center text-green-500 hover:text-green-600"
-                    onClick={handleUpvote}
-                >
-                    <FaThumbsUp className="mr-2" size={50} />
-                    <span>{upvotes}</span>
-                </motion.button>
-                <motion.button
-
-                    whileTap={{ scale: 0.9 }}
-                    className="flex items-center text-red-500 hover:text-red-600"
-                    onClick={handleDownvote}>
-                    <FaThumbsDown className="mr-2" size={50} />
-                    <span>{downvotes}</span>
-                </motion.button>
+                <Tooltip content="Upvote">
+                    <motion.button
+                        disabled={upvotes}
+                        whileTap={{ scale: 0.9 }}
+                        className="flex items-center text-green-500 hover:text-green-600 disabled:text-gray-300"
+                        onClick={handleUpvote}
+                    >
+                        <FaThumbsUp className="mr-2" size={50} />
+                    </motion.button>
+                </Tooltip>
+                <Tooltip content="Downvote">
+                    <motion.button
+                        disabled={downvotes}
+                        whileTap={{ scale: 0.9 }}
+                        className="flex items-center text-red-500 hover:text-red-600 disabled:text-gray-300"
+                        onClick={handleDownvote}>
+                        <FaThumbsDown className="mr-2" size={50} />
+                    </motion.button>
+                </Tooltip>
             </div>
             <div className="flex flex-col gap-5">
                 {/* Input for typing a comment */}
-                <GFrom onSubmit={handleComment}>
+                <GFrom onSubmit={handleComment} resolver={zodResolver(commetValidationSchema)}>
                     <GTeaxtArea
                         type="text"
                         className="flex-grow border rounded-l-md p-2 w-full text-gray-700 focus:outline-none"

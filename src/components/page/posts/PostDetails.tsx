@@ -50,7 +50,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                 transition={{ delay: 0.3 }}
                                 className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center"
                             >
-                                <h1 className="text-white text-3xl font-bold px-3">{post?.title}</h1>
+                                <h1 className="text-white text-xl md:text-3xl font-bold px-3">{post?.title}</h1>
                             </motion.div>
                         </div>
 
@@ -59,16 +59,14 @@ const PostDetails = ({ id }: { id: string }) => {
                                 initial={{ opacity: 0, translateY: 20 }}
                                 animate={{ opacity: 1, translateY: 0 }}
                                 transition={{ duration: 0.6 }}
-                                className="mx-auto p-6 bg-white shadow-md rounded-lg"
-                            >
+                                className="mx-auto p-3 md:p-6 bg-white shadow-md rounded-lg">
                                 {/* Post Content */}
                                 <motion.div
                                     initial={{ opacity: 0, translateY: 30 }}
                                     animate={{ opacity: 1, translateY: 0 }}
                                     transition={{ delay: 0.5 }}
-                                    className="mt-8 text-lg text-gray-800"
-                                    dangerouslySetInnerHTML={{ __html: post.post }}
-                                />
+                                    className="mt-8 md:text-lg text-gray-800"
+                                    dangerouslySetInnerHTML={{ __html: post.post }} />
 
                                 {/* User Info */}
                                 <div className="flex items-center mt-10 justify-evenly py-5 bg-gray-100 rounded-lg">

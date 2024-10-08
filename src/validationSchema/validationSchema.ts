@@ -15,3 +15,7 @@ export const registerValidationSchema = z.object({
 export const postValidation = z.object({
   title: z.string({ required_error: "Need Post title" }).min(10, "title should be minimum 10 character"),
 });
+
+export const commetValidationSchema = z.object({
+  comment: z.string({ required_error: "plese write a comment" }).min(5, "comment should be minimum 5 letters"),
+});

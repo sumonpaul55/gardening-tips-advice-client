@@ -29,10 +29,9 @@ const postApi = baseApi.injectEndpoints({
       },
     }),
     getPostByUserId: builder.query({
-      query: (id: string) => {
-        console.log("api id", id);
+      query: (userId: string) => {
         return {
-          url: `/post/postby-user/${id}`,
+          url: `/post/postby-user/${userId}`,
           method: "GET",
         };
       },
