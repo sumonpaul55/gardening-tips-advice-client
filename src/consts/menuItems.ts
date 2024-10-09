@@ -7,6 +7,14 @@ export const MenuItems = [
     name: "News Feed",
     url: "news-feed",
   },
+  {
+    name: "About Us",
+    url: "about-us",
+  },
+  {
+    name: "Contact Us",
+    url: "contact",
+  },
 ];
 
 export const UserMenuItems = [
@@ -17,5 +25,13 @@ export const UserMenuItems = [
   {
     name: "News Feed",
     url: "news-feed",
+  },
+  {
+    name: "About Us",
+    url: "about-us",
+  },
+  {
+    name: "Contact Us",
+    url: "contact",
   },
 ];

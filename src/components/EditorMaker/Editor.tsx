@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import CreateCategory from '../modals/CreateCategoryModal';
 import { useGetCategoryQuery } from '@/redux/features/category/category.api';
-import { useAppSelector } from '@/redux/hooks';
+import { useLocalUser } from '@/context/user.Provider';
 
 const Editor = () => {
     const router = useRouter()
@@ -22,7 +22,7 @@ const Editor = () => {
     const [content, setContent] = useState('');
     const { data, isLoading } = useGetCategoryQuery(undefined)
     const [category, setCategory] = useState()
-    const user = useAppSelector(state => state.auth.user)
+    const { user } = useLocalUser()
     const categories = data?.data;
 
 

@@ -5,6 +5,7 @@ import { getCurrenUser } from "./services/authService.ts";
 type role = keyof typeof roleBaseRoutes;
 
 const Authroutes = ["/login", "/registration"];
+const ProtectedRoute = ["/profile"];
 
 const roleBaseRoutes = {
   // using regex for all profile related path can be accessable for user
@@ -26,6 +27,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
     }
   }
+  // default protected route
+
+  if (ProtectedRoute.includes(pathname)) {
+    if (!user) {
+      return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
+    } else {
+      return NextResponse.next();
+    }
+  }
+
   if (user?.role && roleBaseRoutes[user?.role as role]) {
     const route = roleBaseRoutes[user?.role as role];
     if (route.some((route) => pathname.match(route))) {
