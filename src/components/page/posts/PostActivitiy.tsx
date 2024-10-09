@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { } from 'react'
 import { motion } from "framer-motion";
 import { FaThumbsDown, FaThumbsUp } from 'react-icons/fa';
 import GTeaxtArea from '@/components/forms/GTextArea';
@@ -7,36 +8,50 @@ import { FieldValues, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { commetValidationSchema } from '@/validationSchema/validationSchema';
 import { Tooltip } from '@nextui-org/react';
+import { useLocalUser } from '@/context/user.Provider';
+import { useHandleVotesMutation } from '@/redux/features/post/postApi';
+import { toast } from 'sonner';
 
-const PostActivitiy = () => {
-    const [upvotes, setUpvotes] = useState<boolean>();
-    const [downvotes, setDownvotes] = useState<boolean>();
+const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userId: string; comments: string[]; votes: boolean }[] }) => {
 
-    const handleUpvote = () => setUpvotes(true);
-    const handleDownvote = () => setDownvotes(true);
+    const [handlevotes] = useHandleVotesMutation()
+    const { user: localUser } = useLocalUser()
+
+    const myActivity = activity.find((item) => item?.userId === localUser?._id)
+
+    const handleVotes = async (votes: boolean) => {
+        const res = await handlevotes({ postId: postId, userId: localUser?._id, votes }) as any
+        if (res?.data?.success) {
+            toast.success(res?.data?.message,)
+        }
+        else {
+            toast.error(res?.error?.data?.message)
+        }
+        console.log(res)
+    };
 
     const handleComment: SubmitHandler<FieldValues> = (data) => {
         console.log(data)
     }
     return (
-        <div className="flex flex-col space-x-4 mt-10">
-            <div className='flex items-center justify-stretch gap-10 mb-10'>
+        <div className="flex flex-col space-x-4">
+            <div className='flex items-center justify-stretch gap-10 mb-5 ml-5'>
                 <Tooltip content="Upvote">
                     <motion.button
-                        disabled={upvotes}
+                        disabled={myActivity?.votes}
                         whileTap={{ scale: 0.9 }}
                         className="flex items-center text-green-500 hover:text-green-600 disabled:text-gray-300"
-                        onClick={handleUpvote}
-                    >
+                        onClick={() => handleVotes(true)}>
+
                         <FaThumbsUp className="mr-2" size={50} />
                     </motion.button>
                 </Tooltip>
                 <Tooltip content="Downvote">
                     <motion.button
-                        disabled={downvotes}
+                        disabled={!myActivity?.votes}
                         whileTap={{ scale: 0.9 }}
                         className="flex items-center text-red-500 hover:text-red-600 disabled:text-gray-300"
-                        onClick={handleDownvote}>
+                        onClick={() => handleVotes(false)}>
                         <FaThumbsDown className="mr-2" size={50} />
                     </motion.button>
                 </Tooltip>

@@ -66,7 +66,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                     animate={{ opacity: 1, translateY: 0 }}
                                     transition={{ delay: 0.5 }}
                                     className="mt-8 md:text-lg text-gray-800"
-                                    dangerouslySetInnerHTML={{ __html: post.post }} />
+                                    dangerouslySetInnerHTML={{ __html: post?.post }} />
 
                                 {/* User Info */}
                                 <div className="flex items-center mt-10 justify-evenly py-5 bg-gray-100 rounded-lg">
@@ -138,7 +138,7 @@ const PostDetails = ({ id }: { id: string }) => {
                         </div>
                         {/* post activity */}
                         <div className="p-3 md:p-10 bg-gray-200 mt-5 rounded-lg">
-                            <PostActivitiy />
+                            <PostActivitiy activity={post?.activity} postId={post?._id} />
                         </div>
                     </div>
             }

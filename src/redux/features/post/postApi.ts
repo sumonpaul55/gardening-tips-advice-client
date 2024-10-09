@@ -27,6 +27,7 @@ const postApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["post"],
     }),
     getPostByUserId: builder.query({
       query: (userId: string) => {
@@ -35,8 +36,19 @@ const postApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["post"],
+    }),
+    handleVotes: builder.mutation({
+      query: (info: { postId: string; userId: string | undefined; votes: boolean }) => {
+        return {
+          url: `/post/handle-voting/${info.postId}`,
+          method: "PUT",
+          body: { userId: info.userId, votes: info.votes },
+        };
+      },
+      invalidatesTags: ["post"],
     }),
   }),
 });
 
-export const { useMakePostMutation, useGetPostByIdQuery, useGetPostByUserIdQuery } = postApi;
+export const { useMakePostMutation, useGetPostByIdQuery, useGetPostByUserIdQuery, useHandleVotesMutation } = postApi;
