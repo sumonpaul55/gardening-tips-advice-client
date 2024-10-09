@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React, { ReactNode } from 'react'
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { FieldValues, FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 interface IFormProps extends IFormConfig {
     onSubmit: SubmitHandler<any>;
@@ -24,11 +24,17 @@ const GFrom = ({ resolver, defaultValue, onSubmit, children, className }: IFormP
     if (!!resolver) {
         formConfig["resolver"] = resolver
     }
+
     const methods = useForm(formConfig)
-    const submitHanlder = methods.handleSubmit;
+
+    const submitForm: SubmitHandler<FieldValues> = (data) => {
+        onSubmit(data);
+        methods.reset()
+    }
+
     return (
         <FormProvider {...methods}>
-            <form onSubmit={submitHanlder(onSubmit)} className={className && className}>
+            <form onSubmit={methods.handleSubmit(submitForm)} className={className && className}>
                 {children}
             </form>
         </FormProvider>

@@ -30,9 +30,9 @@ import Image from "next/image"
 const PostDetails = ({ id }: { id: string }) => {
     const { data, isLoading } = useGetPostByIdQuery(`${id}`)
     const post = data?.data;
-    post?.activity?.map((item: any) => (
-        console.log(item)
-    ))
+    // post?.activity?.map((item: any) => (
+    //     console.log(item)
+    // ))
 
 
 
@@ -72,7 +72,6 @@ const PostDetails = ({ id }: { id: string }) => {
                                     transition={{ delay: 0.5 }}
                                     className="mt-8 md:text-lg text-gray-800"
                                     dangerouslySetInnerHTML={{ __html: post?.post }} />
-
                                 {/* User Info */}
                                 <div className="flex items-center mt-10 justify-evenly py-5 bg-gray-100 rounded-lg">
                                     <img
@@ -142,7 +141,7 @@ const PostDetails = ({ id }: { id: string }) => {
                             </motion.div>
                         </div>
                         {/* post activity */}
-                        <div className="p-3 md:p-5 bg-gray-100 mt-5 rounded-lg">
+                        <div className="p-3 md:p-5 bg-gray-200 mt-5 rounded-lg">
                             <PostActivitiy activity={post?.activity} postId={post?._id} />
                         </div>
                         <div className="mt-6">
@@ -156,7 +155,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                                 <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />
                                                 <div className="w-full">
                                                     <h2 className="font-semibold md:text-lg">Name: <span>{item?.userId?.name}</span></h2>
-                                                    <div className="p-2">
+                                                    <div className="p-1 pl-10 bg-gray-50">
                                                         <p className="mt-1 text-lg">{comment}</p>
                                                     </div>
                                                 </div>

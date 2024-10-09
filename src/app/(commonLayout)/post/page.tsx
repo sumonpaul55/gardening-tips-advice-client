@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "@/components/shared/Container/Container"
 import PostCardsSection from "@/components/page/posts/postCardSection";
+import PostHero from "@/components/page/posts/PostHerosection";
 
 const PostPage = async () => {
 
@@ -12,6 +13,7 @@ const PostPage = async () => {
 
     return (
         <main className="z-50 bg-white md:min-h-screen">
+            <PostHero />
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6">
                     {
