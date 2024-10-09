@@ -6,7 +6,7 @@ import { useGetPostByIdQuery } from "@/redux/features/post/postApi"
 import { motion } from "framer-motion";
 import { FaFacebookF, FaYoutube, FaTwitter, FaInstagram, FaPinterest, FaLinkedin } from "react-icons/fa";
 import PostActivitiy from "./PostActivitiy";
-
+import Image from "next/image"
 // interface User {
 //     verified: boolean;
 //     name: string;
@@ -29,8 +29,13 @@ import PostActivitiy from "./PostActivitiy";
 
 const PostDetails = ({ id }: { id: string }) => {
     const { data, isLoading } = useGetPostByIdQuery(`${id}`)
-
     const post = data?.data;
+    post?.activity?.map((item: any) => (
+        console.log(item)
+    ))
+
+
+
 
     return (
         <div>
@@ -137,8 +142,29 @@ const PostDetails = ({ id }: { id: string }) => {
                             </motion.div>
                         </div>
                         {/* post activity */}
-                        <div className="p-3 md:p-10 bg-gray-200 mt-5 rounded-lg">
+                        <div className="p-3 md:p-5 bg-gray-100 mt-5 rounded-lg">
                             <PostActivitiy activity={post?.activity} postId={post?._id} />
+                        </div>
+                        <div className="mt-6">
+                            <h2 className="font-semibold md:text-xl">Comments</h2>
+                            <div>
+                                {
+                                    post?.activity?.map((item: any) => (
+                                        item?.comment?.length &&
+                                        item?.comment?.map((comment: string, idx: number) => (
+                                            <div key={idx} className="bg-gray-100 rounded-lg p-3 mt-4 flex gap-4">
+                                                <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />
+                                                <div className="w-full">
+                                                    <h2 className="font-semibold md:text-lg">Name: <span>{item?.userId?.name}</span></h2>
+                                                    <div className="p-2">
+                                                        <p className="mt-1 text-lg">{comment}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
             }

@@ -9,12 +9,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { commetValidationSchema } from '@/validationSchema/validationSchema';
 import { Tooltip } from '@nextui-org/react';
 import { useLocalUser } from '@/context/user.Provider';
-import { useHandleVotesMutation } from '@/redux/features/post/postApi';
+import { useHandleCommentMutation, useHandleVotesMutation } from '@/redux/features/post/postApi';
 import { toast } from 'sonner';
 
 const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userId: string; comments: string[]; votes: boolean }[] }) => {
 
     const [handlevotes] = useHandleVotesMutation()
+    const [addComment] = useHandleCommentMutation()
     const { user: localUser } = useLocalUser()
 
     const myActivity = activity.find((item) => item?.userId === localUser?._id)
@@ -30,11 +31,13 @@ const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userI
         console.log(res)
     };
 
-    const handleComment: SubmitHandler<FieldValues> = (data) => {
-        console.log(data)
+    const handleComment: SubmitHandler<FieldValues> = async (data) => {
+        const res = await addComment({ postId: postId, userId: localUser?._id, comment: data?.comment }) as any;
+        console.log(res)
     }
     return (
         <div className="flex flex-col space-x-4">
+            <h3 className='mb-4 font-roboto_slab text-center md:text-lg'>Your valueable feedback will increase our experiences</h3>
             <div className='flex items-center justify-stretch gap-10 mb-5 ml-5'>
                 <Tooltip content="Upvote">
                     <motion.button
@@ -43,7 +46,7 @@ const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userI
                         className="flex items-center text-green-500 hover:text-green-600 disabled:text-gray-300"
                         onClick={() => handleVotes(true)}>
 
-                        <FaThumbsUp className="mr-2" size={50} />
+                        <FaThumbsUp className="mr-2" size={40} />
                     </motion.button>
                 </Tooltip>
                 <Tooltip content="Downvote">
@@ -52,7 +55,7 @@ const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userI
                         whileTap={{ scale: 0.9 }}
                         className="flex items-center text-red-500 hover:text-red-600 disabled:text-gray-300"
                         onClick={() => handleVotes(false)}>
-                        <FaThumbsDown className="mr-2" size={50} />
+                        <FaThumbsDown className="mr-2" size={40} />
                     </motion.button>
                 </Tooltip>
             </div>
@@ -65,6 +68,7 @@ const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userI
                         placeholder="Write a comment..."
                         label='Comment'
                         name='comment'
+
                     />
 
                     {/* Button to submit the comment */}

@@ -48,7 +48,17 @@ const postApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["post"],
     }),
+    handleComment: builder.mutation({
+      query: (info: { postId: string; userId: string | undefined; comment: string }) => {
+        return {
+          url: `/post/handle-comment/${info.postId}`,
+          method: "PUT",
+          body: { userId: info.userId, comment: info.comment },
+        };
+      },
+      invalidatesTags: ["post"],
+    }),
   }),
 });
 
-export const { useMakePostMutation, useGetPostByIdQuery, useGetPostByUserIdQuery, useHandleVotesMutation } = postApi;
+export const { useMakePostMutation, useGetPostByIdQuery, useGetPostByUserIdQuery, useHandleVotesMutation, useHandleCommentMutation } = postApi;
