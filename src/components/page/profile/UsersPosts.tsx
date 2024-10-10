@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 // import LoadingSpinner from '@/components/shared/LoadingSpinner'
-import { useGetPostByUserIdQuery, } from '@/redux/features/post/postApi'
 import { Tpost } from '@/types'
 import React from 'react'
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
@@ -10,10 +9,9 @@ import LoadingSpinner from '@/components/shared/LoadingSpinner'
 import Link from 'next/link'
 
 
-const UsersPosts = ({ userId }: { userId: string }) => {
-    // console.log(data?.data)
-    const { data, isLoading, } = useGetPostByUserIdQuery(userId)
-    const post = data?.data;
+const UsersPosts = ({ postData, isLoading }: { postData: Tpost[]; isLoading: boolean | undefined }) => {
+    const post = postData    // console.log(data?.data)
+
 
     return (
         <div>
@@ -21,7 +19,7 @@ const UsersPosts = ({ userId }: { userId: string }) => {
             {
                 isLoading ? <LoadingSpinner /> : post?.length < 1 ? <NoDataFound /> :
                     <div>
-                        <Table>
+                        <Table aria-label="Example static collection table">
                             <TableHeader>
                                 <TableColumn className=''>NO</TableColumn>
                                 <TableColumn className=''>Title</TableColumn>
