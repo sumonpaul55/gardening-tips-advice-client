@@ -47,7 +47,7 @@ export const SidebarItemsAdmin = [
   },
   {
     name: "Category",
-    url: "admin/category",
+    url: "category",
   },
 ];
 
