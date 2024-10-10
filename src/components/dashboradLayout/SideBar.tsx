@@ -1,9 +1,11 @@
 "use client"
+import { SidebarItemsAdmin, SideBarItemsUser } from '@/consts/menuItems'
+import { useLocalUser } from '@/context/user.Provider'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
 const SideBar = () => {
-
+    const { user } = useLocalUser()
     const [sideBarOpen, setSidebarOpen] = useState(false)
     return (
         <>
@@ -13,7 +15,15 @@ const SideBar = () => {
                 </svg>
             </button>
             <div className={`min-h-screen flex gap-3 pt-10 duration-200 w-[300px] flex-col sm:gap-4 fixed h-full md:static bg-slate-600 text-white p-2 ${sideBarOpen ? "-left-[300px] " : "z-40"}`}>
-                <Link onClick={() => setSidebarOpen(!sideBarOpen)} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href="/user/create-post">Create Post</Link>
+                {user?.role === "ADMIN" ?
+                    SidebarItemsAdmin?.map((item, idx) => {
+                        return <Link onClick={() => setSidebarOpen(!sideBarOpen)} key={idx} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href={`${item?.url}`}>{item?.name}</Link>
+                    }) :
+                    SideBarItemsUser?.map((item, idx) => {
+                        return <Link onClick={() => setSidebarOpen(!sideBarOpen)} key={idx} className='sm:text-lg font-medium bg-slate-500 bg-opacity-50 p-2 rounded' href={`${item?.url}`}>{item?.name}</Link>
+                    })
+                }
+
             </div>
         </>
     )
