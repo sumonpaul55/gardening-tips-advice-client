@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 const SideBar = () => {
+
     const [sideBarOpen, setSidebarOpen] = useState(false)
     return (
         <>

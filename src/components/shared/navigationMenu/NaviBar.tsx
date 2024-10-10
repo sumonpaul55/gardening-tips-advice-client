@@ -86,7 +86,7 @@ export default function MenuBar() {
                                         <Link href="/profile" className="bg-primary w-full rounded-lg text-white text-md p-2">
                                             Profile
                                         </Link>
-                                        <Link href="/user" className="bg-primary w-full rounded-lg text-white text-md p-2">
+                                        <Link href={`/${user?.role === "ADMIN" ? "admin" : "user"}`} className="bg-primary w-full rounded-lg text-white text-md p-2">
                                             Dashborad
                                         </Link>
                                     </div>

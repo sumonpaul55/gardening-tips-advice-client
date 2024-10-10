@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 "use client"
 import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
-import { redirect } from 'next/navigation'
 import React, { } from 'react'
 import moment from "moment"
 import EditUser from '@/components/modals/EditProfileModal'
@@ -11,15 +11,10 @@ import Link from 'next/link'
 import { useLocalUser } from '@/context/user.Provider'
 const ProfilePage = () => {
     const { user } = useLocalUser()
-    const { data, isLoading } = useGetUserByEmailQuery(`${user?.email}`)
+    const { data } = useGetUserByEmailQuery(`${user?.email}`)
     const userData = data?.data;
     // const { email, profilePhoto, name, verified, role, phoneNumber, createdAt, follower, following } = userData;
 
-    if (!isLoading && !user) {
-        return redirect("/")
-    } else if (!user?.email) {
-        return null
-    }
     return (
         <>
             <div className='mt-4 flex flex-col md:flex-row gap-8 min-h-screen font-roboto_slab bg-slate-100 pb-10'>
@@ -62,7 +57,7 @@ const ProfilePage = () => {
                     </div>
                 </div>
                 <div className='flex-1 bg-slate-100 rounded-md md:border-l p-2 md:p-5'>
-                    <UsersPosts userId={user?._id} />
+                    <UsersPosts userId={user?._id!} />
                 </div>
             </div>
         </>

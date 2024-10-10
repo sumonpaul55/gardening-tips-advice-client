@@ -5,13 +5,13 @@ import { MdSearchOff } from "react-icons/md"; // Using a react icon for the empt
 const NoDataFound: React.FC = () => {
     return (
         <motion.div
-            className="flex justify-center items-center h-screen"
+            className="flex justify-center items-center h-full"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.5 }}
         >
-            <Card className="p-10 text-center">
+            <Card className="p-10 text-center w-full">
                 <div className="flex justify-center mb-4">
                     <MdSearchOff className="text-6xl text-gray-400" />
                 </div>

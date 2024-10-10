@@ -149,7 +149,7 @@ const PostDetails = ({ id }: { id: string }) => {
                             <div>
                                 {
                                     post?.activity?.map((item: any) => (
-                                        item?.comment?.length &&
+                                        item?.comment?.length > 0 &&
                                         item?.comment?.map((comment: string, idx: number) => (
                                             <div key={idx} className="bg-gray-100 rounded-lg p-3 mt-4 flex gap-4">
                                                 <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />

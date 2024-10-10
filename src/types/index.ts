@@ -30,6 +30,8 @@ export interface Tpost {
   userId: UserId;
   category: TCategory;
   activity: any[];
+  upVotes: any;
+  downVotes: any;
   __v: number;
 }
 

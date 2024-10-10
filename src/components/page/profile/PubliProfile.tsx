@@ -3,7 +3,7 @@
 import Container from '@/components/shared/Container/Container'
 import { useLocalUser } from '@/context/user.Provider'
 import { useFollowUnfolowMutation, useGetUserByidQuery } from '@/redux/features/auth/auth.api'
-import { useGetPostByUserIdQuery } from '@/redux/features/post/postApi'
+import { useGetPostByUserIdQuery, } from '@/redux/features/post/postApi'
 import { Button } from '@nextui-org/react'
 import moment from 'moment'
 import Image from 'next/image'

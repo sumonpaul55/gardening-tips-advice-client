@@ -17,21 +17,43 @@ export const MenuItems = [
   },
 ];
 
-export const UserMenuItems = [
+// export const UserMenuItems = [
+//   {
+//     name: "Post",
+//     url: "post",
+//   },
+//   {
+//     name: "News Feed",
+//     url: "news-feed",
+//   },
+//   {
+//     name: "About Us",
+//     url: "about-us",
+//   },
+//   {
+//     name: "Contact Us",
+//     url: "contact",
+//   },
+// ];
+
+export const SidebarItemsAdmin = [
   {
-    name: "Post",
-    url: "post",
+    name: "User Management",
+    url: "users",
   },
   {
-    name: "News Feed",
-    url: "news-feed",
+    name: "Post Management",
+    url: "posts",
   },
   {
-    name: "About Us",
-    url: "about-us",
+    name: "Category",
+    url: "admin/category",
   },
+];
+
+export const SideBarItemsUser = [
   {
-    name: "Contact Us",
-    url: "contact",
+    name: "Post Management",
+    url: "posts",
   },
 ];
