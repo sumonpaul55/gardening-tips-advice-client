@@ -6,7 +6,7 @@ import React, { } from 'react'
 import moment from "moment"
 import EditUser from '@/components/modals/EditProfileModal'
 import ProfileImage from './ProfileImage'
-import { Button, Divider, Tooltip } from '@nextui-org/react'
+import { Divider, Tooltip } from '@nextui-org/react'
 import UsersPosts from './UsersPosts'
 import Link from 'next/link'
 import { useLocalUser } from '@/context/user.Provider'
@@ -15,6 +15,12 @@ import { ImNotification } from "react-icons/im";
 import { useGetPostByUserIdQuery } from '@/redux/features/post/postApi'
 import LoadingSpinner from '@/components/shared/LoadingSpinner'
 import { Tpost } from '@/types'
+import CheckoutForm from '@/components/modals/CheckOutModal'
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_Publishable_Key as string)
 
 const ProfilePage = () => {
     const { user, isLoading } = useLocalUser()
@@ -24,6 +30,7 @@ const ProfilePage = () => {
     const post = postData?.data;
 
     const isUpVotesTrue = post?.some((item: Tpost) => item.upVotes > item?.downVotes)
+
 
 
     return (
@@ -55,7 +62,12 @@ const ProfilePage = () => {
                                             {
                                                 userData?.verified !== true &&
                                                 <div className='flex gap-3 items-center'>
-                                                    <Button className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400' isDisabled={!isUpVotesTrue}>Verify</Button>
+                                                    <Elements stripe={stripePromise}>
+                                                        {
+                                                            <CheckoutForm userInfo={{ name: user?.name, email: user?.email }} btnClass={` className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400'`} post={post} />
+
+                                                        }
+                                                    </Elements>
                                                     <Tooltip content="Required minimum 1 Up Votes in your post">
                                                         {!isUpVotesTrue &&
                                                             <span>
