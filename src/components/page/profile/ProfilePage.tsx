@@ -64,9 +64,6 @@ const ProfilePage = () => {
                                                         }
                                                     </Tooltip>
                                                 </div>
-
-
-
                                             }
                                             <span className='text-sm md:text-lg font-medium mt-3'>Address: {(userData?.address)}</span>
                                         </div>
