@@ -23,7 +23,7 @@ const UsersAllPost = () => {
     const { data } = useGetUserByEmailQuery(`${user?.email}`)
     const userData = data?.data;
     const post = postData?.data;
-    console.log(userData)
+    // console.log(userData)
 
     return (
         <>

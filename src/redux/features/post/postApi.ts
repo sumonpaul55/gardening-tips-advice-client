@@ -58,6 +58,20 @@ const postApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["post"],
     }),
+    updatePost: builder.mutation({
+      query: (postInfo: {
+        postId: string | undefined;
+        postData?: { title: string | undefined; category: string | undefined; post: string | undefined; userId: string | undefined };
+      }) => {
+        console.log("lfdkjsdljdsklj", postInfo);
+        return {
+          url: `/post/update-post/${postInfo.postId}`,
+          method: "PUT",
+          body: postInfo.postData,
+        };
+      },
+      invalidatesTags: ["post"],
+    }),
   }),
 });
 
@@ -68,4 +82,5 @@ export const {
   useHandleVotesMutation,
   useHandleCommentMutation,
   useGetVotesSummeryQuery,
+  useUpdatePostMutation,
 } = postApi;

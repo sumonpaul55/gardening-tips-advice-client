@@ -11,15 +11,17 @@ import { Select, SelectItem } from '@nextui-org/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postValidation } from '@/validationSchema/validationSchema';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import CreateCategory from '../modals/CreateCategoryModal';
 import { useGetCategoryQuery } from '@/redux/features/category/category.api';
 import { useLocalUser } from '@/context/user.Provider';
 import { Tpost } from "@/types";
+import { useUpdatePostMutation } from "@/redux/features/post/postApi";
 
 export default function EditPostModal({ post, }: { post?: Tpost; }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const router = useRouter()
+    const [updatePost] = useUpdatePostMutation()
+    // const router = useRouter()
     const editor = useRef(null)
     const [content, setContent] = useState('');
     const { data, isLoading } = useGetCategoryQuery(undefined)
@@ -42,11 +44,17 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
     }
 
     const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const toastId = toast.loading("Creating...")
+        // const toastId = toast.loading("Creating...")
         const postData = {
-            ...data, post: content ? content : post?.post, category: category ? category : post?.category?._id, userId: user?._id
+            title: data?.title || post?.title, post: content ? content : post?.post, category: category ? category : post?.category?._id, userId: user?._id
         }
-        console.log(postData)
+        try {
+            const postInfo = { postId: post?._id, postData }
+            console.log("kfjd", postInfo)
+            const res = updatePost(postInfo) as any;
+        } catch (error: any) {
+            toast.error(error?.message)
+        }
     }
 
     return (
