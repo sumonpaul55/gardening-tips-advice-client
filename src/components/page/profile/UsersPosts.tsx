@@ -9,10 +9,9 @@ import LoadingSpinner from '@/components/shared/LoadingSpinner'
 import Link from 'next/link'
 
 
-const UsersPosts = ({ postData, isLoading }: { postData: Tpost[]; isLoading: boolean | undefined }) => {
+const UsersPosts = ({ postData, isLoading, }: { postData: Tpost[]; isLoading: boolean | undefined }) => {
+
     const post = postData    // console.log(data?.data)
-
-
     return (
         <div>
             <h2 className='font-semibold text-lg md:text-xl my-3'>Your Posts</h2>
@@ -43,7 +42,7 @@ const UsersPosts = ({ postData, isLoading }: { postData: Tpost[]; isLoading: boo
                         </Table>
                     </div>
             }
-        </div >
+        </div>
     )
 }
 

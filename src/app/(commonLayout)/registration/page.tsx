@@ -30,8 +30,6 @@ const Registration = () => {
     const [imageFile, setImageFile] = useState<any>()
 
 
-
-
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         let profilePhoto;
         if (imageFile) {

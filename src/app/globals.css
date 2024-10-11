@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .jodit-wysiwyg{
-    min-height: 200px !important;
+    min-height: 100px !important;
 }
