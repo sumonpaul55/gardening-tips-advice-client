@@ -12,6 +12,22 @@ const postApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["post"],
     }),
+    getAllPost: builder.query({
+      query: (query: { searchTerm: string; category: string }) => {
+        const params = new URLSearchParams();
+        if (query.searchTerm) {
+          params.append(`searchTerm`, `${query.searchTerm}`);
+        }
+        if (query.category) {
+          params.append(`category`, `${query.category}`);
+        }
+        return {
+          url: "/post",
+          method: "GET",
+          params,
+        };
+      },
+    }),
     getVotesSummery: builder.query({
       query: (id: string) => {
         return {
@@ -93,4 +109,5 @@ export const {
   useGetVotesSummeryQuery,
   useUpdatePostMutation,
   useDeletePostMutation,
+  useGetAllPostQuery,
 } = postApi;

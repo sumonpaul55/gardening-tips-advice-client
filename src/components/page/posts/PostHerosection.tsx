@@ -5,7 +5,7 @@ import { Input, Select, SelectItem } from '@nextui-org/react';
 import React from 'react';
 
 
-const PostHero: React.FC = () => {
+const PostHero = ({ setSearchTerm, setCategory }: { setSearchTerm: any, setCategory }) => {
 
     return (
         <section className="relative bg-gradient-to-r from-green-700 via-indigo-600 to-green-700 py-6 px-6 text-white w-full">
@@ -18,6 +18,7 @@ const PostHero: React.FC = () => {
                 {/* Search Input */}
                 <div className="flex justify-center items-center mb-6">
                     <Input
+                        onChange={(e) => setSearchTerm(e.target.value)}
                         type="text"
                         className="w-full max-w-lg p-3 rounded-lg shadow-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Search posts..."

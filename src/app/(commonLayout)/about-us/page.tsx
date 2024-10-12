@@ -28,9 +28,9 @@ const AboutUs: React.FC = () => {
                     </div>
                     <div className="md:w-1/2 p-6">
                         <img
-                            src="https://via.placeholder.com/600x400"
+                            src="https://i.ibb.co/GtVk70y/story.jpg"
                             alt="Our Story"
-                            className="rounded-lg shadow-lg"
+                            className="rounded-lg shadow-lg md:h-[380px] w-full"
                         />
                     </div>
                 </div>
@@ -43,14 +43,14 @@ const AboutUs: React.FC = () => {
                         <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
                             <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
                                 <img
-                                    src="https://via.placeholder.com/150"
-                                    alt="Team Member"
-                                    className="rounded-full mx-auto mb-4"
+                                    src="https://i.ibb.co/TqLjCmy/jhon-dow.jpg"
+                                    alt="Alex Johnson"
+                                    className="rounded-full mx-auto mb-4 size-32"
                                 />
                                 <h4 className="text-xl font-bold mb-2">Alex Johnson</h4>
                                 <p className="text-sm text-gray-600">Founder & CEO</p>
-                                <p className="text-gray-700 mt-3">
-                                    Alex is a passionate entrepreneur and web developer who founded NextLeaf with the vision of creating a community-driven platform for knowledge sharing.
+                                <p className="text-gray-700 mt-3 line-clamp-6">
+                                    Alex is a passionate entrepreneur and web developer who founded NextLeaf with the vision of creating a community-driven platform for knowledge sharing. With over 10 years of experience in the tech industry, Alex drives the company&apos;s mission and inspires the team to push the boundaries of what&apos;s possible.
                                 </p>
                             </div>
                         </div>
@@ -59,14 +59,14 @@ const AboutUs: React.FC = () => {
                         <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
                             <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
                                 <img
-                                    src="https://via.placeholder.com/150"
-                                    alt="Team Member"
-                                    className="rounded-full mx-auto mb-4"
+                                    src="https://i.ibb.co/745fRGT/emily.png"
+                                    alt="Samantha Brown"
+                                    className="rounded-full mx-auto mb-4 size-32"
                                 />
                                 <h4 className="text-xl font-bold mb-2">Samantha Brown</h4>
                                 <p className="text-sm text-gray-600">UI/UX Designer</p>
-                                <p className="text-gray-700 mt-3">
-                                    Samantha is a talented UI/UX designer responsible for creating the sleek, user-friendly interface that powers the NextLeaf experience.
+                                <p className="text-gray-700 mt-3 line-clamp-6">
+                                    Samantha is a talented UI/UX designer responsible for creating the sleek, user-friendly interface that powers the NextLeaf experience. She has a keen eye for design and ensures that every interaction on the platform is seamless and visually appealing.
                                 </p>
                             </div>
                         </div>
@@ -75,14 +75,14 @@ const AboutUs: React.FC = () => {
                         <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
                             <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
                                 <img
-                                    src="https://via.placeholder.com/150"
-                                    alt="Team Member"
-                                    className="rounded-full mx-auto mb-4"
+                                    src="https://i.ibb.co/gTBx7qs/sumon.png"
+                                    alt="Michael Lee"
+                                    className="rounded-full mx-auto mb-4 size-32"
                                 />
                                 <h4 className="text-xl font-bold mb-2">Michael Lee</h4>
                                 <p className="text-sm text-gray-600">Backend Developer</p>
-                                <p className="text-gray-700 mt-3">
-                                    Michael ensures that everything runs smoothly behind the scenes, developing the APIs and backend architecture that support NextLeaf&apos;s functionality.
+                                <p className="text-gray-700 mt-3 line-clamp-6">
+                                    Michael ensures that everything runs smoothly behind the scenes, developing the APIs and backend architecture that support NextLeaf&apos;s functionality. With expertise in Node.js and MongoDB, he is the backbone of the technical team.
                                 </p>
                             </div>
                         </div>
