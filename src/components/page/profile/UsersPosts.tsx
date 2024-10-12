@@ -10,7 +10,6 @@ import Link from 'next/link'
 
 
 const UsersPosts = ({ postData, isLoading, }: { postData: Tpost[]; isLoading: boolean | undefined }) => {
-
     const post = postData    // console.log(data?.data)
     return (
         <div>

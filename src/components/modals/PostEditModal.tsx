@@ -31,6 +31,13 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
 
     const config = {
         loadExternalConfig: false,
+        // allowPasteFromWord: true, // Enable pasting from Word or rich text editors
+        // allowPasteHTML: true, // Allow HTML content with styles
+        defaultActionOnPaste: 'insert_only', // Keep the formatting intact on paste
+        askBeforePasteHTML: false,
+        // cleanHTML: {
+        //     cleanOnPaste: true // Prevent stripping styles when pasting
+        // },
         readonly: false, // all options from https://xdsoft.net/jodit/docs/,
         uploader: {
             url: 'https://xdsoft.net/jodit/finder/?action=fileUpload'
@@ -40,7 +47,12 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
                 url: 'https://xdsoft.net/jodit/finder/'
             },
             height: 450,
-        }
+        },
+        // events: {
+        //     paste: function (event: any) {
+        //         console.log("Pasted content:", event.clipboardData.getData('text/html'));
+        //     }
+        // }
     }
 
     const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -52,7 +64,7 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
             const postInfo = { postId: post?._id, postData }
             const res = await updatePost(postInfo) as any;
             if (res?.data?.success) {
-                toast.success(res?.data?.success, { id: toastId })
+                toast.success(res?.data?.message, { id: toastId })
             } else {
                 toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId })
             }
@@ -60,6 +72,7 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
             toast.error(error?.message)
         }
     }
+
 
     return (
         <>
@@ -100,7 +113,7 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
 
                                                 ref={editor}
                                                 value={content ? content : post?.post!}
-                                                config={config}// tabIndex of textarea
+                                                config={config as any}// tabIndex of textarea
                                                 onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                                             // onChange={newContent => { console.log(newContent) }}
                                             />

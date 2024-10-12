@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useLocalUser } from '@/context/user.Provider'
-import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
-import { useGetPostByUserIdQuery } from '@/redux/features/post/postApi'
+// import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
+import { useDeletePostMutation, useGetPostByUserIdQuery } from '@/redux/features/post/postApi'
 import React from 'react'
 import LoadingSpinner from '@/components/shared/LoadingSpinner'
 import { Tpost } from '@/types'
@@ -9,10 +10,9 @@ import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow
 import NoDataFound from '@/components/shared/NotDataFound'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-
-
+import Swal from "sweetalert2"
 const UsersAllPost = () => {
-
+    const [deletePost] = useDeletePostMutation()
     const EditPostModal = dynamic(() => import("@/components/modals/PostEditModal"), {
         ssr: false
     })
@@ -20,11 +20,41 @@ const UsersAllPost = () => {
 
     const { user, isLoading } = useLocalUser()
     const { data: postData } = useGetPostByUserIdQuery(`${user?._id}`)
-    const { data } = useGetUserByEmailQuery(`${user?.email}`)
-    const userData = data?.data;
+    // const { data } = useGetUserByEmailQuery(`${user?.email}`)
+    // const userData = data?.data;
     const post = postData?.data;
     // console.log(userData)
+    const handleDeletePost = (postId: string) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                console.log(postId)
+                const res = await deletePost(postId) as any;
+                if (res?.data?.success) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                } else {
+                    Swal.fire({
+                        title: `${res?.error?.data?.message || "something went wrong"}`,
+                        text: "Items not deleted",
+                        icon: "error"
+                    });
+                }
+                console.log('red', res,)
 
+            }
+        });
+    }
     return (
         <>
             {
@@ -55,10 +85,8 @@ const UsersAllPost = () => {
                                                             <TableCell className='md:pl-10'>{item?.downVotes?.length}</TableCell>
                                                             <TableCell><Link href={`/post/${item?._id}`} className='bg-gray-100 px-2 py-1 rounded-md hover:bg-gray-300'>View</Link></TableCell>
                                                             <TableCell className='flex justify-center gap-4'>
-                                                                <div>
-                                                                    <EditPostModal post={item} />
-                                                                </div>
-                                                                <Button>Delete</Button>
+                                                                <EditPostModal post={item} />
+                                                                <Button onClick={() => handleDeletePost(item?._id)}>Delete</Button>
                                                             </TableCell>
                                                         </TableRow>
                                                     ))
