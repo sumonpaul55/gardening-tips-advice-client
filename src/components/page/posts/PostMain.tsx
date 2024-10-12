@@ -5,10 +5,13 @@ import PostHero from './PostHerosection';
 import Container from '@/components/shared/Container/Container';
 import { useGetAllPostQuery } from '@/redux/features/post/postApi';
 import PostCardsSection from './postCardSection';
+import { useDebounce } from '@/hooks/useDebouce';
 
 const PostMain = () => {
-    const [searchTerm, setSearchTerm] = useState<string>("")
+    const [srcValue, setSearchTerm] = useState<string>("")
     const [category, setCategory] = useState<string>("")
+    const searchTerm = useDebounce(srcValue, 1000)
+
     const { data } = useGetAllPostQuery({ searchTerm, category })
 
     console.log(data?.data)
