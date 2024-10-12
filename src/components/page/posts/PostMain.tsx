@@ -10,14 +10,15 @@ import { useDebounce } from '@/hooks/useDebouce';
 const PostMain = () => {
     const [srcValue, setSearchTerm] = useState<string>("")
     const [category, setCategory] = useState<string>("")
+    const [premium, setPremium] = useState<boolean>(false)
     const searchTerm = useDebounce(srcValue, 1000)
 
-    const { data } = useGetAllPostQuery({ searchTerm, category })
+    const { data } = useGetAllPostQuery({ searchTerm, category, premium })
 
-    console.log(data?.data)
+    console.log(category)
     return (
-        <div>
-            <PostHero setCategory={setCategory} setSearchTerm={setSearchTerm} />
+        <div className=''>
+            <PostHero setCategory={setCategory} setSearchTerm={setSearchTerm} setPremium={setPremium} srcValue={srcValue} category={category} />
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 p-6">
                     {

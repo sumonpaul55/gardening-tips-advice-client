@@ -1,11 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { useGetCategoryQuery } from '@/redux/features/category/category.api';
 import { Input, Select, SelectItem } from '@nextui-org/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 
-const PostHero = ({ setSearchTerm, setCategory }: { setSearchTerm: any, setCategory }) => {
+const PostHero = ({ setSearchTerm, setCategory, setPremium, srcValue, category }: { category: string; srcValue: string; setSearchTerm: any, setCategory: any; setPremium: any }) => {
+    const { data, isLoading } = useGetCategoryQuery({})
+    const categories = data?.data;
+
+
+
+    useEffect(() => {
+        setPremium(false)
+    }, [srcValue, category])
+
 
     return (
         <section className="relative bg-gradient-to-r from-green-700 via-indigo-600 to-green-700 py-6 px-6 text-white w-full">
@@ -27,24 +37,27 @@ const PostHero = ({ setSearchTerm, setCategory }: { setSearchTerm: any, setCateg
 
                 {/* Filter by Category */}
                 <div className="flex justify-center items-center mb-6">
-                    <Select
-                        label="Categories"
+                    <Select isDisabled={isLoading}
+                        label="Select an animal"
                         size='sm'
-                        placeholder="Select an Category"
                         className="max-w-xs"
-                        onChange={(e: any) => console.log(e.target.value)}>
-                        <SelectItem key="1" value="all">
-                            All Categories
+                        onChange={(e: any) => setCategory(e.target.value)}>
+                        <SelectItem key={""} value="">
+                            All
                         </SelectItem>
-                        <SelectItem key="2" value="tech">
-                            Tech
-                        </SelectItem>
+                        {
+                            categories?.map((category: { category: string; image: string; _id: string }) => (
+                                <SelectItem key={category?._id} value={category?._id}>
+                                    {category?.category}
+                                </SelectItem>
+                            ))
+                        }
                     </Select>
                 </div>
 
                 {/* Premium Content Button */}
                 <div className="flex justify-center items-center">
-                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-colors duration-300">
+                    <button onClick={() => setPremium(true)} className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-colors duration-300">
                         Premium Content
                     </button>
                 </div>

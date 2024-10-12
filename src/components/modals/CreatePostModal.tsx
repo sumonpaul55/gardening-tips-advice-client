@@ -48,7 +48,6 @@ export default function CreatePostModal() {
         const postData = {
             ...data, post: content, category, userId: user?._id
         }
-        console.log(postData)
         const res = await createPost(postData) as any
         if (res?.data?.success) {
             toast.success(res?.data?.message, { id: toastId })
