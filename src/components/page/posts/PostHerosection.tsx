@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
@@ -9,8 +10,6 @@ import React, { useEffect } from 'react';
 const PostHero = ({ setSearchTerm, setCategory, setPremium, srcValue, category }: { category: string; srcValue: string; setSearchTerm: any, setCategory: any; setPremium: any }) => {
     const { data, isLoading } = useGetCategoryQuery({})
     const categories = data?.data;
-
-
 
     useEffect(() => {
         setPremium(false)

@@ -30,15 +30,11 @@ import Image from "next/image"
 const PostDetails = ({ id }: { id: string }) => {
     const { data, isLoading } = useGetPostByIdQuery(`${id}`)
     const post = data?.data;
-    // post?.activity?.map((item: any) => (
-    //     console.log(item)
-    // ))
-
-
 
 
     return (
         <div>
+            <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3">{post?.title}</h2>
             {
                 isLoading ? <LoadingBlur /> :
                     <div className="max-w-[900px] px-3 mx-auto">
@@ -148,9 +144,9 @@ const PostDetails = ({ id }: { id: string }) => {
                             <h2 className="font-semibold md:text-xl">Comments</h2>
                             <div>
                                 {
-                                    post?.activity?.map((item: any) => (
+                                    post?.activity?.slice(0, 1)?.map((item: any) => (
                                         item?.comment?.length > 0 &&
-                                        item?.comment?.map((comment: string, idx: number) => (
+                                        item?.comment.slice(0, 1)?.map((comment: string, idx: number) => (
                                             <div key={idx} className="bg-gray-100 rounded-lg p-3 mt-4 flex gap-4">
                                                 <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />
                                                 <div className="w-full">

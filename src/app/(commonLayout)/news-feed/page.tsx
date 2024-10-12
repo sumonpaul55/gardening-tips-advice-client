@@ -1,7 +1,10 @@
+import NewsFeed from "@/components/page/newsFeed/NewsFeed"
 
 const page = () => {
     return (
-        <div>page</div>
+        <div className="py-4 bg-white">
+            <NewsFeed />
+        </div>
     )
 }
 

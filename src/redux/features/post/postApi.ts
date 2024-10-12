@@ -13,7 +13,7 @@ const postApi = baseApi.injectEndpoints({
       invalidatesTags: ["post"],
     }),
     getAllPost: builder.query({
-      query: (query: { searchTerm: string; category: string; limit?: number; sort?: string; premium?: boolean }) => {
+      query: (query: { searchTerm?: string; category?: string; limit?: number; sort?: string; premium?: boolean }) => {
         const params = new URLSearchParams();
         if (query.searchTerm) {
           params.append(`searchTerm`, `${query.searchTerm}`);
