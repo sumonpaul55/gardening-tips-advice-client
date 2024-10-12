@@ -44,14 +44,18 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
     }
 
     const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-        // const toastId = toast.loading("Creating...")
+        const toastId = toast.loading("Updating...")
         const postData = {
             title: data?.title || post?.title, post: content ? content : post?.post, category: category ? category : post?.category?._id, userId: user?._id
         }
         try {
             const postInfo = { postId: post?._id, postData }
-            console.log("kfjd", postInfo)
-            const res = updatePost(postInfo) as any;
+            const res = await updatePost(postInfo) as any;
+            if (res?.data?.success) {
+                toast.success(res?.data?.success, { id: toastId })
+            } else {
+                toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId })
+            }
         } catch (error: any) {
             toast.error(error?.message)
         }

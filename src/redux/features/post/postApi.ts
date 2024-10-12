@@ -63,7 +63,6 @@ const postApi = baseApi.injectEndpoints({
         postId: string | undefined;
         postData?: { title: string | undefined; category: string | undefined; post: string | undefined; userId: string | undefined };
       }) => {
-        console.log("lfdkjsdljdsklj", postInfo);
         return {
           url: `/post/update-post/${postInfo.postId}`,
           method: "PUT",
