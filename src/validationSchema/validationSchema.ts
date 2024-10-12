@@ -19,3 +19,9 @@ export const postValidation = z.object({
 export const commetValidationSchema = z.object({
   comment: z.string({ required_error: "plese write a comment" }).min(5, "comment should be minimum 5 letters"),
 });
+export const contactValidationSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  phoneNumber: z.string().min(10, "Phone number must be valid"),
+  message: z.string().min(10, "Message must be at least 10 characters long"),
+});

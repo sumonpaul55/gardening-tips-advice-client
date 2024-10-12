@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import ContactForm from '@/components/page/contactus/ContactForm';
-import * as z from 'zod';
 
-export const contactValidationSchema = z.object({
-    name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email address'),
-    phoneNumber: z.string().min(10, 'Phone number must be valid'),
-    message: z.string().min(10, 'Message must be at least 10 characters long'),
-});
+
+
 
 const ContactUs = () => {
     // const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +17,7 @@ const ContactUs = () => {
                 <div className="text-center mb-12">
                     <h2 className="text-4xl font-bold text-blue-600 mb-6">Contact Us</h2>
                     <p className="text-lg max-w-2xl mx-auto">
-                        We’d love to hear from you! Whether you have questions about our platform, need support, or just want to share feedback, feel free to get in touch.
+                        We&apos;d love to hear from you! Whether you have questions about our platform, need support, or just want to share feedback, feel free to get in touch.
                     </p>
                 </div>
 

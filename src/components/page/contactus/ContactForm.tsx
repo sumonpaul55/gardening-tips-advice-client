@@ -1,7 +1,8 @@
 "use client"
-import { contactValidationSchema } from '@/app/(commonLayout)/contact/page'
+
 import GFrom from '@/components/forms/GFrom'
 import GInput from '@/components/forms/GInput'
+import { contactValidationSchema } from '@/validationSchema/validationSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/react'
 import React from 'react'
