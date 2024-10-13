@@ -34,7 +34,7 @@ export default function MenuBar() {
     }
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999]">
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999] bg-white bg-opacity-70 flex justify-center font-roboto_slab">
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -47,13 +47,13 @@ export default function MenuBar() {
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+            <NavbarContent className="hidden sm:flex gap-4 justify-end" justify="center">
                 {
                     MenuItems?.map((item, idx: number) => {
                         if (item?.url === "profile" && !user) {
                             return null
                         }
-                        return <NavbarItem key={idx}>
+                        return <NavbarItem key={idx} className="font-semibold text-secondary">
                             <Link color="foreground" href={`/${item.url}`}>
                                 {item?.name}
                             </Link>

@@ -13,7 +13,7 @@ const quotes = [
 
 const QuotesSection: React.FC = () => {
     return (
-        <section className="py-10 bg-green-50 text-center">
+        <section className="py-20 bg-white text-center">
             <h2 className="text-4xl font-bold text-green-600 mb-6">Inspiring Gardening Quotes</h2>
             <div className="max-w-4xl mx-auto space-y-6">
                 {quotes.map((quote, index) => (

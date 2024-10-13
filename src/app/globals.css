@@ -12,3 +12,9 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+.home-hero{
+    background: linear-gradient( #02701277 ,#000000b5), url("../../public/herobg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
