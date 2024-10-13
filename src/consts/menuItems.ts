@@ -53,6 +53,10 @@ export const SidebarItemsAdmin = [
     name: "All Posts",
     url: "/all-post",
   },
+  {
+    name: "Payments",
+    url: "payment",
+  },
 ];
 
 export const SideBarItemsUser = [

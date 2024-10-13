@@ -110,6 +110,14 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["user"],
     }),
+    getPaymentHistory: builder.query({
+      query: () => {
+        return {
+          url: "/payment/get-payment-history",
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 export const {
@@ -124,4 +132,5 @@ export const {
   useGetAllUserQuery,
   useDeleteUserMutation,
   useMakeUserAdminMutation,
+  useGetPaymentHistoryQuery,
 } = authApi;
