@@ -5,6 +5,7 @@ import { getCurrenUser } from "./services/authService.ts";
 type role = keyof typeof roleBaseRoutes;
 
 const Authroutes = ["/login", "/registration"];
+
 const ProtectedRoute = ["/profile", "/news-feed", "/post:page*"];
 
 const roleBaseRoutes = {
@@ -29,7 +30,7 @@ export async function middleware(request: NextRequest) {
   }
   // default protected route
 
-  if (ProtectedRoute.includes(pathname)) {
+  if (ProtectedRoute?.includes(pathname)) {
     if (!user) {
       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));
     } else {
@@ -47,5 +48,5 @@ export async function middleware(request: NextRequest) {
 }
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/admin", "/admin/:page*", "/user", "/login", "/profile", "/registration", "/user/:page*"],
+  matcher: ["/admin", "/admin/:page*", "/user", "/login", "/profile", "/news-feed", "/post:page*", "/registration", "/user/:page*"],
 };
