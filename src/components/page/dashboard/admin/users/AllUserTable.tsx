@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useDeleteUserMutation, useGetAllUserQuery, useMakeUserAdminMutation } from '@/redux/features/auth/auth.api'
 import React from 'react'
@@ -92,10 +93,6 @@ const AllUserTable = () => {
         </Table>
     )
 }
-// Example delete handler
-const handleDelete = (userId: string) => {
-    // Add your delete logic here, e.g., calling an API
-    console.log("Delete user with ID:", userId);
-};
+
 
 export default AllUserTable

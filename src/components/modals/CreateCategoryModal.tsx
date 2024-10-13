@@ -28,7 +28,7 @@ export default function CreateCategory() {
             } else {
                 const datas = { category: categroy }
                 const res = await createCategory(datas) as any
-                console.log(res)
+
                 if (res?.data?.success) {
                     toast.success(res?.data?.message)
                 } else if (res?.error) {

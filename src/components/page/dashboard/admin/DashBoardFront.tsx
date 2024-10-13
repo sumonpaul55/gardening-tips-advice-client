@@ -10,7 +10,7 @@ const DashBoardFront = () => {
     const { user } = useLocalUser();
     const { data } = useGetUserByEmailQuery(`${user?.email}`)
     const remoteUser = data?.data;
-    console.log(data?.data)
+
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
             <div className='bg-gradient-to-r shadow rounded-lg from-slate-800 to-primary-700 text-white py-12 px-3 md:px-6'>

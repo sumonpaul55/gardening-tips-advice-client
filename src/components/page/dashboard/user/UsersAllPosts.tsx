@@ -35,7 +35,6 @@ const UsersAllPost = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(postId)
                 const res = await deletePost(postId) as any;
                 if (res?.data?.success) {
                     Swal.fire({
@@ -50,8 +49,6 @@ const UsersAllPost = () => {
                         icon: "error"
                     });
                 }
-                console.log('red', res,)
-
             }
         });
     }

@@ -9,7 +9,6 @@ import React from 'react'
 
 const FeaturedPost = () => {
     const { data } = useGetAllPostQuery({ limit: 4 })
-    console.log(data?.data)
 
 
 

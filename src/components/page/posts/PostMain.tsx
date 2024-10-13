@@ -15,7 +15,7 @@ const PostMain = () => {
     const searchTerm = useDebounce(srcValue, 1000)
 
     const { data, isLoading } = useGetAllPostQuery({ searchTerm, category, premium })
-    console.log(data?.data)
+
     return (
         <div className=''>
             {

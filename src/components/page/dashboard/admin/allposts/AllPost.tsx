@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useLocalUser } from '@/context/user.Provider'
@@ -32,7 +33,6 @@ const ViewAllPostFromAdmin = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(postId)
                 const res = await deletePost(postId) as any;
                 if (res?.data?.success) {
                     Swal.fire({
@@ -47,7 +47,6 @@ const ViewAllPostFromAdmin = () => {
                         icon: "error"
                     });
                 }
-                console.log('red', res,)
             }
         });
     }

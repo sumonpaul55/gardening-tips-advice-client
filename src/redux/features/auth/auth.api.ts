@@ -56,7 +56,6 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateUser: builder.mutation({
       query: (updateInfo: any) => {
-        console.log(updateInfo);
         return {
           url: `/auth/update-user/${updateInfo.id}`,
           method: "PUT",
@@ -67,7 +66,6 @@ const authApi = baseApi.injectEndpoints({
     }),
     followUnfolow: builder.mutation({
       query: (info: any) => {
-        console.log("api", info);
         return {
           url: "/user/follow-unfollow",
           method: "PUT",

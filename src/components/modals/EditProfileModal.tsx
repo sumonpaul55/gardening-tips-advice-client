@@ -50,7 +50,7 @@ export default function EditUser() {
         const updateInfo = { id: dataUser?._id, updateData }
         try {
             const res = await update(updateInfo) as any;
-            console.log(res)
+
             if (res?.data?.success) {
                 toast.success(res?.data?.message, { id: toastId })
             } else if (res?.error) {
