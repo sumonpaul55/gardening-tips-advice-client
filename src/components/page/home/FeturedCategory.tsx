@@ -11,6 +11,9 @@ import Link from 'next/link';
 const FeaturedCategory = () => {
     const { data, isLoading } = useGetCategoryQuery({})
     const categories = data?.data;
+    if (isLoading) {
+        <LoadingSpinner />
+    }
     return (
         <>{
             isLoading ? <LoadingSpinner /> :
