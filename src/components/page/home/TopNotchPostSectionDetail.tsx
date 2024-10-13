@@ -5,7 +5,6 @@ import Image from 'next/image';
 import React from 'react';
 
 const TopNotchPostSectionDetail = ({ post }: { post: Tpost }) => {
-    console.log(post)
     return (
         <div className="border p-4 rounded-lg shadow-md mb-4">
             <h2 className="text-2xl font-bold mb-2">{post?.title}</h2>

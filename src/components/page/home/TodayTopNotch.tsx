@@ -9,7 +9,6 @@ const TopNotchPostSection = () => {
     // Dummy post data
     const { data } = useGetAllPostQuery({ limit: 2 })
 
-    console.log(data)
 
     return (
         <section className="py-16">

@@ -10,8 +10,6 @@ const PaymentHistory = () => {
     const { data } = useGetPaymentHistoryQuery(undefined)
     const payments = data?.data
 
-    console.log(payments)
-
     return (
         <div>
             <Table aria-label="Payment History" className="w-full">
