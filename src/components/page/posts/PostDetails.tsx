@@ -30,7 +30,8 @@ const PostDetails = ({ id }: { id: string }) => {
         // Reset copied state after 3 seconds
         setTimeout(() => setCopied(false), 3000);
     };
-    if (post?.premium === true && user?.verified !== true) {
+    console.log(user)
+    if (post?.premium === true && user?.verified) {
         return <section>
             <div className="md:min-h-[350px] relative">
                 <div className="absolute h-full w-full backdrop-blur-sm z-30 flex justify-center items-end">
