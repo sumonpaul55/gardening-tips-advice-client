@@ -75,7 +75,7 @@ const AllUserTable = () => {
                         <TableCell className=''><span className={`${user?.role === "ADMIN" ? "bg-pink-600" : "bg-green-600"} text-center min-w-14 block text-white p-1 rounded`}>{user.role}</span></TableCell>
                         <TableCell>{user.totalPosts}</TableCell>
 
-                        <TableCell className=''><span className={`${user?.verfied === true ? "bg-pink-600" : "bg-green-600"} text-center min-w-14 block text-white p-1 rounded`}>{user.verfied ? "Yes" : "No"}</span></TableCell>
+                        <TableCell className=''><span className={`${user?.verified === true ? "bg-pink-600" : "bg-green-600"} text-center min-w-14 block text-white p-1 rounded`}>{user.verified ? "Yes" : "No"}</span></TableCell>
 
                         <TableCell>
                             <div className="flex gap-2">

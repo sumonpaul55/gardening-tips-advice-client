@@ -59,12 +59,12 @@ const ProfilePage = () => {
                                         <span className='text-sm md:text-lg font-medium'>Following: {userData?.following?.length}</span>
                                         <span className='text-sm md:text-lg font-semibold'>Joined: {moment(userData?.createdAt).format("MMM Do YY")}</span>
                                         <div className='flex items-center flex-wrap justify-between'>
-                                            <span className='text-sm md:text-lg font-semibold flex gap-3'>Varified: {userData?.verfied === true ? <div className='flex items-center gap-1'>
+                                            <span className='text-sm md:text-lg font-semibold flex gap-3'>Varified: {userData?.verified === true ? <div className='flex items-center gap-1'>
                                                 <span className='border p-[5px] rounded-full bg-secondary text-white block'><FaCheck size={13} /></span>
                                                 <h3>Varified</h3>
                                             </div> : "Not verified"}</span>
                                             {
-                                                userData?.verfied !== true &&
+                                                userData?.verified !== true &&
                                                 <div className='flex gap-3 items-center'>
                                                     <Elements stripe={stripePromise}>
                                                         {

@@ -16,7 +16,7 @@ const ProfileImage = ({ className }: { className?: string }) => {
         <div className='relative w-fit'>
             <Image src={data?.data?.profilePhoto} alt={data?.data?.name} width={400} height={500} className={`${className && className}`} />
             {
-                data?.data?.verfied === true ?
+                data?.data?.verified === true ?
                     <Tooltip content="Verified">
                         <span className='absolute right-1 top-2/3 size-9 shadow flex items-center justify-center rounded-full bg-gray-200'>
                             <MdVerified className='text-primary' size={35} />

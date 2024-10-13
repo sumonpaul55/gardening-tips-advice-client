@@ -32,7 +32,7 @@ const FeaturedPost = () => {
                                 />
                                 <div>
                                     <h4 className="text-lg font-semibold">{item?.userId.name}</h4>
-                                    {item?.userId.verfied && (
+                                    {item?.userId.verified && (
                                         <span className="text-sm text-green-600">Verified</span>
                                     )}
                                     <p className="text-sm text-gray-600">{new Date(item?.createdAt).toLocaleDateString()}</p>

@@ -20,7 +20,7 @@ export interface IUser {
   profilePhoto: string;
   createdAt?: string;
   updatedAt?: string;
-  verfied?: boolean;
+  verified?: boolean;
   __v?: number;
 }
 
@@ -38,7 +38,7 @@ export interface Tpost {
 }
 
 export interface UserId {
-  verfied: boolean;
+  verified: boolean;
   _id: string;
   name: string;
   role: string;
