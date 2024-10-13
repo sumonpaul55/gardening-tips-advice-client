@@ -18,6 +18,7 @@ import { Tpost } from '@/types'
 import CheckoutForm from '@/components/modals/CheckOutModal'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ChangePassword from '@/components/modals/ChangePassword'
 
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_Publishable_Key as string)
@@ -42,7 +43,10 @@ const ProfilePage = () => {
                             <div className='flex flex-col'>
                                 <div className=''>
                                     <ProfileImage className='md:size-[250px] size-[150px] object-bottom rounded-full border-2 p-2 shadow-lg' />
-                                    <EditUser />
+                                    <div className='mt-2 flex flex-col'>
+                                        <EditUser />
+                                        <ChangePassword />
+                                    </div>
                                 </div>
                                 {/* more info */}
                                 <div className='p-3 md:p-6'>

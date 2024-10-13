@@ -25,3 +25,8 @@ export const contactValidationSchema = z.object({
   phoneNumber: z.string().min(10, "Phone number must be valid"),
   message: z.string().min(10, "Message must be at least 10 characters long"),
 });
+
+export const changePassValidation = z.object({
+  oldPassword: z.string({ required_error: "old password required" }),
+  newPassword: z.string({ required_error: "new password required" }),
+});

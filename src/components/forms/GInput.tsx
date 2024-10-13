@@ -15,8 +15,6 @@ const GInput = ({ size = "md", type = "text", variant = "flat", isRequired = tru
 
     // const preValue = useWatch({ name })
 
-
-
     return (
         <Input {...register(name)} defaultValue={defaultValue ? defaultValue : ""} size={size} type={type} isDisabled={isDisabled} label={label} variant={variant} isRequired={isRequired} className={clasName && clasName} errorMessage={errors[name] ? (errors[name].message as string) : ""} isInvalid={!!errors[name]} />
     )
