@@ -1,8 +1,11 @@
+import AllUserTable from '@/components/page/dashboard/admin/users/AllUserTable'
 import React from 'react'
 
 const AllUserPage = () => {
     return (
-        <div>AllUserPage</div>
+        <div>
+            <AllUserTable />
+        </div>
     )
 }
 

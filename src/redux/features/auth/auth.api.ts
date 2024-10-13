@@ -27,6 +27,15 @@ const authApi = baseApi.injectEndpoints({
       //   return Response;
       // },
     }),
+    getAllUser: builder.query({
+      query: () => {
+        return {
+          url: "/user",
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+    }),
     getUserByEmail: builder.query({
       query: (email: string) => {
         return {
@@ -85,6 +94,24 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    deleteUser: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/user/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+    makeUserAdmin: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/user/user-admin/${id}`,
+          method: "PATCH",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 export const {
@@ -96,4 +123,7 @@ export const {
   useFollowUnfolowMutation,
   useMakePaymentMutation,
   useChangePasswordMutation,
+  useGetAllUserQuery,
+  useDeleteUserMutation,
+  useMakeUserAdminMutation,
 } = authApi;
