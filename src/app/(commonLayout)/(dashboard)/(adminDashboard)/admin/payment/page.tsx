@@ -1,15 +1,13 @@
+import PaymentHistory from "@/components/page/paymentHistory/PaymentHistroy"
 
-import Container from '@/components/shared/Container/Container'
-import React from 'react'
+const PaymentPage = () => {
 
-const PaymentHistory = () => {
+
     return (
         <div>
-            <Container>
-                <PaymentHistory />
-            </Container>
+            <PaymentHistory />
         </div>
     )
 }
 
-export default PaymentHistory
+export default PaymentPage
