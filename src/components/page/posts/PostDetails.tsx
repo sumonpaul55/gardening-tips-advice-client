@@ -11,6 +11,7 @@ import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { useLocalUser } from "@/context/user.Provider";
 import { useState } from "react";
 import { usePDF } from 'react-to-pdf';
+import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
 
 
 const PostDetails = ({ id }: { id: string }) => {
@@ -19,8 +20,9 @@ const PostDetails = ({ id }: { id: string }) => {
     const { user } = useLocalUser()
     const [copied, setCopied] = useState(false);
     const { toPDF, targetRef } = usePDF({ filename: `${post?.title}.pdf` })
-
-
+    const { data: userDB } = useGetUserByEmailQuery(`${user?.email}`)
+    const userData = userDB?.data;
+    console.log(userData)
 
     // handle copy linkg
     const handleCopyLink = () => {
@@ -31,7 +33,7 @@ const PostDetails = ({ id }: { id: string }) => {
         setTimeout(() => setCopied(false), 3000);
     };
     console.log(user)
-    if (post?.premium === true && !user?.verified) {
+    if (post?.premium === true && !userData?.verified) {
         return <section>
             <div className="md:min-h-[350px] relative">
                 <div className="absolute h-full w-full backdrop-blur-sm z-30 flex justify-center items-end">
