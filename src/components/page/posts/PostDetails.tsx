@@ -24,7 +24,7 @@ const PostDetails = ({ id }: { id: string }) => {
 
     // handle copy linkg
     const handleCopyLink = () => {
-        const postUrl = `${window.location.origin}/posts/${id}`; // Generate the full post URL
+        const postUrl = `${window.location.origin}/post/${id}`; // Generate the full post URL
         navigator.clipboard.writeText(postUrl);
         setCopied(true);
         // Reset copied state after 3 seconds
