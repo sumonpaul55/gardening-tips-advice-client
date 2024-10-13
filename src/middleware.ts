@@ -6,7 +6,7 @@ type role = keyof typeof roleBaseRoutes;
 
 const Authroutes = ["/login", "/registration"];
 
-const ProtectedRoute = ["/profile", "/news-feed", "/post:page*"];
+const ProtectedRoute = ["/profile", "/news-feed"];
 
 const roleBaseRoutes = {
   // using regex for all profile related path can be accessable for user
@@ -48,5 +48,5 @@ export async function middleware(request: NextRequest) {
 }
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/admin", "/admin/:page*", "/user", "/login", "/profile", "/news-feed", "/post:page*", "/registration", "/user/:page*"],
+  matcher: ["/admin", "/admin/:page*", "/user", "/login", "/profile", "/news-feed", "/registration", "/user/:page*"],
 };
