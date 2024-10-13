@@ -24,7 +24,7 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
     // const router = useRouter()
     const editor = useRef(null)
     const [content, setContent] = useState('');
-    const { data, isLoading } = useGetCategoryQuery(undefined)
+    const { data, isLoading } = useGetCategoryQuery({})
     const [category, setCategory] = useState()
     const { user } = useLocalUser()
     const categories = data?.data;
