@@ -46,8 +46,8 @@ export const SidebarItemsAdmin = [
     url: "posts",
   },
   {
-    name: "Category",
-    url: "category",
+    name: "All Posts",
+    url: "/all-post",
   },
 ];
 

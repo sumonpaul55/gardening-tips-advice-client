@@ -23,8 +23,8 @@ const ContactUs = () => {
 
                 <ContactForm />
                 {/* Contact Information */}
-                <div className="text-center mt-12">
-                    <h3 className="text-2xl font-bold text-green-600 mb-4">Get in Touch</h3>
+                <div className="mt-12 max-w-[500px] space-y-3 mx-auto">
+                    <h3 className="text-2xl font-bold text-green-600 mb-4 md:text-4xl font-roboto_slab">Get in Touch</h3>
                     <p className="text-lg">You can also reach us at:</p>
                     <p className="text-lg">
                         <strong>Email:</strong> support@nextleaf.com
