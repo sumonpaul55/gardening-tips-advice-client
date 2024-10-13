@@ -31,7 +31,7 @@ const PostDetails = ({ id }: { id: string }) => {
         setTimeout(() => setCopied(false), 3000);
     };
     console.log(user)
-    if (post?.premium === true && user?.verified) {
+    if (post?.premium === true && !user?.verified) {
         return <section>
             <div className="md:min-h-[350px] relative">
                 <div className="absolute h-full w-full backdrop-blur-sm z-30 flex justify-center items-end">
