@@ -5,3 +5,10 @@
 .jodit-wysiwyg{
     min-height: 100px !important;
 }
+
+
+.galley-hero{
+    background: linear-gradient( #000000c3 ,#00000057), url("../../public/gallery.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
