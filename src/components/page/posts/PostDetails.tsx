@@ -8,12 +8,50 @@ import { FaFacebookF, FaYoutube, FaTwitter, FaInstagram, FaPinterest, FaLinkedin
 import PostActivitiy from "./PostActivitiy";
 import Image from "next/image"
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
+import { useLocalUser } from "@/context/user.Provider";
+import { useState } from "react";
 
 
 const PostDetails = ({ id }: { id: string }) => {
     const { data, isLoading } = useGetPostByIdQuery(`${id}`)
     const post = data?.data;
+    const { user } = useLocalUser()
+    const [copied, setCopied] = useState(false);
 
+    const handleCopyLink = () => {
+        const postUrl = `${window.location.origin}/posts/${id}`; // Generate the full post URL
+        navigator.clipboard.writeText(postUrl);
+        setCopied(true);
+
+        // Reset copied state after 3 seconds
+        setTimeout(() => setCopied(false), 3000);
+    };
+    if (post?.premium === true && user?.verified !== true) {
+        return <section>
+            <div className="md:min-h-[350px] relative">
+                <div className="absolute h-full w-full backdrop-blur-sm z-30 flex justify-center items-end">
+                    <div className="flex flex-col gap-10">
+                        <h3 className="mb-10 text-white bg-secondary p-3 inline-block">This Content is Prmium for verified user</h3>
+                    </div>
+                </div>
+                <div className="relative h-80 w-full overflow-hidden rounded-lg">
+                    <img
+                        src={post?.category.image}
+                        alt={post?.category.category}
+                        className="object-cover object-top w-full h-full"
+                    />
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+                    >
+                        <h1 className="text-white text-xl md:text-3xl font-bold px-3">{post?.title}</h1>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
+    }
     return (
         <div>
             <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3 text-center mb-10">{post?.title}</h2>
@@ -75,46 +113,73 @@ const PostDetails = ({ id }: { id: string }) => {
                                 </div>
 
                                 {/* Social Links */}
-                                <div className="mt-6 flex space-x-4">
-                                    {post?.userId?.links?.map((link: any) => {
-                                        let IconComponent;
-                                        switch (link.socialName) {
-                                            case "Facebook":
-                                                IconComponent = FaFacebookF;
-                                                break;
-                                            case "Youtube":
-                                                IconComponent = FaYoutube;
-                                                break;
-                                            case "Twitter":
-                                                IconComponent = FaTwitter;
-                                                break;
-                                            case "Instagram":
-                                                IconComponent = FaInstagram;
-                                                break;
-                                            case "Pinterest":
-                                                IconComponent = FaPinterest;
-                                                break;
-                                            case "Linkedin":
-                                                IconComponent = FaLinkedin;
-                                                break;
-                                            default:
-                                                return null;
-                                        }
+                                <div className="flex justify-between items-center flex-col sm:flex-row">
+                                    <div className="mt-6 flex flex-col gap-3">
+                                        <h2 className="font-semibold text-sm">authors socila links</h2>
+                                        <div className="flex gap-5">
+                                            {post?.userId?.links?.map((link: any) => {
+                                                let IconComponent;
+                                                switch (link.socialName) {
+                                                    case "Facebook":
+                                                        IconComponent = FaFacebookF;
+                                                        break;
+                                                    case "Youtube":
+                                                        IconComponent = FaYoutube;
+                                                        break;
+                                                    case "Twitter":
+                                                        IconComponent = FaTwitter;
+                                                        break;
+                                                    case "Instagram":
+                                                        IconComponent = FaInstagram;
+                                                        break;
+                                                    case "Pinterest":
+                                                        IconComponent = FaPinterest;
+                                                        break;
+                                                    case "Linkedin":
+                                                        IconComponent = FaLinkedin;
+                                                        break;
+                                                    default:
+                                                        return null;
+                                                }
 
-                                        return (
-                                            <motion.a
-                                                key={link.socialName}
-                                                href={link.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-gray-500 hover:text-blue-600"
-                                                whileHover={{ scale: 1.2 }}
-                                                whileTap={{ scale: 0.9 }}
+                                                return (
+                                                    <motion.a
+                                                        key={link.socialName}
+                                                        href={link.url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-gray-500 hover:text-blue-600"
+                                                        whileHover={{ scale: 1.2 }}
+                                                        whileTap={{ scale: 0.9 }}
+                                                    >
+
+                                                        <IconComponent size={24} />
+                                                    </motion.a>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {/* Share Button */}
+                                        <div className="flex justify-end mt-4">
+                                            <motion.button
+                                                onClick={handleCopyLink}
+                                                whileHover={{ scale: 1.1 }}
+                                                whileTap={{ scale: 0.95 }}
+                                                className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600"
                                             >
-                                                <IconComponent size={24} />
-                                            </motion.a>
-                                        );
-                                    })}
+                                                Share Post
+                                            </motion.button>
+                                        </div>
+                                        {copied && (
+                                            <motion.div
+                                                initial={{ opacity: 0, translateY: -10 }}
+                                                animate={{ opacity: 1, translateY: 0 }}
+                                                className="text-green-500 text-sm text-center mt-2">
+                                                Link copied to clipboard!
+                                            </motion.div>
+                                        )}
+                                    </div>
                                 </div>
                             </motion.div>
                         </div>

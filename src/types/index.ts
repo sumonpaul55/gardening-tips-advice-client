@@ -33,6 +33,7 @@ export interface Tpost {
   activity: any[];
   upVotes: any;
   downVotes: any;
+  createdAt?: any;
   __v: number;
 }
 
