@@ -10,6 +10,7 @@ import Image from "next/image"
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { useLocalUser } from "@/context/user.Provider";
 import { useState } from "react";
+import { usePDF } from 'react-to-pdf';
 
 
 const PostDetails = ({ id }: { id: string }) => {
@@ -17,12 +18,15 @@ const PostDetails = ({ id }: { id: string }) => {
     const post = data?.data;
     const { user } = useLocalUser()
     const [copied, setCopied] = useState(false);
+    const { toPDF, targetRef } = usePDF({ filename: `${post?.title}.pdf` })
 
+
+
+    // handle copy linkg
     const handleCopyLink = () => {
         const postUrl = `${window.location.origin}/posts/${id}`; // Generate the full post URL
         navigator.clipboard.writeText(postUrl);
         setCopied(true);
-
         // Reset copied state after 3 seconds
         setTimeout(() => setCopied(false), 3000);
     };
@@ -57,7 +61,7 @@ const PostDetails = ({ id }: { id: string }) => {
             <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3 text-center mb-10">{post?.title}</h2>
             {
                 isLoading ? <LoadingBlur /> :
-                    <div className="max-w-[900px] px-3 mx-auto">
+                    <div className="max-w-[900px] px-3 mx-auto" ref={targetRef}>
                         {/* Category Image and Title */}
                         <div className="relative h-80 w-full overflow-hidden rounded-lg">
                             <img
@@ -161,7 +165,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                     </div>
                                     <div>
                                         {/* Share Button */}
-                                        <div className="flex justify-end mt-4">
+                                        <div className="flex justify-end mt-4 flex-col gap-2">
                                             <motion.button
                                                 onClick={handleCopyLink}
                                                 whileHover={{ scale: 1.1 }}
@@ -170,6 +174,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                             >
                                                 Share Post
                                             </motion.button>
+                                            <button onClick={() => toPDF()} className="bg-secondary py-2 text-white px-2 rounded-md">Download PDF</button>
                                         </div>
                                         {copied && (
                                             <motion.div
