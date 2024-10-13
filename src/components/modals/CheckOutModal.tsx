@@ -11,8 +11,6 @@ import { useLocalUser } from "@/context/user.Provider";
 import Swal from "sweetalert2";
 
 
-
-
 const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: Tpost[]; userInfo: { name: string | undefined; email: string | undefined } }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [makePayment] = useMakePaymentMutation()
@@ -41,7 +39,7 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
             toast.error(error.message, { id: toastId, duration: 4000 })
         } else {
             // send response to the server
-            const response = await fetch("http://localhost:5000/api/user/confirm-payment", {
+            const response = await fetch("https://gardenigng-tips-advice.vercel.app/api/user/confirm-payment", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
