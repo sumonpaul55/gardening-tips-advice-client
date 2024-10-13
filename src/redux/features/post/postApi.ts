@@ -37,6 +37,14 @@ const postApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getTotalPostDocument: builder.query({
+      query: () => {
+        return {
+          url: "/post/total-post",
+          method: "GET",
+        };
+      },
+    }),
     getVotesSummery: builder.query({
       query: (id: string) => {
         return {
@@ -119,4 +127,5 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useGetAllPostQuery,
+  useGetTotalPostDocumentQuery,
 } = postApi;

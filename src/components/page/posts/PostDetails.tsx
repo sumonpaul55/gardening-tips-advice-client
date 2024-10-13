@@ -7,34 +7,16 @@ import { motion } from "framer-motion";
 import { FaFacebookF, FaYoutube, FaTwitter, FaInstagram, FaPinterest, FaLinkedin } from "react-icons/fa";
 import PostActivitiy from "./PostActivitiy";
 import Image from "next/image"
-// interface User {
-//     verified: boolean;
-//     name: string;
-//     email: string;
-//     profilePhoto: string;
-//     address: string;
-//     links: { socialName: string; url: string }[];
-// }
+import { Accordion, AccordionItem } from "@nextui-org/accordion";
 
-// interface Post {
-//     _id: string;
-//     title: string;
-//     post: string;
-//     userId: User;
-//     category: {
-//         category: string;
-//         image: string;
-//     };
-// }
 
 const PostDetails = ({ id }: { id: string }) => {
     const { data, isLoading } = useGetPostByIdQuery(`${id}`)
     const post = data?.data;
 
-
     return (
         <div>
-            <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3">{post?.title}</h2>
+            <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3 text-center mb-10">{post?.title}</h2>
             {
                 isLoading ? <LoadingBlur /> :
                     <div className="max-w-[900px] px-3 mx-auto">
@@ -138,28 +120,32 @@ const PostDetails = ({ id }: { id: string }) => {
                         </div>
                         {/* post activity */}
                         <div className="p-3 md:p-5 bg-gray-200 mt-5 rounded-lg">
-                            <PostActivitiy activity={post?.activity} postId={post?._id} />
+                            <PostActivitiy activity={post?.activity} postId={post?._id} upVotes={post?.upVotes?.length} downVotes={post?.downVotes?.length} />
                         </div>
                         <div className="mt-6">
                             <h2 className="font-semibold md:text-xl">Comments</h2>
-                            <div>
-                                {
-                                    post?.activity?.slice(0, 1)?.map((item: any) => (
-                                        item?.comment?.length > 0 &&
-                                        item?.comment.slice(0, 1)?.map((comment: string, idx: number) => (
-                                            <div key={idx} className="bg-gray-100 rounded-lg p-3 mt-4 flex gap-4">
-                                                <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />
-                                                <div className="w-full">
-                                                    <h2 className="font-semibold md:text-lg">Name: <span>{item?.userId?.name}</span></h2>
-                                                    <div className="p-1 pl-10 bg-gray-50">
-                                                        <p className="mt-1 text-lg">{comment}</p>
+                            <Accordion>
+                                <AccordionItem key="1" aria-label="View All Comments" title="View All Comments" className="border px-5">
+                                    <div>
+                                        {
+                                            post?.activity?.map((item: any) => (
+                                                item?.comment?.length > 0 &&
+                                                item?.comment?.map((comment: string, idx: number) => (
+                                                    <div key={idx} className="bg-gray-100 rounded-lg p-3 mt-4 flex gap-4">
+                                                        <Image src={item?.userId?.profilePhoto} height={200} width={200} alt={item?.userId?.name} className="border p-[1px] size-24 rounded-full" />
+                                                        <div className="w-full">
+                                                            <h2 className="font-semibold md:text-lg">Name: <span>{item?.userId?.name}</span></h2>
+                                                            <div className="p-1 pl-10 bg-gray-50">
+                                                                <p className="mt-1 text-lg">{comment}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        ))
-                                    ))
-                                }
-                            </div>
+                                                ))
+                                            ))
+                                        }
+                                    </div>
+                                </AccordionItem>
+                            </Accordion>
                         </div>
                     </div>
             }

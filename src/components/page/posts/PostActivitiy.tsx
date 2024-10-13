@@ -12,13 +12,13 @@ import { useLocalUser } from '@/context/user.Provider';
 import { useHandleCommentMutation, useHandleVotesMutation } from '@/redux/features/post/postApi';
 import { toast } from 'sonner';
 
-const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userId: string; comments: string[]; votes: boolean }[] }) => {
+const PostActivitiy = ({ postId, activity, downVotes, upVotes }: { downVotes: number; upVotes: number; postId: string, activity: { userId: string; comments: string[]; votes: boolean }[] }) => {
 
     const [handlevotes] = useHandleVotesMutation()
     const [addComment] = useHandleCommentMutation()
     const { user: localUser } = useLocalUser()
+    console.log(activity)
     const myActivity = activity.find((item: any) => item?.userId?._id == localUser?._id)
-
     const handleVotes = async (votes: boolean) => {
         const res = await handlevotes({ postId: postId, userId: localUser?._id, votes }) as any
         if (res?.data?.success) {
@@ -27,37 +27,46 @@ const PostActivitiy = ({ postId, activity }: { postId: string, activity: { userI
         else {
             toast.error(res?.error?.data?.message)
         }
-        console.log(res)
     };
 
     const handleComment: SubmitHandler<FieldValues> = async (data) => {
-
+        const toastId = toast.loading("Commenting...")
         const res = await addComment({ postId: postId, userId: localUser?._id, comment: data?.comment }) as any;
-        console.log(res)
+        if (res?.data?.success) {
+            toast.success("Your comment added Successfully", { id: toastId })
+        } else if (res?.error) {
+            toast.error("Somethin went wrong", { id: toastId })
+        }
 
     }
     return (
         <div className="flex flex-col space-x-4">
             <h3 className='mb-4 font-roboto_slab text-center md:text-lg'>Your valueable feedback will increase our experiences</h3>
-            <div className='flex items-center justify-stretch gap-10 mb-5 ml-5'>
-                <Tooltip content="Upvote">
-                    <motion.button
-                        disabled={myActivity?.votes === true}
-                        whileTap={{ scale: 0.9 }}
-                        className="flex items-center text-green-500 hover:text-green-600 disabled:text-gray-300"
-                        onClick={() => handleVotes(true)}>
-                        <FaThumbsUp className="mr-2" size={40} />
-                    </motion.button>
-                </Tooltip>
-                <Tooltip content="Downvote">
-                    <motion.button
-                        disabled={myActivity?.votes === false}
-                        whileTap={{ scale: 0.9 }}
-                        className="flex items-center text-red-500 hover:text-red-600 disabled:text-gray-300"
-                        onClick={() => handleVotes(false)}>
-                        <FaThumbsDown className="mr-2" size={40} />
-                    </motion.button>
-                </Tooltip>
+            <div className='flex justify-between items-center'>
+                <div className='flex items-center justify-stretch gap-10 mb-5 ml-5'>
+                    <Tooltip content="Upvote">
+                        <motion.button
+                            disabled={myActivity?.votes === true}
+                            whileTap={{ scale: 0.9 }}
+                            className="flex items-center text-black text-opacity-50 hover:text-green-600 disabled:text-secondary"
+                            onClick={() => handleVotes(true)}>
+                            <FaThumbsUp className="mr-2" size={40} />
+                        </motion.button>
+                    </Tooltip>
+                    <Tooltip content="Downvote">
+                        <motion.button
+                            disabled={myActivity?.votes === false}
+                            whileTap={{ scale: 0.9 }}
+                            className="flex items-center text-black text-opacity-50 hover:text-green-600 disabled:text-secondary"
+                            onClick={() => handleVotes(false)}>
+                            <FaThumbsDown className="mr-2" size={40} />
+                        </motion.button>
+                    </Tooltip>
+                </div>
+                <div className='flex gap-10 items-center bg-secondary text-white p-2 rounded-md'>
+                    <h3 className='font-bold flex gap-2'>{upVotes} <FaThumbsUp size={15} className='mt-1' /></h3>
+                    <h3 className='font-bold flex gap-2'>{downVotes} <FaThumbsDown size={15} className='mt-1' /></h3>
+                </div>
             </div>
             <div className="flex flex-col gap-5">
                 {/* Input for typing a comment */}
