@@ -11,9 +11,6 @@ const extractImagesFromPost = (html: string) => {
     return images.map((img) => img.src); // Return the image URLs
 };
 
-interface PostData {
-    posts: Array<{ post: string }>;
-}
 
 const ImageGallery = () => {
     // Extract images from all posts

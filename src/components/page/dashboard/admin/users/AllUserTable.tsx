@@ -2,7 +2,7 @@
 import { useDeleteUserMutation, useGetAllUserQuery, useMakeUserAdminMutation } from '@/redux/features/auth/auth.api'
 import React from 'react'
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
-import Link from 'next/link';
+
 import Swal from 'sweetalert2';
 import { toast } from 'sonner';
 

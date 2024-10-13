@@ -2,26 +2,23 @@
 "use client"
 import { useLocalUser } from '@/context/user.Provider'
 // import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api'
-import { useDeletePostMutation, useGetAllPostQuery, useGetPostByUserIdQuery } from '@/redux/features/post/postApi'
+import { useDeletePostMutation, useGetAllPostQuery } from '@/redux/features/post/postApi'
 import React from 'react'
 import LoadingSpinner from '@/components/shared/LoadingSpinner'
 import { Tpost } from '@/types'
 import { Button, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react'
 import NoDataFound from '@/components/shared/NotDataFound'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import Swal from "sweetalert2"
 const ViewAllPostFromAdmin = () => {
     const [deletePost] = useDeletePostMutation()
-    const EditPostModal = dynamic(() => import("@/components/modals/PostEditModal"), {
-        ssr: false
-    })
+
 
 
     const { user, isLoading } = useLocalUser()
     const { data: postData } = useGetAllPostQuery({})
     // const { data } = useGetUserByEmailQuery(`${user?.email}`)
-    // const userData = data?.data;
+
     const post = postData?.data;
     // console.log(userData)
     const handleDeletePost = (postId: string) => {
