@@ -29,7 +29,7 @@ const DashBoardFront = () => {
                 {<h2 className='md:text-lg font-semibold text-center'>Votes Items - {remoteUser?.upVotesItem?.length}</h2>}
             </div>
             <div className='bg-gradient-to-r shadow rounded-lg from-slate-800 to-primary-700 text-white py-12'>
-                {<h2 className='md:text-lg font-semibold text-center'>Verified - {remoteUser?.verified ? "Verified" : "No"}</h2>}
+                {<h2 className='md:text-lg font-semibold text-center'>Verified - {remoteUser?.verfied ? "Verified" : "No"}</h2>}
             </div>
         </div>
     )

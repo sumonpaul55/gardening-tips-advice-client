@@ -53,7 +53,7 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                                 <span className='text-sm md:text-lg font-medium'>Follower: {userData?.follower?.length}</span>
                                 <span className='text-sm md:text-lg font-medium'>Following: {userData?.following?.length}</span>
                                 <span className='text-sm md:text-lg font-medium'>Joined: {moment(userData?.createdAt).format("MMM Do YY")}</span>
-                                <span className='text-sm md:text-lg font-medium'>Varified: {userData?.verified === true ? "Verified" : "Not verified"}</span>
+                                <span className='text-sm md:text-lg font-medium'>Varified: {userData?.verfied === true ? "Verified" : "Not verified"}</span>
                             </div>
                         </div>
                         <div>

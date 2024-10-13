@@ -30,7 +30,7 @@ const PostDetails = ({ id }: { id: string }) => {
         // Reset copied state after 3 seconds
         setTimeout(() => setCopied(false), 3000);
     };
-    if (post?.premium === true && user?.verified !== true) {
+    if (post?.premium === true && user?.verfied !== true) {
         return <section>
             <div className="md:min-h-[350px] relative">
                 <div className="absolute h-full w-full backdrop-blur-sm z-30 flex justify-center items-end">
@@ -104,7 +104,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                         <p className="text-sm text-gray-500">{post?.userId.address}</p>
                                         <p className="text-sm text-gray-500">{post?.userId.email}</p>
                                     </div>
-                                    {post?.userId.verified ? (
+                                    {post?.userId.verfied ? (
                                         <motion.div
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}

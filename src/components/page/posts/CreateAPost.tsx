@@ -91,7 +91,7 @@ export default function CreateAPost() {
                         // onChange={newContent => { console.log(newContent) }}
                         />
 
-                        <Button isDisabled={user?.verified !== true} className="my-3 font-semibold py-2 inline-block px-2 shadow-md border border-gray-400 rounded bg-white cursor-pointer md:px-10 disabled:bg-gray-300"><Checkbox onValueChange={() => setIsPremium(prev => !prev)}>Is Premium?</Checkbox></Button>
+                        <Button isDisabled={user?.verfied !== true} className="my-3 font-semibold py-2 inline-block px-2 shadow-md border border-gray-400 rounded bg-white cursor-pointer md:px-10 disabled:bg-gray-300"><Checkbox onValueChange={() => setIsPremium(prev => !prev)}>Is Premium?</Checkbox></Button>
 
                     </div>
                     <Button type='submit' className='mt-4 bg-secondary text-white md:px-20'>Submit Post</Button>

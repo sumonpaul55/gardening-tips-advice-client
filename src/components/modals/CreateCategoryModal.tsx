@@ -41,7 +41,7 @@ export default function CreateCategory() {
     }
     return (
         <div className="flex-1">
-            <Button onPress={onOpen} isDisabled={user?.role === "ADMIN" ? false : user?.verified === true ? false : true} className="min-fit px-4 py-6 bg-secondary text-white">Create a new Category?</Button>
+            <Button onPress={onOpen} isDisabled={user?.role === "ADMIN" ? false : user?.verfied === true ? false : true} className="min-fit px-4 py-6 bg-secondary text-white">Create a new Category?</Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (

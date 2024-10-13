@@ -70,7 +70,7 @@ export default function MenuBar() {
                                     !isLoading && <div className="relative">
                                         <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
                                         {
-                                            loggedInuser?.data?.verified === true ?
+                                            loggedInuser?.data?.verfied === true ?
                                                 <span className='absolute -right-2 top-6 size-5 shadow flex items-center justify-center rounded-full bg-gray-300'>
                                                     <MdVerified className='text-primary' size={16} />
                                                 </span> :
