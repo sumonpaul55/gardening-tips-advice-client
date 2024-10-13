@@ -82,6 +82,7 @@ const authApi = baseApi.injectEndpoints({
           body: paymentInfo,
         };
       },
+      invalidatesTags: ["payment"],
     }),
     changePassword: builder.mutation({
       query: (Info) => {

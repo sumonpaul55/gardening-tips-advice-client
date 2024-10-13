@@ -39,7 +39,8 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
             toast.error(error.message, { id: toastId, duration: 4000 })
         } else {
             // send response to the server
-            const response = await fetch("https://gardenigng-tips-advice.vercel.app/api/user/confirm-payment", {
+            const response = await fetch("https://gardening-tips-server.vercel.app/api/user/confirm-payment", {
+                // const response = await fetch("http://localhost:5000/api/user/confirm-payment", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,12 +56,12 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
                 const paymentInfo = {
                     ...userInfo, transactionId: paymentResult?.data?.id, paymentTime: paymentResult?.data?.created, userId: user?._id
                 }
-                const res = makePayment(paymentInfo) as any;
+                const res = await makePayment(paymentInfo) as any;
 
                 if (res?.error) {
-                    toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId, duration: 4000 })
+                    toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId, duration: 4000 },)
                 } else {
-                    toast.success(res?.date?.data?.message, { id: toastId, duration: 4000 });
+                    toast.success(res?.date?.message, { id: toastId, duration: 4000 });
                     Swal.fire({
                         title: "Congratulations Your now verified memeber of NextLeaf",
                         icon: "success",

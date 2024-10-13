@@ -65,7 +65,6 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                                     </Button> :
                                     <h3 className='md:text-lg font-semibold font-roboto_slab'>Your Total Post {post?.data?.length}</h3>
                             }
-
                         </div>
                     </div>
                     {/* Social Links */}
