@@ -67,7 +67,23 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["user"],
     }),
+    makePayment: builder.mutation({
+      query: (paymentInfo) => {
+        return {
+          url: "/payment/confirm-payment",
+          method: "POST",
+          body: paymentInfo,
+        };
+      },
+    }),
   }),
 });
-export const { useLogInMutation, useRegisterMutation, useGetUserByEmailQuery, useGetUserByidQuery, useUpdateUserMutation, useFollowUnfolowMutation } =
-  authApi;
+export const {
+  useLogInMutation,
+  useRegisterMutation,
+  useGetUserByEmailQuery,
+  useGetUserByidQuery,
+  useUpdateUserMutation,
+  useFollowUnfolowMutation,
+  useMakePaymentMutation,
+} = authApi;

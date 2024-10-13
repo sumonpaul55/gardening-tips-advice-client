@@ -5,8 +5,6 @@ import Link from 'next/link'
 // import Editor from "@/components/EditorMaker/Editor"
 
 
-
-
 const CreatePost = () => {
 
     return (

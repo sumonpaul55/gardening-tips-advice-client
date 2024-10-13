@@ -20,6 +20,7 @@ export interface IUser {
   profilePhoto: string;
   createdAt?: string;
   updatedAt?: string;
+  verified?: boolean;
   __v?: number;
 }
 

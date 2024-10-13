@@ -65,10 +65,9 @@ const ProfilePage = () => {
                                                     <Elements stripe={stripePromise}>
                                                         {
                                                             <CheckoutForm userInfo={{ name: user?.name, email: user?.email }} btnClass={` className='h-fit w-fit py-1 rounded-sm font-semibold bg-secondary text-white disabled:bg-gray-400'`} post={post} />
-
                                                         }
                                                     </Elements>
-                                                    <Tooltip content="Required minimum 1 Up Votes in your post">
+                                                    <Tooltip content="Required minimum 1 more Up Votes than down Votes in your post">
                                                         {!isUpVotesTrue &&
                                                             <span>
                                                                 <ImNotification size={20} />
@@ -77,8 +76,8 @@ const ProfilePage = () => {
                                                     </Tooltip>
                                                 </div>
                                             }
-                                            <span className='text-sm md:text-lg font-medium mt-3'>Address: {(userData?.address)}</span>
                                         </div>
+                                        <h5 className='text-sm md:text-lg font-medium mt-3'>Address: {(userData?.address)}</h5>
 
                                     </div>
                                 </div>

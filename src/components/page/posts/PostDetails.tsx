@@ -141,7 +141,8 @@ const PostDetails = ({ id }: { id: string }) => {
                                                         </div>
                                                     </div>
                                                 ))
-                                            ))
+                                            )
+                                            )
                                         }
                                     </div>
                                 </AccordionItem>

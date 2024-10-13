@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import { useCreateCategoryMutation } from "@/redux/features/category/category.api";
 import { uploadImageToCloudinary } from "@/utils/uploadImageToCloudinary";
 import { toast } from "sonner";
+import { useLocalUser } from "@/context/user.Provider";
 export default function CreateCategory() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { user } = useLocalUser()
     const [categroy, setCategory] = useState<string>()
     const [createCategory] = useCreateCategoryMutation()
     const [file, setFile] = useState<any>()
@@ -39,7 +41,7 @@ export default function CreateCategory() {
     }
     return (
         <div className="flex-1">
-            <Button onPress={onOpen} className="min-fit px-4 py-6 bg-secondary text-white">Create a new Category?</Button>
+            <Button onPress={onOpen} isDisabled={user?.role === "ADMIN" ? false : user?.verified === true ? false : true} className="min-fit px-4 py-6 bg-secondary text-white">Create a new Category?</Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (

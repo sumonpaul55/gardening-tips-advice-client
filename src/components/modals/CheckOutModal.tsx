@@ -5,18 +5,24 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { toast } from "sonner";
 import { Modal, Button, useDisclosure, Card, ModalContent, ModalFooter } from "@nextui-org/react";
 import { Tpost } from "@/types";
+import { useMakePaymentMutation } from "@/redux/features/auth/auth.api";
+
+import { useLocalUser } from "@/context/user.Provider";
+import Swal from "sweetalert2";
 
 
 
 
 const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: Tpost[]; userInfo: { name: string | undefined; email: string | undefined } }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const [makePayment] = useMakePaymentMutation()
+    const { user } = useLocalUser()
 
     const isUpVotesTrue = post?.some((item: Tpost) => item.upVotes > item?.downVotes)
-    console.log(isUpVotesTrue)
     // const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
     const stripe = useStripe();
     const elements = useElements()
+
 
     const handleSubmit = async (event: React.FormEvent) => {
         const toastId = toast.loading("Data Proccessing...")
@@ -48,18 +54,22 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
                 toast.success(paymentResult.message, { id: toastId })
 
                 // data for back end stor after payment and make user verified
-                const newUserInfopaymentInfo = {
-                    ...userInfo, transactionId: paymentResult?.data?.id, paymentTime: paymentResult?.data?.created
+                const paymentInfo = {
+                    ...userInfo, transactionId: paymentResult?.data?.id, paymentTime: paymentResult?.data?.created, userId: user?._id
                 }
-                console.log(newUserInfopaymentInfo)
-                // const res: any = "api call "
+                const res = makePayment(paymentInfo) as any;
 
-                // if (res?.error) {
-                //     toast.error(res?.error?.message || res?.error?.data?.message, { id: toastId, duration: 4000 })
-                // } else {
-                //     toast.success(res?.date?.message, { id: toastId, duration: 4000 });
-                //     setIsSuccessModalOpen(true)
-                // }
+                if (res?.error) {
+                    toast.error(res?.error?.message || res?.error?.data?.message || "Something went wrong", { id: toastId, duration: 4000 })
+                } else {
+                    toast.success(res?.date?.data?.message, { id: toastId, duration: 4000 });
+                    Swal.fire({
+                        title: "Congratulations Your now verified memeber of NextLeaf",
+                        icon: "success",
+                        showCancelButton: true,
+                        denyButtonText: `ok`
+                    })
+                }
 
             } else if (!paymentResult.success) {
                 toast.error(paymentResult?.message, { id: toastId, duration: 4000 })
@@ -77,6 +87,7 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
                     {(onClose) => (
                         <>
                             <Card className="p-6 text-center bg-white rounded-lg shadow-lg">
+                                <h2 className="text-center md:text-lg my-3 font-semibold font-roboto_slab">You have to pay $40</h2>
                                 <form onSubmit={handleSubmit}>
                                     <CardElement />
                                     <Button
@@ -98,7 +109,7 @@ const CheckoutForm = ({ userInfo, post, btnClass }: { btnClass?: string; post?: 
                         </>)}
                 </ModalContent>
             </Modal>
-            {/* <SuccessModal id={paymentId} total={bookingInfo?.totalAmount} isSuccessModalOpen={isSuccessModalOpen} setIsSuccessModalOpen={setIsSuccessModalOpen} totalRoom={bookingInfo?.room?.length} totalSlot={slotNumber} /> */}
+
         </>
     )
 }

@@ -17,7 +17,6 @@ const PostActivitiy = ({ postId, activity, downVotes, upVotes }: { downVotes: nu
     const [handlevotes] = useHandleVotesMutation()
     const [addComment] = useHandleCommentMutation()
     const { user: localUser } = useLocalUser()
-    console.log(activity)
     const myActivity = activity.find((item: any) => item?.userId?._id == localUser?._id)
     const handleVotes = async (votes: boolean) => {
         const res = await handlevotes({ postId: postId, userId: localUser?._id, votes }) as any
