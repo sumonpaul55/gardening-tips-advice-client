@@ -1,8 +1,11 @@
+import DashBoardFront from '@/components/page/dashboard/admin/DashBoardFront'
 import React from 'react'
 
 const AdminDashBoard = () => {
     return (
-        <div>AdminDashBoard</div>
+        <div>
+            <DashBoardFront />
+        </div>
     )
 }
 

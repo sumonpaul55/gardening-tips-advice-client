@@ -15,6 +15,10 @@ export const MenuItems = [
     name: "Contact Us",
     url: "contact",
   },
+  {
+    name: "Gallery",
+    url: "gallery",
+  },
 ];
 
 // export const UserMenuItems = [
