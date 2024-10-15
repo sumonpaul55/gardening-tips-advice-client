@@ -8,9 +8,9 @@
 
 
 .galley-hero{
-    background: linear-gradient( #000000c3 ,#00000057), url("../../public/gallery.jpg");
+    background: linear-gradient( #00000009 ,#036a29ba), url("https://i.ibb.co.com/ZXKKYRv/gallery.jpg");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
 }
 .home-hero{
     background: linear-gradient( #02701277 ,#000000b5), url("../../public/herobg.jpg");

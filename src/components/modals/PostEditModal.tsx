@@ -78,7 +78,7 @@ export default function EditPostModal({ post, }: { post?: Tpost; }) {
         <>
             <Button onPress={onOpen}>Edit</Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="p-0 max-w-[900px] overflow-scroll max-h-[750px]">
-                <ModalContent className="py-0 m-0">
+                <ModalContent className="py-0 m-0 max-w-[1200px]">
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>

@@ -26,7 +26,7 @@ export default function CreateAPost() {
     const { user } = useLocalUser()
     const categories = data?.data;
     const [isPremium, setIsPremium] = useState<boolean>(false)
-
+    console.log(content)
     const config = {
         loadExternalConfig: false,
         readonly: false, // all options from https://xdsoft.net/jodit/docs/,

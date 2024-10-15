@@ -31,19 +31,20 @@ const Registration = () => {
 
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+        // const toastId = toast.loading("Registering...")
+        const toastId = toast.loading("Register processing...")
         let profilePhoto;
         if (imageFile) {
             profilePhoto = await uploadImageToCloudinary(imageFile)
         }
-        const toastId = toast.loading("Register processing...")
         const name = data?.name.trim()
         const registerData = {
             ...data, name, profilePhoto
         }
-
         const res = await register(registerData) as any
         if (res?.data?.success) {
             const user = verifiyToken(res?.data?.data?.accessToken)
+            Cookies.set("accessToken", res?.data?.data?.accessToken);
             // set cookies refresh token
             Cookies.set("refreshToken", res?.data?.data?.refreshToken)
             dispatch(setUser({ user, token: res?.data?.data?.accessToken }))

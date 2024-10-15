@@ -7,7 +7,7 @@ const nextConfig = {
         //         hostname: "**"
         //     }
         // ]
-        domains: ["res.cloudinary.com", "i.ibb.co.com"]
+        domains: ["res.cloudinary.com", "i.ibb.co.com", "xdsoft.net"]
     },
     // this is suspense related error will ignore
 

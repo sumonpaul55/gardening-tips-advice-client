@@ -14,8 +14,6 @@ import Swal from "sweetalert2"
 const ViewAllPostFromAdmin = () => {
     const [deletePost] = useDeletePostMutation()
 
-
-
     const { user, isLoading } = useLocalUser()
     const { data: postData } = useGetAllPostQuery({})
     // const { data } = useGetUserByEmailQuery(`${user?.email}`)

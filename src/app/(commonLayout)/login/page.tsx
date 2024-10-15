@@ -38,6 +38,7 @@ const LoginPage = () => {
 
                 // set cookies refresh token
                 Cookies.set("refreshToken", res?.data?.data?.refreshToken)
+                Cookies.set("accessToken", res?.data?.data?.accessToken)
                 const user = verifiyToken(res?.data?.data?.accessToken)
                 dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
                 toast.success(res?.data?.message, { id: toastId })
