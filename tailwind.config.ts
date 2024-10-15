@@ -15,6 +15,7 @@ const config: Config = {
         roboto: ["var(--roboto)"],
         roboto_slab: ["var(--roboto_slab)"],
       },
+
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
