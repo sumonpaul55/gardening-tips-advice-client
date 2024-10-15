@@ -15,7 +15,7 @@ const quotes = [
 
 const QuotesSection: React.FC = () => {
     return (
-        <Container className='py-20'>
+        <Container className='pb-16'>
             <h2 className="text-4xl font-bold text-green-600 mb-6 m-10">Inspiring Gardening Quotes</h2>
             <div className='flex md:flex-row flex-col items-start gap-3 mt-16'>
                 <div className='p-4 border-gray-200 border justify-center h-full' style={{
