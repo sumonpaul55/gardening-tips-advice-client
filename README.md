@@ -2,6 +2,27 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Installation
+
+1. Clone the repository:
+   ```bash
+   https://github.com/sumonpaul55/gardening-tips-advice-client.git
+   ```
+   #npm install
+   example env
+
+# cludinay
+
+NEXT_PUBLIC_Cloud_Name={your cloud name}
+NEXT_PUBLIC_Api_Key={your api key}
+NEXT_PUBLIC_Api_Secret={your scret}
+
+# NEXT_PUBLIC_UpLoad_presect=ml_gardening
+
+NEXT_PUBLIC_UpLoad_presect={you preset}
+
+NEXT_PUBLIC_Publishable_Key={publishable key o stripe}
+
 First, run the development server:
 
 ```bash
@@ -29,22 +50,86 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+# Gardening Tips and Advice
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Gardening Tips and Advice is a community-driven platform where users can share tips, advice, and best practices for gardening. Built with Next.js and TypeScript, this platform allows users to engage with others by creating posts, following users, and participating in discussions through upvotes, downvotes, and comments. The platform includes features for normal users and verified users, with premium content accessible only to verified members.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Key Features
 
-example env
+1. **Authentication with JWT**:
 
-# cludinay
+   - Secure login and registration using JWT (JSON Web Tokens) for authentication.
+   - Protected routes for both admin and normal users based on their roles.
 
-NEXT_PUBLIC_Cloud_Name={your cloud name}
-NEXT_PUBLIC_Api_Key={your api key}
-NEXT_PUBLIC_Api_Secret={your scret}
+2. **Admin and User Dashboards**:
 
-# NEXT_PUBLIC_UpLoad_presect=ml_gardening
+   - Admin dashboard to manage categories, users, and content moderation.
+   - User dashboard to manage posts, followers, and profile settings.
 
-NEXT_PUBLIC_UpLoad_presect={you preset}
+3. **Post Creation with Jodit Text Editor**:
 
-NEXT_PUBLIC_Publishable_Key={publishable key o stripe}
+   - Users can create and format rich content posts using the Jodit text editor.
+   - Posts can include text, images, and other media for a full blogging experience.
+
+4. **Verified and Normal User Roles**:
+
+   - Two types of users: Normal and Verified.
+   - Verified users can publish **premium posts** that are only visible to other verified users.
+   - Normal users will see a blurred preview of premium posts but cannot access the content.
+
+5. **Profile Management**:
+
+   - **Two types of profile pages**:
+     1. User profile page to view personal posts, followers, and followings.
+     2. Profile settings page to update user information, including bio, profile picture, and contact details.
+   - Users can update all personal information from the profile page.
+
+6. **Follow System**:
+
+   - Users can follow other users, including admins, to stay updated on their posts.
+   - Profiles display a total count of followers, following, total upvotes, and total downvotes.
+
+7. **Post Interaction (Upvote, Downvote, Comments)**:
+
+   - Users can interact with posts by upvoting or downvoting them.
+   - Commenting is enabled on posts, with users able to upvote or downvote individual comments.
+
+8. **Profile Verification through Stripe Payment**:
+
+   - If a post receives more upvotes than downvotes, the user becomes eligible for profile verification.
+   - Users can verify their profile after making a payment through Stripe.
+
+9. **Premium Post Visibility**:
+
+   - Normal users will see premium posts as blurred sections.
+   - Only verified users can view the full content of premium posts.
+
+10. **Category Management (Admin Only)**:
+    - Only admin users have the ability to create, update, or delete categories.
+    - Categories help organize content and enhance the search and filter experience for users.
+
+## Technology Stack
+
+- **Frontend**:
+
+  - **Next.js**: Server-side rendering, static site generation, and optimized performance.
+  - **TypeScript**: Type safety for better development experience and fewer errors.
+  - **Next UI**: Elegant UI components with minimal configuration.
+  - **Tailwind CSS**: For responsive and modern design.
+  - **Redux Toolkit and RTK Query**: Advanced state management and efficient data fetching.
+
+- **Backend**:
+  - **Express.js**: Backend API for user management, post creation, and payment integration.
+  - **Mongoose**: MongoDB object modeling for database operations.
+  - **Stripe API**: Payment gateway for handling profile verification transactions.
+  - **JWT Authentication**: Secure token-based authentication for users and admin roles.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Stripe Account for payment integration
+
+#view live https://gardenigng-tips-advice.vercel.app/
