@@ -5,23 +5,26 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    https://github.com/sumonpaul55/gardening-tips-advice-client.git
    ```
+
    #npm install
-   example env
 
-# cludinay
+# example env
 
-NEXT_PUBLIC_Cloud_Name={your cloud name}
-NEXT_PUBLIC_Api_Key={your api key}
-NEXT_PUBLIC_Api_Secret={your scret}
+- cludinay
 
-# NEXT_PUBLIC_UpLoad_presect=ml_gardening
+* NEXT_PUBLIC_Cloud_Name={your cloud name}
+* NEXT_PUBLIC_Api_Key={your api key}
+* NEXT_PUBLIC_Api_Secret={your scret}
 
-NEXT_PUBLIC_UpLoad_presect={you preset}
+- NEXT_PUBLIC_UpLoad_presect=ml_gardening
 
-NEXT_PUBLIC_Publishable_Key={publishable key o stripe}
+* NEXT_PUBLIC_UpLoad_presect={you preset}
+
+* NEXT_PUBLIC_Publishable_Key={publishable key o stripe}
 
 First, run the development server:
 
