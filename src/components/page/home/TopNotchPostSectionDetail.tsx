@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 
 const TopNotchPostSectionDetail = ({ post }: { post: Tpost }) => {
+
     return (
         <div className="border p-4 rounded-lg shadow-md mb-4">
             <h2 className="text-2xl font-bold mb-2">{post?.title}</h2>
@@ -18,15 +19,18 @@ const TopNotchPostSectionDetail = ({ post }: { post: Tpost }) => {
             </div>
             {/* <p className="text-gray-500 text-sm">Posted on: {new Date(createdAt).toLocaleDateString()}</p> */}
             <div className="mt-4">
-                <h4 className="font-semibold">Activity</h4>
-                {post?.activity?.map((item: any, index: number) => (
-                    <div key={index} className="border-t py-2">
-                        <p className="font-medium">{item.userId}</p>
-                        {item.comment?.map((comment: string, idx: number) => (
+                <h4 className="font-semibold border-b">Activity</h4>
+                {post?.activity?.map((item: any, index: number) => {
+                    if (item?.comment < 1) {
+                        return
+                    }
+                    return <div key={index} className="border-b py-2">
+                        {/* <p className="font-medium">{item?.name}</p> */}
+                        {item?.comment?.slice(0, 4).map((comment: string, idx: number) => (
                             <p key={idx} className="text-gray-700">{comment}</p>
                         ))}
                     </div>
-                ))}
+                })}
             </div>
             <div className="mt-4">
                 <h4 className="font-semibold">Votes</h4>
