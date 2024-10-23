@@ -49,14 +49,29 @@ const PostActivitiy = ({ postId, activity, downVotes, upVotes }: { downVotes: nu
     };
 
     const handleComment: SubmitHandler<FieldValues> = async (data) => {
-        const toastId = toast.loading("Commenting...")
-        const res = await addComment({ postId: postId, userId: localUser?._id, comment: data?.comment }) as any;
-        if (res?.data?.success) {
-            toast.success("Your comment added Successfully", { id: toastId })
-        } else if (res?.error) {
-            toast.error("Somethin went wrong", { id: toastId })
+        if (!localUser) {
+            Swal.fire({
+                title: "You Have to login first",
+                text: "If you want to interact with this post? Please login You can cancel as well",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    router.push("/login")
+                }
+            });
+        } else {
+            const toastId = toast.loading("Commenting...")
+            const res = await addComment({ postId: postId, userId: localUser?._id, comment: data?.comment }) as any;
+            if (res?.data?.success) {
+                toast.success("Your comment added Successfully", { id: toastId })
+            } else if (res?.error) {
+                toast.error("Somethin went wrong", { id: toastId })
+            }
         }
-
     }
     return (
         <div className="flex flex-col space-x-4">
