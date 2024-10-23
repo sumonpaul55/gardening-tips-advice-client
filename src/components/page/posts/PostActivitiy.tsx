@@ -11,6 +11,8 @@ import { Tooltip } from '@nextui-org/react';
 import { useLocalUser } from '@/context/user.Provider';
 import { useHandleCommentMutation, useHandleVotesMutation } from '@/redux/features/post/postApi';
 import { toast } from 'sonner';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 const PostActivitiy = ({ postId, activity, downVotes, upVotes }: { downVotes: number; upVotes: number; postId: string, activity: { userId: string; comments: string[]; votes: boolean }[] }) => {
 
@@ -18,14 +20,32 @@ const PostActivitiy = ({ postId, activity, downVotes, upVotes }: { downVotes: nu
     const [addComment] = useHandleCommentMutation()
     const { user: localUser } = useLocalUser()
     const myActivity = activity.find((item: any) => item?.userId?._id == localUser?._id)
+    const router = useRouter()
     const handleVotes = async (votes: boolean) => {
-        const res = await handlevotes({ postId: postId, userId: localUser?._id, votes }) as any
-        if (res?.data?.success) {
-            toast.success(res?.data?.message,)
+        if (!localUser) {
+            Swal.fire({
+                title: "You Have to login first",
+                text: "If you want to interact with this post? Please login You can cancel as well",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    router.push("/login")
+                }
+            });
+        } else {
+            const res = await handlevotes({ postId: postId, userId: localUser?._id, votes }) as any
+            if (res?.data?.success) {
+                toast.success(res?.data?.message,)
+            }
+            else {
+                toast.error(res?.error?.data?.message)
+            }
         }
-        else {
-            toast.error(res?.error?.data?.message)
-        }
+
     };
 
     const handleComment: SubmitHandler<FieldValues> = async (data) => {

@@ -12,21 +12,22 @@ const PopularPosts = () => {
     const { data, isLoading } = useGetAllPostQuery({});
     const posts = data?.data;
     const upVotesPost = posts?.filter((post: Tpost) => post?.upVotes > post?.downVotes)
+
     return (
         <>
             <div>
                 {
                     isLoading ? <LoadingSpinner /> :
-                        <Link href={`/post/${posts._id}`}>
-                            <div className="my-8 p-6 rounded-lg bg-white py-20">
-                                <h2 className="text-3xl font-bold text-center mb-6">Popular Posts</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9">
-                                    {upVotesPost?.map((post: Tpost) => (
-                                        <EachPopularPost key={post._id} post={post} />
-                                    ))}
-                                </div>
+                        <div className="my-8 p-6 rounded-lg bg-white py-20">
+                            <h2 className="text-3xl font-bold text-center mb-6">Popular Posts</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9">
+                                {upVotesPost?.map((post: Tpost) => (
+                                    <Link key={post._id} href={`post/${post?._id}`}>
+                                        <EachPopularPost post={post} />
+                                    </Link>
+                                ))}
                             </div>
-                        </Link>
+                        </div>
                 }
             </div>
         </>

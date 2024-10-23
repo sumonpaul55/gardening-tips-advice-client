@@ -22,7 +22,6 @@ const PostDetails = ({ id }: { id: string }) => {
     const { toPDF, targetRef } = usePDF({ filename: `${post?.title}.pdf` })
     const { data: userDB } = useGetUserByEmailQuery(`${user?.email}`)
     const userData = userDB?.data;
-    console.log(userData)
 
     // handle copy linkg
     const handleCopyLink = () => {
@@ -32,7 +31,6 @@ const PostDetails = ({ id }: { id: string }) => {
         // Reset copied state after 3 seconds
         setTimeout(() => setCopied(false), 3000);
     };
-    console.log(user)
     if (post?.premium === true && !userData?.verified) {
         return <section>
             <div className="md:min-h-[350px] relative">
@@ -157,9 +155,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                                         rel="noopener noreferrer"
                                                         className="text-gray-500 hover:text-blue-600"
                                                         whileHover={{ scale: 1.2 }}
-                                                        whileTap={{ scale: 0.9 }}
-                                                    >
-
+                                                        whileTap={{ scale: 0.9 }}>
                                                         <IconComponent size={24} />
                                                     </motion.a>
                                                 );
@@ -196,7 +192,7 @@ const PostDetails = ({ id }: { id: string }) => {
                             <PostActivitiy activity={post?.activity} postId={post?._id} upVotes={post?.upVotes?.length} downVotes={post?.downVotes?.length} />
                         </div>
                         <div className="mt-6">
-                            <h2 className="font-semibold md:text-xl">Comments</h2>
+                            <h2 className="font-semibold md:text-xl mb-3">Comments</h2>
                             <Accordion>
                                 <AccordionItem key="1" aria-label="View All Comments" title="View All Comments" className="border px-5">
                                     <div>

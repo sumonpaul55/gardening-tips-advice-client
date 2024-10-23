@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { Tpost } from '@/types';
 import { getFirstImage } from '@/utils/getFirstImage';
@@ -9,7 +10,7 @@ const EachPopularPost = ({ post }: { post: Tpost }) => {
     const { title, post: content, userId, createdAt, activity, upVotes, downVotes } = post;
 
     return (
-        <div className="border p-4 rounded-lg shadow-md">
+        <div className="border p-4 rounded-lg shadow-md h-full">
             <h2 className="text-2xl font-bold mb-2 line-clamp-1">{title}</h2>
             <Image width={400} height={400} src={`${image}`} alt={userId.name} className="w-full" />
             {/* <div className="mb-4" dangerouslySetInnerHTML={{ __html: content }} /> */}
