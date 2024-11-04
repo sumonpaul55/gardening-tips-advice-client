@@ -29,7 +29,6 @@ export async function middleware(request: NextRequest) {
     }
   }
   // default protected route
-
   if (ProtectedRoute?.includes(pathname)) {
     if (!user) {
       return NextResponse.redirect(new URL(`/login?redirect=${pathname}`, request.url));

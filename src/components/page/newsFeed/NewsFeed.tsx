@@ -6,10 +6,12 @@ import React, { useState, useEffect } from 'react';
 import PostDetails from '../posts/PostDetails';
 import { useInView } from 'react-intersection-observer';
 import { Spinner } from '@nextui-org/react';
+import Container from '@/components/shared/Container/Container';
+import NewsFeedLeft from './NewsFeedLeft';
 
 const NewsFeed = () => {
     const [limit, setLimit] = useState<number>(1); // Start by loading 1 post
-    const { data, isFetching } = useGetAllPostQuery({ limit });
+    const { data, isFetching, isLoading } = useGetAllPostQuery({ limit });
     const { ref: inViewRef, inView } = useInView();
     const { data: totalPost } = useGetTotalPostDocumentQuery({})
     const [allPostsLoaded, setAllPostsLoaded] = useState<boolean>(false);
@@ -26,24 +28,42 @@ const NewsFeed = () => {
     }, [inView, isFetching, data, allPostsLoaded]);
 
     return (
-        <div className='max-w-[900px] mx-auto'>
+        <Container className='px-0'>
             <>
-                {data?.data?.map((item: Tpost, idx: number) => (
-                    <div key={idx} className='mt-5'>
-                        <PostDetails id={item?._id} />
-                    </div>
-                ))}
-                <div className='bg-white h-[200px]'>
-                    {!allPostsLoaded && (
-                        <div ref={inViewRef}>
-                            {isFetching ? <ContentLoading /> : <h3>Loading more posts...</h3>}
-                        </div>
-                    )}
-                    {allPostsLoaded && <h3 className="text-center mt-5 font-bold md:text-lg py-5 rounded-lg mx-4">No more posts available</h3>}
+                {
+                    isLoading ? <div className='flex justify-center items-center'>
+                        <Spinner />
+                    </div> :
+                        <div className='flex md:px-4 gap-7'>
+                            <div className='h-screen overflow-auto w-[220px] hidden md:block'>
+                                <NewsFeedLeft />
+                            </div>
+                            <div className='mx-auto h-screen overflow-auto flex-1'>
+                                <>
+                                    {data?.data?.map((item: Tpost, idx: number) => (
+                                        <div key={idx} className='mt-5'>
+                                            <PostDetails id={item?._id} />
+                                        </div>
+                                    ))}
+                                    <div className='bg-white h-[200px]'>
+                                        {!allPostsLoaded && (
+                                            <div ref={inViewRef}>
+                                                {isFetching ? <ContentLoading /> : <h3>Loading more posts...</h3>}
+                                            </div>
+                                        )}
+                                        {allPostsLoaded && <h3 className="text-center mt-5 font-bold md:text-lg py-5 rounded-lg mx-4">No more posts available</h3>}
 
-                </div>
+                                    </div>
+                                </>
+                            </div>
+                            <div className='h-screen overflow-auto w-[220px] hidden lg:block'>
+                                dfdf
+                            </div>
+                        </div>
+                }
+
             </>
-        </div>
+        </Container>
     );
 };
 

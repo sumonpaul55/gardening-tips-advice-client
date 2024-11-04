@@ -87,6 +87,11 @@ const LoginPage = () => {
                                 <Link className="ml-3 font-semibold text-primary flex items-center gap-2" href="/registration">Create Account <FiExternalLink />
                                 </Link>
                             </div>
+                            <div className="mt-12 space-y-1">
+                                <p>Admin credentials</p>
+                                <p>Email: paul@gmail.com</p>
+                                <p>Pass: 654321</p>
+                            </div>
                         </div>
                     </Container >
             }
