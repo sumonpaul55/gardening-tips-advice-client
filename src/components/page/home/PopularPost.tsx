@@ -18,9 +18,9 @@ const PopularPosts = () => {
             <div>
                 {
                     isLoading ? <LoadingSpinner /> :
-                        <div className="my-8 p-6 rounded-lg bg-white py-20">
+                        <div className="my-8 p-6 lg:px-0 rounded-lg bg-white py-20">
                             <h2 className="text-3xl font-bold text-center mb-6">Popular Posts</h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                                 {upVotesPost?.map((post: Tpost) => (
                                     <Link key={post._id} href={`post/${post?._id}`}>
                                         <EachPopularPost post={post} />

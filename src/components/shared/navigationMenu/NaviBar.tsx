@@ -34,96 +34,97 @@ export default function MenuBar() {
     }
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999] bg-white bg-opacity-70 flex justify-center font-roboto_slab">
-            <NavbarContent>
-                <NavbarMenuToggle
-                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                    className="sm:hidden"
-                />
-                <NavbarBrand>
-                    <Link href="/">
-                        <Image src="/logo.png" alt="nextLeaf" height={200} width={200} />
-                    </Link>
-                </NavbarBrand>
-            </NavbarContent>
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999] font-roboto_slab">
+            <div className="flex justify-between w-full container mx-auto items-center px-3 lg:px-0">
+                <NavbarContent>
+                    <NavbarMenuToggle
+                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                        className="sm:hidden"
+                    />
+                    <NavbarBrand>
+                        <Link href="/">
+                            <Image src="/logo.png" alt="nextLeaf" height={200} width={200} />
+                        </Link>
+                    </NavbarBrand>
+                </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4 justify-end" justify="center">
-                {
-                    MenuItems?.map((item, idx: number) => {
-                        if (item?.url === "profile" && !user) {
-                            return null
-                        }
-                        return <NavbarItem key={idx} className="font-semibold text-secondary">
-                            <Link color="foreground" href={`/${item.url}`}>
+                <NavbarContent className="hidden sm:flex gap-4">
+                    {
+                        MenuItems?.map((item, idx: number) => {
+                            if (item?.url === "profile" && !user) {
+                                return null
+                            }
+                            return <NavbarItem key={idx} className="font-semibold text-secondary">
+                                <Link color="foreground" href={`/${item.url}`}>
+                                    {item?.name}
+                                </Link>
+                            </NavbarItem>
+                        })
+                    }
+                </NavbarContent>
+                <NavbarContent justify="end" className="">
+                    {
+                        user ?
+                            <Dropdown>
+                                <DropdownTrigger>
+                                    {
+                                        !isLoading && <div className="relative">
+                                            <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
+                                            {
+                                                loggedInuser?.data?.verified === true ?
+                                                    <span className='absolute -right-2 top-6 size-5 shadow flex items-center justify-center rounded-full bg-gray-300'>
+                                                        <MdVerified className='text-primary' size={16} />
+                                                    </span> :
+                                                    null
+                                            }
+                                        </div>
+                                    }
+
+                                </DropdownTrigger>
+                                <DropdownMenu className="m-2">
+                                    <DropdownItem>
+                                        <div className="space-y-2 mb-2 flex flex-col">
+                                            <Link href="/profile" className="bg-primary w-full rounded-lg text-white text-md p-2">
+                                                Profile
+                                            </Link>
+                                            <Link href={`/${user?.role === "ADMIN" ? "admin" : "user"}`} className="bg-primary w-full rounded-lg text-white text-md p-2">
+                                                Dashborad
+                                            </Link>
+                                        </div>
+                                        <Button className="bg-secondary py-2 w-full h-auto text-white" onClick={handleLogout}>
+                                            Log Out
+                                        </Button>
+
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            :
+                            <NavbarItem>
+                                <Button className="bg-secondary">
+                                    <Link href="/login" className="text-white">Login</Link>
+                                </Button>
+                            </NavbarItem>
+                    }
+                </NavbarContent>
+
+                {/* mobile menu */}
+                <NavbarMenu>
+                    {MenuItems.map((item, index) => (
+                        <NavbarMenuItem key={`${item}-${index}`}>
+                            <Link
+                                color={
+                                    index === 2 ? "primary" : index === MenuItems?.length - 1 ? "danger" : "foreground"
+                                }
+                                className="w-full"
+                                href={`/${item.url}`}
+                                size="lg"
+                            >
                                 {item?.name}
                             </Link>
-                        </NavbarItem>
-                    })
-                }
-            </NavbarContent>
-            <NavbarContent justify="end">
-                {
-                    user ?
-                        <Dropdown>
-                            <DropdownTrigger>
-                                {
-                                    !isLoading && <div className="relative">
-                                        <Image src={loggedInuser?.data?.profilePhoto} alt={user?.name} width={300} height={300} className="size-12 rounded-full shadow cursor-pointer" />
-                                        {
-                                            loggedInuser?.data?.verified === true ?
-                                                <span className='absolute -right-2 top-6 size-5 shadow flex items-center justify-center rounded-full bg-gray-300'>
-                                                    <MdVerified className='text-primary' size={16} />
-                                                </span> :
-                                                null
-                                        }
-                                    </div>
-                                }
-
-                            </DropdownTrigger>
-                            <DropdownMenu className="m-2">
-                                <DropdownItem>
-                                    <div className="space-y-2 mb-2 flex flex-col">
-                                        <Link href="/profile" className="bg-primary w-full rounded-lg text-white text-md p-2">
-                                            Profile
-                                        </Link>
-                                        <Link href={`/${user?.role === "ADMIN" ? "admin" : "user"}`} className="bg-primary w-full rounded-lg text-white text-md p-2">
-                                            Dashborad
-                                        </Link>
-                                    </div>
-                                    <Button className="bg-secondary py-2 w-full h-auto text-white" onClick={handleLogout}>
-                                        Log Out
-                                    </Button>
-
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                        :
-                        <NavbarItem>
-                            <Button className="bg-secondary">
-                                <Link href="/login" className="text-white">Login</Link>
-                            </Button>
-                        </NavbarItem>
-                }
-            </NavbarContent>
-
-
-            {/* mobile menu */}
-            <NavbarMenu>
-                {MenuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`}>
-                        <Link
-                            color={
-                                index === 2 ? "primary" : index === MenuItems?.length - 1 ? "danger" : "foreground"
-                            }
-                            className="w-full"
-                            href={`/${item.url}`}
-                            size="lg"
-                        >
-                            {item?.name}
-                        </Link>
-                    </NavbarMenuItem>
-                ))}
-            </NavbarMenu>
+                        </NavbarMenuItem>
+                    ))}
+                </NavbarMenu>
+            </div>
         </Navbar >
     );
 }
