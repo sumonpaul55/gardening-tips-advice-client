@@ -43,7 +43,7 @@ const NewsFeed = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="flex md:px-6 gap-4 px-3">
+          <div className="flex md:px-6 gap-4 px-0">
             <div className="h-screen overflow-auto hidden md:block">
               <NewsFeedLeft />
             </div>

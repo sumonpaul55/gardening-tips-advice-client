@@ -12,6 +12,7 @@ import { useLocalUser } from "@/context/user.Provider";
 import { useState } from "react";
 import { usePDF } from 'react-to-pdf';
 import { useGetUserByEmailQuery } from "@/redux/features/auth/auth.api";
+import Link from "next/link";
 
 
 const PostDetails = ({ id }: { id: string }) => {
@@ -61,7 +62,7 @@ const PostDetails = ({ id }: { id: string }) => {
         <div>
             {
                 isLoading ? <LoadingBlur /> :
-                <div className="max-w-[900px] px-3 mx-auto" ref={targetRef}>
+                    <div className="max-w-[900px] px-3 mx-auto" ref={targetRef}>
                         <h2 className="font-semibold md:text-xl text-left lg:text-2xl my-2 mb-6">{post?.title}</h2>
                         {/* Category Image and Title */}
                         <div className="relative h-80 w-full overflow-hidden rounded-lg">
@@ -95,11 +96,14 @@ const PostDetails = ({ id }: { id: string }) => {
                                     dangerouslySetInnerHTML={{ __html: post?.post }} />
                                 {/* User Info */}
                                 <div className="flex items-center mt-10 justify-evenly py-5 bg-gray-100 rounded-lg">
-                                    <img
-                                        src={post?.userId.profilePhoto}
-                                        alt={post?.userId.name}
-                                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
-                                    />
+                                    <Link href={`/profile/${post?.userId._id}`}>
+                                        <img
+                                            src={post?.userId.profilePhoto}
+                                            alt={post?.userId.name}
+                                            className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                                        />
+                                    </Link>
+
                                     <div className="ml-4">
                                         <h3 className="text-lg font-bold">{post?.userId.name}</h3>
                                         <p className="text-sm text-gray-500">{post?.userId.address}</p>
