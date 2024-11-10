@@ -2,16 +2,17 @@
 "use client"
 import { useLocalUser } from '@/context/user.Provider'
 import { useGetUserByEmailQuery } from '@/redux/features/auth/auth.api';
-import { TUser } from '@/redux/features/auth/authSlice';
+// import { TUser } from '@/redux/features/auth/authSlice';
 import React, { } from 'react'
+import { useGetPostByUserIdQuery } from '@/redux/features/post/postApi';
 
 const NewsFeedLeft = () => {
     const { user, isLoading } = useLocalUser();
     const { data, } = useGetUserByEmailQuery(`${user?.email}`)
-    const loggedInuser = data?.data
-    console.log(loggedInuser)
+    const {data: posts} = useGetPostByUserIdQuery(`${user?._id}`)
+    const loggedInuser = data?.data;
     return (
-        <div className='shadow-lg px-3 md:px-5 py-3 rounded-lg bg-gray-100'>
+        <div className='shadow-lg px-3 md:px-5 py-3 rounded-lg bg-gray-100 h-screen'>
             <div className='flex flex-col gap-4'>
                 <div className=''>
                     {
@@ -21,36 +22,20 @@ const NewsFeedLeft = () => {
                             <h4 className='font-semibold mt-3 md:text-lg'>{loggedInuser?.name}</h4>
                             <address>{loggedInuser?.address ? loggedInuser?.address : "Addres"}</address>
                             <div className='mt-8 space-y-3'>
-                                <div>
-                                    <div className='flex items-center justify-between'>
+                                <div className="space-y-2">
+                                    <div className='flex items-center justify-between border p-2 shadow-inset'>
                                         <h3>Follower</h3>
                                         <p>{loggedInuser?.follower.length}</p>
                                     </div>
-                                    <div>
-                                        {
-                                            loggedInuser?.follower?.map((item: TUser, idx: number) => (
-                                                <div key={idx}>
-                                                    {/* <img src={ } alt="" /> */}
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
-                                </div>
-                                <div className=''>
-                                    <div className='flex items-center justify-between'>
+                                    <div className='flex items-center justify-between border p-2 shadow-inset'>
                                         <h3>Following</h3>
                                         <p>{loggedInuser?.following.length}</p>
                                     </div>
-                                </div>
-                                <div>
-                                    {
-                                        loggedInuser?.following?.map((item: TUser, idx: number) => (
-                                            <div key={idx}>
-                                                {/* <img src={ } alt="" /> */}
-                                                dsdds
-                                            </div>
-                                        ))
-                                    }
+                                    <div className='flex items-center justify-between border p-2 shadow-inset'>
+                                        <h3>Posts</h3>
+                                        <p>{posts?.data?.length}</p>
+                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
