@@ -22,7 +22,7 @@ const NewsFeed = () => {
   const { data: totalPost } = useGetTotalPostDocumentQuery({});
   const [allPostsLoaded, setAllPostsLoaded] = useState<boolean>(false);
   const { user } = useLocalUser();
-  const { data: posts  } = useGetPostByUserIdQuery(`${user?._id}`);
+  const { data: posts, } = useGetPostByUserIdQuery(`${user?._id}`);
 
   // When inView changes (user scrolls to the bottom), increment the limit to load another post
   useEffect(() => {
@@ -61,11 +61,11 @@ const NewsFeed = () => {
                 </div>
               </>
             </div>
-            <div className="h-screen overflow-auto w-[220px] hidden lg:block">
+            <div className="h-screen overflow-auto scroll-b w-[220px] hidden lg:block hide-scrollbar">
               <h3 className="font-semibold text-lg md:text-xl">Your Posts</h3>
               <div>
                 {
-                  posts?.data?.length > 1 ? <NoDataFound /> :
+                  posts?.data?.length < 1 ? <NoDataFound /> :
 
                     posts?.data?.map((post: any, idx: number) => (
                       <div key={idx} className="mb-3">
