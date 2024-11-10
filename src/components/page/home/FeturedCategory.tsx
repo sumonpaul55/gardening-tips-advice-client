@@ -17,8 +17,12 @@ const FeaturedCategory = () => {
     return (
         <>{
             isLoading ? <LoadingSpinner /> :
-                <div className="my-10 mx-auto max-w-screen-xl py-10">
-                    <h2 className="text-3xl font-bold text-center mb-8">Explore Our Categories</h2>
+                <div className="my-14 mx-auto max-w-screen-xl py-10">
+                    <div>
+                        <h2 className="text-3xl font-bold mb-8 font-roboto_slab">Explore Our <span className='text-basePrimary'>Categories</span></h2>
+
+                    </div>
+
                     <Link href={`/category`}>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {categories?.map((category: { _id: string; image: string; category: string }) => (

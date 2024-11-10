@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const HeroSection = () => {
     return (
-        <div className="relative bg-gradient-to-r from-green-400 to-blue-500 text-white home-hero">
+        <div className="relative text-white home-hero">
             <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center h-[80vh] py-20">
                 <motion.h1
                     className="text-5xl md:text-6xl font-bold text-center mb-4"

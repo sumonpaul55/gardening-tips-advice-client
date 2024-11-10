@@ -59,10 +59,10 @@ const PostDetails = ({ id }: { id: string }) => {
     }
     return (
         <div>
-            <h2 className="font-semibold md:text-lg lg:text-3xl my-3 mx-3 text-center mb-10">{post?.title}</h2>
             {
                 isLoading ? <LoadingBlur /> :
-                    <div className="max-w-[900px] px-3 mx-auto" ref={targetRef}>
+                <div className="max-w-[900px] px-3 mx-auto" ref={targetRef}>
+                        <h2 className="font-semibold md:text-xl text-left lg:text-2xl my-2 mb-6">{post?.title}</h2>
                         {/* Category Image and Title */}
                         <div className="relative h-80 w-full overflow-hidden rounded-lg">
                             <img

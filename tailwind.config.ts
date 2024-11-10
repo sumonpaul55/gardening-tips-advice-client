@@ -20,6 +20,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         secondary: "#007525",
+        basePrimary: "#008000",
         disable: "rgb(156 163 175)",
       },
     },

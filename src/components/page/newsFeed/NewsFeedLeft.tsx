@@ -11,7 +11,7 @@ const NewsFeedLeft = () => {
     const loggedInuser = data?.data
     console.log(loggedInuser)
     return (
-        <div className='shadow-lg p-2 rounded-lg bg-gray-100'>
+        <div className='shadow-lg px-3 md:px-5 py-3 rounded-lg bg-gray-100'>
             <div className='flex flex-col gap-4'>
                 <div className=''>
                     {

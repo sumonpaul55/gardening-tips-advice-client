@@ -15,13 +15,13 @@ const FeaturedPost = () => {
     // Truncate the post content for a brief snippet
 
     return (
-        <Container className='py-16'>
-            <h3 className='mb-8 font-semibold text-xl md:text-2xl lg:text-3xl'>Featured last post</h3>
+        <Container className='py-16' sectionClass="featured-section py-10">
+            {/* <h3 className='mb-8 font-semibold text-xl md:text-2xl lg:text-3xl text-white'>Featured last post</h3> */}
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
                 {
                     data?.data?.map((item: Tpost, idx: number) => (
-                        <div className="bg-white py-10 px-6 shadow-lg rounded-lg border-gray-200 border font-roboto_slab" key={idx}>
-                            <div className="flex items-center space-x-4">
+                        <div className="bg-white py-10 px-6 shadow-lg hover:shadow-sm duration-200 rounded-lg border-gray-200 border font-roboto_slab flex flex-col justify-between" key={idx}>
+                            <div className="flex space-x-4">
                                 {/* Profile photo and author details */}
                                 <Image
                                     width={400}

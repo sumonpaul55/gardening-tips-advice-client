@@ -34,7 +34,7 @@ export default function MenuBar() {
     }
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999] font-roboto_slab">
+        <Navbar onMenuOpenChange={setIsMenuOpen} className="shadow-lg z-[9999] font-roboto_slab bg-white bg-opacity-70">
             <div className="flex justify-between w-full container mx-auto items-center px-3 lg:px-0">
                 <NavbarContent>
                     <NavbarMenuToggle

@@ -5,7 +5,7 @@ import { Tpost } from '@/types';
 import React, { useState, useEffect } from 'react';
 import PostDetails from '../posts/PostDetails';
 import { useInView } from 'react-intersection-observer';
-import { Spinner } from '@nextui-org/react';
+import { Divider, Spinner } from '@nextui-org/react';
 import Container from '@/components/shared/Container/Container';
 import NewsFeedLeft from './NewsFeedLeft';
 
@@ -34,15 +34,16 @@ const NewsFeed = () => {
                     isLoading ? <div className='flex justify-center items-center'>
                         <Spinner />
                     </div> :
-                        <div className='flex md:px-4 gap-7'>
-                            <div className='h-screen overflow-auto w-[220px] hidden md:block'>
+                        <div className='flex md:px-6 gap-4 px-3'>
+                            <div className='h-screen overflow-auto hidden md:block'>
                                 <NewsFeedLeft />
                             </div>
                             <div className='mx-auto h-screen overflow-auto flex-1'>
                                 <>
                                     {data?.data?.map((item: Tpost, idx: number) => (
-                                        <div key={idx} className='mt-5'>
+                                        <div key={idx} className='border rounded shadow mb-10'>
                                             <PostDetails id={item?._id} />
+                                           <Divider className='my-12 w-1/2 bg-primary mx-auto'/>
                                         </div>
                                     ))}
                                     <div className='bg-white h-[200px]'>
