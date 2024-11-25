@@ -67,7 +67,7 @@ export default function EditUser() {
         <div className="flex-1">
             <Button onPress={onOpen} className="absolute bg-secondary text-white right-0 top-4">Edit? <FaEdit size={15} /></Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                <ModalContent className="min-w-[60%]">
+                <ModalContent className="min-w-[70%] pt-10 pl-4">
                     {(onClose) => (
                         <>
                             <ModalHeader className="flex flex-col gap-1">Edit Profile</ModalHeader>

@@ -43,7 +43,7 @@ const NewsFeed = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="flex md:px-6 gap-4 px-0">
+          <div className="flex px-6 gap-4 md:px-0">
             <div className="h-screen overflow-auto hidden md:block">
               <NewsFeedLeft />
             </div>
@@ -61,7 +61,7 @@ const NewsFeed = () => {
                 </div>
               </>
             </div>
-            <div className="h-screen overflow-auto scroll-b w-[220px] hidden lg:block hide-scrollbar">
+            <div className="h-screen overflow-auto scroll-b w-[250px] hidden lg:block hide-scrollbar px-2">
               <h3 className="font-semibold text-lg md:text-xl">Your Posts</h3>
               <div>
                 {

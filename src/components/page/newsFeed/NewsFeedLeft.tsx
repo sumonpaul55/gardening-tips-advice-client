@@ -9,10 +9,10 @@ import { useGetPostByUserIdQuery } from '@/redux/features/post/postApi';
 const NewsFeedLeft = () => {
     const { user, isLoading } = useLocalUser();
     const { data, } = useGetUserByEmailQuery(`${user?.email}`)
-    const {data: posts} = useGetPostByUserIdQuery(`${user?._id}`)
+    const { data: posts } = useGetPostByUserIdQuery(`${user?._id}`)
     const loggedInuser = data?.data;
     return (
-        <div className='shadow-lg px-3 md:px-5 py-3 rounded-lg bg-gray-100 h-screen'>
+        <div className='shadow-lg px-3 md:px-5 py-3 rounded-lg bg-gray-100 h-screen min-w-[250px]'>
             <div className='flex flex-col gap-4'>
                 <div className=''>
                     {
@@ -35,7 +35,7 @@ const NewsFeedLeft = () => {
                                         <h3>Posts</h3>
                                         <p>{posts?.data?.length}</p>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>

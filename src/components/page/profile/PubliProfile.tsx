@@ -8,19 +8,20 @@ import { Button } from '@nextui-org/react'
 import moment from 'moment'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { toast } from 'sonner'
 import { motion } from "framer-motion";
 import { FaFacebookF, FaInstagram, FaLinkedin, FaPinterest, FaTwitter, FaYoutube } from 'react-icons/fa'
 import Link from "next/link"
 
 const PubliProfile = ({ userId }: { userId: string }) => {
-    const { data, isLoading } = useGetUserByidQuery(userId)
+    const { data: userDatadb, isLoading } = useGetUserByidQuery(userId)
     const [followUnfollow] = useFollowUnfolowMutation()
     const { user: localUser } = useLocalUser()
-    const userData = data?.data;
+    const userData = userDatadb?.data;
     const { data: post } = useGetPostByUserIdQuery(`${localUser?._id}`)
-    const isFollower = userData?.follower?.some((item: string) => item === localUser?._id)
+    const isFollower = userData?.follower?.some((item: any) => item?.email === localUser?.email)
+    const [friedsent, setFriendsent] = useState(false)
 
     if (!isLoading && !userData) {
         redirect("/")
@@ -34,6 +35,9 @@ const PubliProfile = ({ userId }: { userId: string }) => {
         } else {
             toast.error(res?.error?.data?.message)
         }
+    }
+    const handleFriendRequest = () => {
+        setFriendsent(!friedsent)
     }
     return (
         <Container>
@@ -59,10 +63,17 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                         <div>
                             {
                                 !isLoading && localUser?.email !== userData?.email ?
-                                    <Button className={`${isFollower ? "bg-pink-600" : "bg-secondary"}  text-white md:px-10`} onClick={handleFollowUnfollow}> {
-                                        isFollower ? "Unfollow" :
-                                            "Follow"}
-                                    </Button> :
+                                    <div className='flex items-center gap-3'>
+                                        <Button className={`${isFollower ? "bg-pink-600" : "bg-secondary"}  text-white md:px-10`} onClick={handleFollowUnfollow}> {
+                                            isFollower ? "Unfollow" :
+                                                "Follow"}
+                                        </Button>
+                                        <Button className={`${friedsent ? "bg-pink-600" : "bg-secondary"}  text-white md:px-10`} onClick={handleFriendRequest}> {
+                                            friedsent ? "Remove friend" :
+                                                "Add Friend"}
+                                        </Button>
+                                    </div>
+                                    :
                                     <h3 className='md:text-lg font-semibold font-roboto_slab'>Your Total Post {post?.data?.length}</h3>
                             }
                         </div>
@@ -73,6 +84,7 @@ const PubliProfile = ({ userId }: { userId: string }) => {
                             let IconComponent;
                             switch (link.socialName) {
                                 case "Facebook":
+
                                     IconComponent = FaFacebookF;
                                     break;
                                 case "Youtube":

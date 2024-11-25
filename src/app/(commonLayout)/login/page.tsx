@@ -24,8 +24,7 @@ import React from "react"
 const LoginPage = () => {
     const [login, { isLoading, isSuccess }] = useLogInMutation()
     const redirect = useSearchParams().get("redirect");
-    const router = useRouter()
-
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState<boolean>(true)
     const dispatch = useAppDispatch()
 
@@ -35,12 +34,11 @@ const LoginPage = () => {
         try {
             const res = await login(data) as any;
             if (res?.data?.success) {
-
                 // set cookies refresh token
                 Cookies.set("refreshToken", res?.data?.data?.refreshToken)
                 Cookies.set("accessToken", res?.data?.data?.accessToken)
                 const user = verifiyToken(res?.data?.data?.accessToken)
-                dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
+                dispatch(setUser({ user, token: res?.data?.data?.accessToken }));
                 toast.success(res?.data?.message, { id: toastId })
             }
             else {
@@ -52,7 +50,7 @@ const LoginPage = () => {
     }
     if (!isLoading && isSuccess) {
         if (redirect) {
-            router.push(redirect)
+            router.push(redirect);
         } else {
             router.push("/")
         }
@@ -61,7 +59,7 @@ const LoginPage = () => {
         <div className="bg-white md:min-h-screen">
             {
                 isLoading ? <LoadingBlur /> :
-                    <Container className="md:mt-32">
+                    <Container className="md:mt-14">
                         <div className="max-w-[500px] mx-auto md:mt-10 border p-3 md:p-6 rounded-lg shadow-inner font-roboto_slab">
                             <div className="space-y-1">
                                 <h4 className="text-lg md:text-xl font-semibold">Login page</h4>

@@ -119,6 +119,16 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    friendRequest: builder.mutation({
+      query: (info: { selfUserId: string; otherUserId: string }) => {
+        return {
+          url: "/user/friendRequest",
+          method: "PUT",
+          body: info,
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 export const {

@@ -17,10 +17,10 @@ const FeaturedPost = () => {
     return (
         <Container className='py-16' sectionClass="featured-section py-10">
             {/* <h3 className='mb-8 font-semibold text-xl md:text-2xl lg:text-3xl text-white'>Featured last post</h3> */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-10'>
                 {
                     data?.data?.map((item: Tpost, idx: number) => (
-                        <div className="bg-white py-10 px-6 shadow-lg hover:shadow-sm duration-200 rounded-lg border-gray-200 border font-roboto_slab flex flex-col justify-between" key={idx}>
+                        <div className="backdrop-blur bg-white bg-opacity-80 py-10 px-6 shadow-lg hover:shadow-sm duration-200 rounded-lg border-gray-200 border font-roboto_slab flex flex-col justify-between" key={idx}>
                             <div className="flex space-x-4">
                                 {/* Profile photo and author details */}
                                 <Image

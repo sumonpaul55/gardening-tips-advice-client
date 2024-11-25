@@ -43,10 +43,11 @@ const Registration = () => {
         }
         const res = await register(registerData) as any
         if (res?.data?.success) {
-            const user = verifiyToken(res?.data?.data?.accessToken)
-            Cookies.set("accessToken", res?.data?.data?.accessToken);
+
             // set cookies refresh token
             Cookies.set("refreshToken", res?.data?.data?.refreshToken)
+            Cookies.set("accessToken", res?.data?.data?.accessToken)
+            const user = verifiyToken(res?.data?.data?.accessToken)
             dispatch(setUser({ user, token: res?.data?.data?.accessToken }))
             toast.success(res?.data?.message, { id: toastId })
             router.push("/")
@@ -59,7 +60,7 @@ const Registration = () => {
         setImageFile(file[0])
     }
     return (
-        <div className="bg-white md:min-h-screen md:pt-20">
+        <div className="bg-white md:min-h-screen md:pt-10">
             {
                 isLoading && <LoadingBlur />
             }

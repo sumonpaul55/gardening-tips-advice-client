@@ -4,7 +4,7 @@ import React from 'react';
 
 const AboutUs: React.FC = () => {
     return (
-        <section className="bg-white text-gray-800 py-16 px-6">
+        <section className="bg-white text-gray-800 py-16 px-6 md:px-0">
             <div className="container mx-auto">
                 {/* Our Mission */}
                 <div className="mb-12 text-center">
@@ -17,7 +17,7 @@ const AboutUs: React.FC = () => {
 
                 {/* Our Story */}
                 <div className="flex flex-col md:flex-row items-center md:items-start mb-16">
-                    <div className="md:w-1/2 p-6">
+                    <div className="md:w-1/2 p-6 md:p-0">
                         <h3 className="text-3xl font-semibold text-purple-600 mb-4">Our Story</h3>
                         <p className="text-lg mb-6">
                             NextLeaf started as a simple idea: to create a platform where enthusiasts from different walks of life can share their knowledge and help others grow. From humble beginnings in 2023, our platform has grown into a thriving community where members exchange tips, advice, and ideas. Whether you&apos;re passionate about gardening, tech innovations, or lifestyle improvements, NextLeaf is your go-to source for learning and contributing.
@@ -26,7 +26,7 @@ const AboutUs: React.FC = () => {
                             Today, we&apos;re proud to offer premium content, expert advice, and a space where verified users can share their expertise and help others level up.
                         </p>
                     </div>
-                    <div className="md:w-1/2 p-6">
+                    <div className="md:w-1/2 p-6 md:p-0">
                         <img
                             src="https://i.ibb.co/GtVk70y/story.jpg"
                             alt="Our Story"

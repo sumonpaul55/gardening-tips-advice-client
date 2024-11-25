@@ -26,7 +26,7 @@ export default function MenuBar() {
         const toastId = toast.loading("proccessing...");
         Cookies.remove("accessToken");
         dispatch(logOut())
-        toast.success("Logout successfull", { id: toastId })
+        toast.success("Logout successfull", { id: toastId });
     }
 
     if (!isClient && !isSuccess) {

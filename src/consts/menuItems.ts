@@ -61,7 +61,12 @@ export const SidebarItemsAdmin = [
 
 export const SideBarItemsUser = [
   {
+    name: "My Profile",
+    url: "/myProfile",
+  },
+  {
     name: "Post Management",
     url: "/create-post",
   },
+ 
 ];

@@ -92,7 +92,7 @@ const PostDetails = ({ id }: { id: string }) => {
                                     initial={{ opacity: 0, translateY: 30 }}
                                     animate={{ opacity: 1, translateY: 0 }}
                                     transition={{ delay: 0.5 }}
-                                    className="mt-8 md:text-lg text-gray-800"
+                                    className="md:text-lg text-gray-800"
                                     dangerouslySetInnerHTML={{ __html: post?.post }} />
                                 {/* User Info */}
                                 <div className="flex items-center mt-10 justify-evenly py-5 bg-gray-100 rounded-lg">
