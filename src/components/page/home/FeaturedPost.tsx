@@ -43,7 +43,7 @@ const FeaturedPost = () => {
                             <h2 className="mt-4 text-lg line-clamp-2 md:text-xl font-bold text-gray-800">{item?.title}</h2>
 
                             {/* Category */}
-                            <p className="text-sm text-gray-500 mt-1">Category: {item?.category.category}</p>
+                            <p className="text-sm text-pink-500 mt-1 font-semibold">Category: {item?.category.category}</p>
 
                             {/* Post content snippet */}
                             {/* <div className="mt-4 text-gray-700" dangerouslySetInnerHTML={{ __html: item?.post }}></div> */}
