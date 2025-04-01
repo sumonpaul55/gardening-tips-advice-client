@@ -84,7 +84,6 @@ const NewsFeed = () => {
 };
 
 export default NewsFeed;
-
 export const ContentLoading = () => {
   return (
     <div className="flex text-center justify-center items-center mt-16 z-50">

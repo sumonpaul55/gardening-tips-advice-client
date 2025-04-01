@@ -65,7 +65,7 @@ const LoginPage = () => {
                                 <h4 className="text-lg md:text-xl font-semibold">Login page</h4>
                                 <p className="text-sm">Hi, Welcome Back👏</p>
                             </div>
-                            <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
+                            <GFrom defaultValue={{email:"paul@gmail.com", password:"654321"}} onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
                                 <GInput type="email" label="Email" name="email" clasName="" />
                                 <div className="relative">
                                     <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />

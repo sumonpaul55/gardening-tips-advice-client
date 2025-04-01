@@ -4,8 +4,8 @@ import { RootState } from "../store";
 import { logOut, setUser } from "../features/auth/authSlice";
 // import Cookies from "js-cookie";
 const baseQuery = fetchBaseQuery({
-  // baseUrl: "http://localhost:5000/api",
-  baseUrl: "https://gardening-tips-server.vercel.app/api",
+  baseUrl: "http://localhost:5000/api",
+  // baseUrl: "https://gardening-tips-server.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
