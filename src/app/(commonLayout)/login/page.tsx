@@ -65,10 +65,10 @@ const LoginPage = () => {
                                 <h4 className="text-lg md:text-xl font-semibold">Login page</h4>
                                 <p className="text-sm">Hi, Welcome Back👏</p>
                             </div>
-                            <GFrom defaultValue={{email:"paul@gmail.com", password:"654321"}} onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
-                                <GInput type="email" label="Email" name="email" clasName="" />
+                            <GFrom onSubmit={onSubmit} className="mt-6 space-y-5" resolver={zodResolver(loginValidationSchema)}>
+                                <GInput type="email" label="Email" name="email" clasName="" defaultValue="paul@gmail.com" />
                                 <div className="relative">
-                                    <GInput type={showPassword ? "password" : "text"} label="Password" name="password" />
+                                    <GInput type={showPassword ? "password" : "text"} label="Password" name="password" defaultValue="654321" />
                                     {
                                         showPassword ?
                                             <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-[50%] cursor-pointer" onClick={() => setShowPassword(false)} /> :
@@ -85,11 +85,11 @@ const LoginPage = () => {
                                 <Link className="ml-3 font-semibold text-primary flex items-center gap-2" href="/registration">Create Account <FiExternalLink />
                                 </Link>
                             </div>
-                            <div className="mt-12 space-y-1">
+                            {/* <div className="mt-12 space-y-1">
                                 <p>Admin credentials</p>
                                 <p>Email: paul@gmail.com</p>
                                 <p>Pass: 654321</p>
-                            </div>
+                            </div> */}
                         </div>
                     </Container >
             }
